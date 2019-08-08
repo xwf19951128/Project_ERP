@@ -1,7 +1,8 @@
-package com.cskaoyan.service;
+package com.cskaoyan.service.login;
 
-import com.cskaoyan.bean.SysUser;
-import com.cskaoyan.mapper.UserMapper;
+import com.cskaoyan.bean.login.SysUser;
+import com.cskaoyan.mapper.login.UserMapper;
+import com.cskaoyan.service.login.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

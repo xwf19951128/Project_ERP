@@ -1,7 +1,6 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.login;
 
-import com.cskaoyan.bean.SysUser;
-import com.cskaoyan.bean.SysUser;
+import com.cskaoyan.bean.login.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
