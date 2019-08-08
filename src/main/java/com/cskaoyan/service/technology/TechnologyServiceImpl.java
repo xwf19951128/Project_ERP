@@ -1,0 +1,20 @@
+package com.cskaoyan.service.technology;
+
+import com.cskaoyan.bean.technology.Technology;
+import com.cskaoyan.mapper.technology.TechnologyMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class TechnologyServiceImpl implements TechnologyService {
+
+    @Autowired
+    TechnologyMapper technologyMapper;
+
+    @Override
+    public List<Technology> queryAllTechnologies() {
+        return technologyMapper.queryAllTechnologies();
+    }
+}

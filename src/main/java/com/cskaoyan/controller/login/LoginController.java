@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +37,6 @@ public class LoginController {
     @ResponseBody //需要把返回值类型设为Jason
     //因为只在这里使用一次，所以不用新建JavaBean，直接用Map存储处理结果作为Jason返回值
     //因为ajax发过来的是Jason请求，所以需要用@RequestBody注解，用Jason格式接收请求参数
-
     public Map<String, String> ajaxLogin(@RequestBody SysUser user, HttpServletRequest request) throws IOException {
         HashMap<String, String> data = new HashMap<>();
         //根据用户名去数据表中查询，如果结果为null，说明用户名错误，给msg赋相应的值，返回map给前端
@@ -65,6 +65,21 @@ public class LoginController {
         }
         //如果程序成功运行到这里，说明登录一切顺利，先把user对象存入session域中
         request.getSession().setAttribute("activeUser",sysUser2);
+        //还需要添加一个用于权限管理的集合
+        ArrayList<String> sysPermissionList = new ArrayList<>();
+        sysPermissionList.add("process:add");
+        sysPermissionList.add("process:edit");
+        sysPermissionList.add("process:delete");
+        sysPermissionList.add("technology:add");
+        sysPermissionList.add("technology:edit");
+        sysPermissionList.add("technology:delete");
+        sysPermissionList.add("technologyPlan:add");
+        sysPermissionList.add("technologyPlan:edit");
+        sysPermissionList.add("technologyPlan:delete");
+        sysPermissionList.add("technologyRequirement:add");
+        sysPermissionList.add("technologyRequirement:edit");
+        sysPermissionList.add("technologyRequirement:delete");
+        request.getSession().setAttribute("sysPermissionList",sysPermissionList);
         // 跳转到主页
         data.put("msg","success");
         //返回Json格式的Map对象
