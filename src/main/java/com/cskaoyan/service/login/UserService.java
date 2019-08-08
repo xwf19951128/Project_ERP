@@ -1,7 +1,6 @@
-package com.cskaoyan.service;
+package com.cskaoyan.service.login;
 
-import com.cskaoyan.bean.SysUser;
-import org.apache.ibatis.annotations.Param;
+import com.cskaoyan.bean.login.SysUser;
 
 public interface UserService {
 
