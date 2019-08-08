@@ -4,12 +4,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SysUser {
-    String id;
-    String username;
-    String password;
-    char locked;
-    String randomcode;
-    String rolename="超级管理员";
+    private String id;
+    private String username;
+    private String password;
+    private char locked;
+    private String randomcode;
+    private String rolename="超级管理员";
 
     public String getRolename() {
         return rolename;

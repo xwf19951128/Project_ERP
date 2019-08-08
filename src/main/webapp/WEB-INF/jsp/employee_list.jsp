@@ -110,7 +110,7 @@ function doSearch_employee(value,name){ //用户输入用户名,点击搜素,触
 				{field : 'empId', width : 100, align:'center', title : '员工编号'},
 				{field : 'empName', width : 100, align : 'center', title : '员工姓名'},
 				{field : 'sex', width : 100, align : 'center', title : '性别', formatter:TAOTAO.formatSex},
-				{field : 'department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment},
+				{field : 'Department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment},
 				{field : 'idCode', width : 150, title : '身份证号', align:'center'},
 				{field : 'education', width : 100, title : '学历', align:'center'},
 				{field : 'degree', width : 100, title : '学位', align:'center'},
@@ -131,7 +131,7 @@ function doSearch_employee(value,name){ //用户输入用户名,点击搜素,触
 				{field : 'empId', width : 100, align:'center', title : '员工编号'},
 				{field : 'empName', width : 100, align : 'center', title : '员工姓名'},
 				{field : 'sex', width : 100, align : 'center', title : '性别', formatter:TAOTAO.formatSex},
-				{field : 'department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment},
+				{field : 'Department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment},
 				{field : 'idCode', width : 150, title : '身份证号', align:'center'},
 				{field : 'education', width : 100, title : '学历', align:'center'},
 				{field : 'degree', width : 100, title : '学位', align:'center'},
@@ -163,7 +163,7 @@ var empDepartmentEditor;
 		var row = onEmployeeClickRow(index);
 		$("#empDepartmentInfo").dialog({
 			onOpen :function(){
-				$.get("department/get/"+row.department.departmentId,'',function(data){
+				$.get("Department/get/"+row.department.departmentId,'',function(data){
 					empDepartmentEditor = TAOTAO.createEditor("#empDepartmentEditForm [name=note]");	
 		    		//回显数据
 		    		$("#empDepartmentEditForm").form("load", data);
@@ -178,7 +178,7 @@ var empDepartmentEditor;
 	};
 	
 	function submitEmpDepartmentEditForm(){
-		$.get("department/edit_judge",'',function(data){
+		$.get("Department/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
@@ -188,7 +188,7 @@ var empDepartmentEditor;
     			}
     			empDepartmentEditor.sync();
     			
-    			$.post("department/update_all",$("#empDepartmentEditForm").serialize(), function(data){
+    			$.post("Department/update_all",$("#empDepartmentEditForm").serialize(), function(data){
     				if(data.status == 200){
     					$.messager.alert('提示','修改部门成功!','info',function(){
     						$("#empDepartmentInfo").dialog("close");

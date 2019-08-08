@@ -37,6 +37,7 @@ public class LoginController {
     //因为只在这里使用一次，所以不用新建JavaBean，直接用Map存储处理结果作为Jason返回值
     //因为ajax发过来的是Jason请求，所以需要用@RequestBody注解，用Jason格式接收请求参数
 
+
     public Map<String, String> ajaxLogin(@RequestBody SysUser user, HttpServletRequest request) throws IOException {
         HashMap<String, String> data = new HashMap<>();
         //根据用户名去数据表中查询，如果结果为null，说明用户名错误，给msg赋相应的值，返回map给前端
