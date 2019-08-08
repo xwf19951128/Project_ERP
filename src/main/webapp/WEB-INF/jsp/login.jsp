@@ -133,6 +133,7 @@
 												contentType : 'application/json;charset=UTF-8',
 												cache : false,  //不缓存
 												dataType : 'json',  //接收的返回值类型为Jason
+												//需要把请求参数data转为Json字符串
 												data : JSON.stringify({
 													username : uname.val(),  //把用户名和密码作为ajax参数
 													password : pwd.val(),
@@ -194,7 +195,8 @@
 									$("#randomcode_span").html("");
 									$
 											.ajax({
-												url : '${baseurl}ajaxLogin',// 跳转到 action  
+												url : '${baseurl}ajaxLogin',// 跳转到 controller
+												//需要把data转为Json字符串
 												data : JSON.stringify({
 													username : uname.val(),
 													password : pwd.val(),
