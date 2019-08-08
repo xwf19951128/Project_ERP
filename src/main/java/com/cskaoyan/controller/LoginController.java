@@ -58,7 +58,7 @@ public class LoginController {
         }
         //最后还要判断用户输入的验证码是否和session中存储的相同
         String validateCode = (String) request.getSession().getAttribute("validateCode");
-        if (user.getRandomcode()!=null & !user.getRandomcode().equals(validateCode)){
+        if (user.getRandomcode()!=null && !validateCode.equals(user.getRandomcode())){
             data.put("msg","randomcode_error");
             return data;
         }
