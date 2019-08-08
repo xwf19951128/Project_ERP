@@ -1,7 +1,7 @@
-package com.cskaoyan.controller;
+package com.cskaoyan.controller.login;
 
-import com.cskaoyan.bean.SysUser;
-import com.cskaoyan.service.UserService;
+import com.cskaoyan.bean.login.SysUser;
+import com.cskaoyan.service.login.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,11 +58,14 @@ public class LoginController {
         }
         //最后还要判断用户输入的验证码是否和session中存储的相同
         String validateCode = (String) request.getSession().getAttribute("validateCode");
-        if (user.getRandomcode()!=null & !user.getRandomcode().equals(validateCode)){
-            data.put("msg","randomcode_error");
+        //当用户输入的验证码为空时，前端就会提示； 当用户的输入不为空时，就会把验证码赋值给user的 randomcode变量，然后和session中的验证码比较
+        if (user.getRandomcode()!=null && !user.getRandomcode().equals(validateCode)){
+            data.put("msg","randomcode_error"); //当用户输入的值和session中的验证码不相等的时候，就会返回一个错误。
             return data;
         }
-        //如果程序成功运行到这里，说明登录一切顺利，跳转到主页
+        //如果程序成功运行到这里，说明登录一切顺利，先把user对象存入session域中
+        request.getSession().setAttribute("activeUser",sysUser2);
+        // 跳转到主页
         data.put("msg","success");
         //返回Json格式的Map对象
         return data;

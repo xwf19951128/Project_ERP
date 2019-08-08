@@ -1,4 +1,4 @@
-package com.cskaoyan.bean;
+package com.cskaoyan.bean.login;
 
 import org.springframework.stereotype.Component;
 
@@ -9,6 +9,15 @@ public class SysUser {
     String password;
     char locked;
     String randomcode;
+    String rolename="超级管理员";
+
+    public String getRolename() {
+        return rolename;
+    }
+
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
+    }
 
     public String getRandomcode() {
         return randomcode;
