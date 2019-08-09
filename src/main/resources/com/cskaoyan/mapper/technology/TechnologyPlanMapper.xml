@@ -24,4 +24,30 @@
         LEFT JOIN technology t
         on p.technology_id = t.technology_id
     </select>
+
+    <!--新增一条工艺计划的记录-->
+    <insert id="insertTechnologyPlan">
+        insert into technology_plan (batch_amount,commit_plan,end_plan,start_plan,
+        technology_id,technology_plan_id,
+        technology_plan_end,technology_plan_start) values (
+        #{technologyPlan.batchAmount},#{technologyPlan.commitPlan},#{technologyPlan.endPlan},
+        #{technologyPlan.startPlan},#{technologyPlan.technologyId},#{technologyPlan.technologyPlanId},
+        #{technologyPlan.technologyPlanEnd},#{technologyPlan.technologyPlanStart})
+    </insert>
+
+    <!--批量删除记录-->
+    <delete id="deleteTechnologyPlan">
+        delete from technology_plan where technology_plan_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--更新工艺计划记录-->
+    <update id="updateTechnologyPlan">
+        update technology_plan set technology_id = #{techPlan.technologyId},
+        batch_amount = #{techPlan.batchAmount},start_plan =#{techPlan.startPlan},end_plan=#{techPlan.endPlan},
+        commit_plan =#{techPlan.commitPlan},technology_plan_start =#{techPlan.technologyPlanStart},
+        technology_plan_end =#{techPlan.technologyPlanEnd}
+        where technology_plan_id = #{techPlan.technologyPlanId}
+    </update>
 </mapper>

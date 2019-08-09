@@ -22,4 +22,31 @@
         double_capacity,overfulfil_capacity
         from technology
     </select>
+
+    <!--新增一条technology工艺记录-->
+    <insert id="insertTechnology">
+        insert into technology (technology_id,technology_name,price,vital_process_period,
+        standard_capacity,overtime_standard_capacity,overtime_overfulfil_capacity,
+        double_capacity,overfulfil_capacity) values
+        (#{technology.technologyId},#{technology.technologyName},#{technology.price},#{technology.vitalProcessPeriod},
+        #{technology.standardCapacity},#{technology.overtimeStandardCapacity},#{technology.overtimeOverfulfilCapacity},
+        #{technology.doubleCapacity},#{technology.overfulfilCapacity})
+    </insert>
+
+    <!--批量删除工艺记录-->
+    <delete id="deleteTechnology">
+        delete from technology where technology_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--更新工艺记录-->
+    <update id="updateTechnology">
+        update technology set technology_name =#{tech.technologyName},
+        price = #{tech.price},vital_process_period = #{tech.vitalProcessPeriod},
+        standard_capacity = #{tech.standardCapacity},overtime_standard_capacity=#{tech.overtimeStandardCapacity},
+        overtime_overfulfil_capacity = #{tech.overtimeOverfulfilCapacity},
+        double_capacity = #{tech.doubleCapacity},overfulfil_capacity =#{tech.overfulfilCapacity}
+        where technology_id = #{tech.technologyId}
+    </update>
 </mapper>
