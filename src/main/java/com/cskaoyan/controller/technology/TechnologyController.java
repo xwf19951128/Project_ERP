@@ -3,6 +3,9 @@ package com.cskaoyan.controller.technology;
 import com.cskaoyan.bean.technology.QueryResult;
 import com.cskaoyan.bean.technology.Technology;
 import com.cskaoyan.service.technology.TechnologyService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +38,13 @@ public class TechnologyController {
    @RequestMapping("/list")
    @ResponseBody
     public QueryResult<Technology> list(){
+       Page page = PageHelper.startPage(1, 2);
        List<Technology> technologies = technologyService.queryAllTechnologies();
+       PageInfo<Technology> pageInfo = new PageInfo<>(technologies);
+       long total = pageInfo.getTotal();
        QueryResult<Technology> technologyQueryResult = new QueryResult<>();
        technologyQueryResult.setRows(technologies);
-       technologyQueryResult.setTotal(technologies.size());
+       technologyQueryResult.setTotal((int) total);
        return technologyQueryResult;
    }
 }
