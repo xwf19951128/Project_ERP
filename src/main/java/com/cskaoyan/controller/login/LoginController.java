@@ -67,21 +67,6 @@ public class LoginController {
         }
         //如果程序成功运行到这里，说明登录一切顺利，先把user对象存入session域中
         request.getSession().setAttribute("activeUser",sysUser2);
-        //还需要添加一个用于权限管理的集合
-        ArrayList<String> sysPermissionList = new ArrayList<>();
-        sysPermissionList.add("process:add");
-        sysPermissionList.add("process:edit");
-        sysPermissionList.add("process:delete");
-        sysPermissionList.add("technology:add");
-        sysPermissionList.add("technology:edit");
-        sysPermissionList.add("technology:delete");
-        sysPermissionList.add("technologyPlan:add");
-        sysPermissionList.add("technologyPlan:edit");
-        sysPermissionList.add("technologyPlan:delete");
-        sysPermissionList.add("technologyRequirement:add");
-        sysPermissionList.add("technologyRequirement:edit");
-        sysPermissionList.add("technologyRequirement:delete");
-        request.getSession().setAttribute("sysPermissionList",sysPermissionList);
         // 跳转到主页
         data.put("msg","success");
         //返回Json格式的Map对象

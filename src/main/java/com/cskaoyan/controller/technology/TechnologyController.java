@@ -20,8 +20,16 @@ public class TechnologyController {
     TechnologyService technologyService;
 
     @RequestMapping("/find")
-    public String find(){
+    public String find(HttpServletRequest request){
         //需要设置sysPermissionList
+        //还需要添加一个用于权限管理的集合
+        ArrayList<String> sysPermissionList = new ArrayList<>();
+
+        sysPermissionList.add("technology:add");
+        sysPermissionList.add("technology:edit");
+        sysPermissionList.add("technology:delete");
+
+        request.getSession().setAttribute("sysPermissionList",sysPermissionList);
         return "/WEB-INF/jsp/technology_list.jsp";
     }
    @RequestMapping("/list")

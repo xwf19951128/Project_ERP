@@ -21,8 +21,14 @@ public class ProcessController {
     ProcessService processService;
 
     @RequestMapping("/find")
-    public String find(){
+    public String find(HttpServletRequest request){
         //需要设置sysPermissionList
+        //还需要添加一个用于权限管理的集合
+        ArrayList<String> sysPermissionList = new ArrayList<>();
+        sysPermissionList.add("process:add");
+        sysPermissionList.add("process:edit");
+        sysPermissionList.add("process:delete");
+        request.getSession().setAttribute("sysPermissionList",sysPermissionList);
         return "/WEB-INF/jsp/process_list.jsp";
     }
 
