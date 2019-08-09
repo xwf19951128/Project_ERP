@@ -7,4 +7,9 @@
         select department_id as departmentId,department_name as departmentName,note
         from department
     </select>
+
+    <insert id="insertDepartment">
+        insert into department (department_id,department_name,note)
+        values(#{department.departmentId}， #{department.departmentName}, #{department.note})
+    </insert>
 </mapper>
