@@ -1,6 +1,6 @@
-package com.cskaoyan.controller;
+package com.cskaoyan.controller.schedule;
 
-import com.cskaoyan.bean.*;
+import com.cskaoyan.bean.schedule.*;
 import com.cskaoyan.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class ScheduleController {
     ScheduleService service;
     @RequestMapping("/custom/list")
     @ResponseBody
-    public SchedulList<Custom> showCustomList(int page,int rows,HttpServletRequest request, HttpServletResponse response){
+    public SchedulList<Custom> showCustomList(int page, int rows, HttpServletRequest request, HttpServletResponse response){
         ArrayList<String> list = new ArrayList<>();
         list.add("order:add");
         list.add("order:edit");
@@ -38,7 +38,7 @@ public class ScheduleController {
     }
     @RequestMapping("/order/list")
     @ResponseBody
-    public SchedulList<Order> showOrderList( int page, int rows,HttpServletRequest request, HttpServletResponse response){
+    public SchedulList<Order> showOrderList(int page, int rows, HttpServletRequest request, HttpServletResponse response){
         return service.queryOrderListByPage(page,rows);
     }
 
@@ -100,5 +100,48 @@ public class ScheduleController {
     @ResponseBody
     public Product showProduct(@PathVariable("pid") int pid){
         return service.queryProductByID(pid);
+    }
+    @RequestMapping("/custom/edit_judge")
+    @ResponseBody
+    public String goEditC(){
+        return null;
+    }
+    @RequestMapping("/product/edit_judge")
+    @ResponseBody
+    public String goEditP(){
+        return null;
+    }
+    @RequestMapping("/order/edit_judge")
+    @ResponseBody
+    public String goEditOrderNote(){
+        return null;
+    }
+    @RequestMapping("/order/edit")
+    public String goEditOrder(){
+        return "/WEB-INF/jsp/order_edit.jsp";
+    }
+    @RequestMapping("/order/add_judge")
+    @ResponseBody
+    public String goAddOrder(){
+        return null;
+    }
+    @RequestMapping("/order/add")
+    public String goAddOrder0(){
+        return "/WEB-INF/jsp/order_add.jsp";
+    }
+    @RequestMapping("/order/delete_judge")
+    @ResponseBody
+    public String goDeleteOrder(){
+        return null;
+    }
+    @RequestMapping("/custom/get_data")
+    @ResponseBody
+    public List<Custom> getAllCustom(){
+        return service.queryCustoms();
+    }
+    @RequestMapping("/product/get_data")
+    @ResponseBody
+    public List<Product> getAllProducts(){
+        return service.queryProducts();
     }
 }

@@ -1,6 +1,6 @@
 package com.cskaoyan.service;
 
-import com.cskaoyan.bean.*;
+import com.cskaoyan.bean.schedule.*;
 
 import java.util.List;
 
@@ -25,4 +25,26 @@ public interface ScheduleService {
 
     Product queryProductByID(Integer pid);
     List<Order> queryOrders();
+
+    int updateCustom(Custom custom);
+
+    int updateInfo(Custom custom);
+    int updateInfo(Product product);
+
+    int updateOrder(Order order);
+
+    int updateInfo(Manufacture manufacture);
+    int updateInfo(Task task);
+    int updateInfo(Work work);
+    int updateInfo(Order order);
+
+    List<Custom> queryCustoms();
+
+    List<Product> queryProducts();
+
+    int insertOrder(Order order);
+
+    int deleteOrderByID(String id);
+
+    int deletepathByOid(String oid);
 }

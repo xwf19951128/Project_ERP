@@ -1,4 +1,4 @@
-package com.cskaoyan.bean;
+package com.cskaoyan.bean.schedule;
 
 public class Work {
     private String workId;

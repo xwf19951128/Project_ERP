@@ -1,4 +1,4 @@
-package com.cskaoyan.bean;
+package com.cskaoyan.bean.schedule;
 
 import java.math.BigDecimal;
 import java.util.Date;

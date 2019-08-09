@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.schedule;
 
-import com.cskaoyan.bean.Product;
-import com.cskaoyan.bean.ProductExample;
+import com.cskaoyan.bean.schedule.Product;
+import com.cskaoyan.bean.schedule.ProductExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
