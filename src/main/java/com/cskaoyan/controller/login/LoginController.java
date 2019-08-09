@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +37,6 @@ public class LoginController {
     @ResponseBody //需要把返回值类型设为Jason
     //因为只在这里使用一次，所以不用新建JavaBean，直接用Map存储处理结果作为Jason返回值
     //因为ajax发过来的是Jason请求，所以需要用@RequestBody注解，用Jason格式接收请求参数
-
-
     public Map<String, String> ajaxLogin(@RequestBody SysUser user, HttpServletRequest request) throws IOException {
         HashMap<String, String> data = new HashMap<>();
         //根据用户名去数据表中查询，如果结果为null，说明用户名错误，给msg赋相应的值，返回map给前端
@@ -59,9 +58,11 @@ public class LoginController {
         }
         //最后还要判断用户输入的验证码是否和session中存储的相同
         String validateCode = (String) request.getSession().getAttribute("validateCode");
+			
         //当用户输入的验证码为空时，前端就会提示； 当用户的输入不为空时，就会把验证码赋值给user的 randomcode变量，然后和session中的验证码比较
         if (user.getRandomcode()!=null && !user.getRandomcode().equals(validateCode)){
             data.put("msg","randomcode_error"); //当用户输入的值和session中的验证码不相等的时候，就会返回一个错误。
+
             return data;
         }
         //如果程序成功运行到这里，说明登录一切顺利，先把user对象存入session域中

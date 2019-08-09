@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cskaoyan.mapper.technology.TechnologyRequirementMapper">
+    <!--查询所有的process记录-->
+    <resultMap id="requireMap" type="com.cskaoyan.bean.technology.TechnologyRequirement">
+        <result column="add_time" property="addTime"></result>
+        <result column="revise_time" property="reviseTime"></result>
+        <result column="requirement" property="requirement"></result>
+        <result column="technology_id" property="technologyId"></result>
+        <result column="technology_name" property="technologyName"></result>
+        <result column="technology_requirement_id" property="technologyRequirementId"></result>
+    </resultMap>
+    <select id="queryAllTechnologyRequirements" resultMap="requireMap">
+        select  r.add_time,r.revise_time,r.requirement,r.technology_id,t.technology_name,r.technology_requirement_id
+        from technology_requirement r
+        left join technology  t on r.technology_id = t.technology_id
+    </select>
+</mapper>

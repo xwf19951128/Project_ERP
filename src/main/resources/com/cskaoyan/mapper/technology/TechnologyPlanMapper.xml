@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cskaoyan.mapper.technology.TechnologyPlanMapper">
+    <!--查询所有的TechnologyPlan记录-->
+    <resultMap id="techPlanMap" type="com.cskaoyan.bean.technology.TechnologyPlan">
+        <result column="batch_amount" property="batchAmount"></result>
+        <result column="commit_plan" property="commitPlan"></result>
+        <result column="end_plan" property="endPlan"></result>
+        <result column="start_plan" property="startPlan"></result>
+        <result column="technology_id" property="technologyId"></result>
+        <result column="technology_name" property="technologyName"></result>
+        <result column="technology_plan_id" property="technologyPlanId"></result>
+        <result column="technology_plan_start" property="technologyPlanStart"></result>
+        <result column="technology_plan_end" property="technologyPlanEnd"></result>
+    </resultMap>
+    <select id="queryAllTechPlans" resultMap="techPlanMap">
+        select p.batch_amount,p.commit_plan,p.end_plan,p.start_plan,
+        p.technology_id,t.technology_name,p.technology_plan_id,
+        p.technology_plan_end,p.technology_plan_start
+        from technology_plan p
+        LEFT JOIN technology t
+        on p.technology_id = t.technology_id
+    </select>
+</mapper>
