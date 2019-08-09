@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cskaoyan.mapper.device.DeviceCheckMapper">
+
+
+    <resultMap id="deviceCheckMap" type="com.cskaoyan.bean.device.DeviceCheck">
+        <id column="device_check_id" jdbcType="VARCHAR" property="deviceCheckId" />
+        <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+        <result column="device_check_emp_id" jdbcType="VARCHAR" property="deviceCheckEmpId" />
+        <result column="device_check_date" jdbcType="TIMESTAMP" property="deviceCheckDate" />
+        <result column="device_check_result" jdbcType="VARCHAR" property="deviceCheckResult" />
+        <result column="device_check_fault_id" jdbcType="VARCHAR" property="deviceCheckFaultId" />
+    </resultMap>
+
+    <resultMap id="deviceCheckVoMap" type="com.cskaoyan.bean.device.more.DeviceCheckVo">
+        <id column="device_check_id" jdbcType="VARCHAR" property="deviceCheckId" />
+        <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+        <result column="device_check_emp_id" jdbcType="VARCHAR" property="deviceCheckEmpId" />
+        <result column="device_check_date" jdbcType="TIMESTAMP" property="deviceCheckDate" />
+        <result column="device_check_result" jdbcType="VARCHAR" property="deviceCheckResult" />
+        <result column="device_check_fault_id" jdbcType="VARCHAR" property="deviceCheckFaultId" />
+
+        <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+        <result column="device_check_emp" property="deviceCheckEmp" jdbcType="VARCHAR" />
+
+    </resultMap>
+
+    <select id="queryAllDeviceCheck" resultMap="deviceCheckVoMap">
+      select
+      dc.device_check_id,
+      dc.device_id,
+      dc.device_check_emp_id,
+      dc.device_check_date,
+      dc.device_check_result,
+      dc.device_check_fault_id,
+      e.emp_name as device_check_emp,
+      d.device_name
+      from device_check dc
+      left join device d on d.device_id=dc.device_id
+      left join employee e on e.emp_id=dc.device_check_emp_id
+    </select>
+
+
+</mapper>
