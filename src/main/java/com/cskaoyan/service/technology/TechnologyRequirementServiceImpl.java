@@ -16,4 +16,34 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
     public List<TechnologyRequirement> queryAllTechnologyRequirements() {
         return technologyRequirementMapper.queryAllTechnologyRequirements();
     }
+
+    @Override
+    public int insertTechnologyRequirement(TechnologyRequirement technologyRequirement) {
+        return technologyRequirementMapper.insertTechnologyRequirement(technologyRequirement);
+    }
+
+    @Override
+    public int deleteTechnologyRequirement(int[] ids) {
+        return technologyRequirementMapper.deleteTechnologyRequirement(ids);
+    }
+
+    @Override
+    public int updateTechnologyRequirement(TechnologyRequirement technologyRequirement) {
+        return technologyRequirementMapper.updateTechnologyRequirement(technologyRequirement);
+    }
+
+    @Override
+    public int updateNote(String technologyRequirementId, String requirement) {
+        return technologyRequirementMapper.updateNote(technologyRequirementId,requirement);
+    }
+
+    @Override
+    public List<TechnologyRequirement> queryRequireByRequireId(String searchValue) {
+        return technologyRequirementMapper.queryRequireByRequireId(searchValue);
+    }
+
+    @Override
+    public List<TechnologyRequirement> queryRequireByTechName(String searchValue) {
+        return technologyRequirementMapper.queryRequireByTechName(searchValue);
+    }
 }

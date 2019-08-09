@@ -18,4 +18,29 @@ public class ProcessServiceImpl implements ProcessService {
     public List<Process> queryAllProcesses() {
         return processMapper.queryAllProcesses();
     }
+
+    @Override
+    public int insertProcess(Process process) {
+        return processMapper.insertProcess(process);
+    }
+
+    @Override
+    public int deleteProcess(int[] ids) {
+        return processMapper.deleteProcess(ids);
+    }
+
+    @Override
+    public int updateProcess(Process process) {
+        return processMapper.updateProcess(process);
+    }
+
+    @Override
+    public List<Process> queryProcessByProcessId(String searchValue) {
+        return processMapper.queryProcessByProcessId(searchValue);
+    }
+
+    @Override
+    public List<Process> queryProcessByPlanId(String searchValue) {
+        return processMapper.queryProcessByPlanId(searchValue);
+    }
 }

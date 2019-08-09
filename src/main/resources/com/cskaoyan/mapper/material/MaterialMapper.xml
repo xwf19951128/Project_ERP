@@ -10,8 +10,8 @@
         material_id as materialId,
         material_type as materialType,
         status,
-            remaining,
-            note
+        remaining,
+        note
         FROM material
         limit #{limit}
         offset #{offset}
@@ -23,5 +23,22 @@
         count(material_id)
         from material
     </select>
+
+    <insert id="insertMaterial">
+        insert into
+        material(material_id, material_type, status, remaining, note)
+        values (#{material.materialId}, #{material.materialType}, #{material.status}, #{material.remaining}, #{material.note})
+    </insert>
+
+    <delete id="deleteMaterialsByIds">
+        delete from material
+        where material_id
+        in
+        (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
 
 </mapper>

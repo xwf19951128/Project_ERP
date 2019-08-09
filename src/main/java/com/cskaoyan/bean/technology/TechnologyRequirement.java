@@ -3,8 +3,8 @@ package com.cskaoyan.bean.technology;
 import java.util.Date;
 
 public class TechnologyRequirement {
-    Date addTime;
-    Date reviseTime;
+    String addTime;
+    String reviseTime;
     String requirement;
     String technologyId;
     String technologyName;
@@ -18,19 +18,19 @@ public class TechnologyRequirement {
         this.requirement = requirement;
     }
 
-    public Date getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Date addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
 
-    public Date getReviseTime() {
+    public String getReviseTime() {
         return reviseTime;
     }
 
-    public void setReviseTime(Date reviseTime) {
+    public void setReviseTime(String reviseTime) {
         this.reviseTime = reviseTime;
     }
 

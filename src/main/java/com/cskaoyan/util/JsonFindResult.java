@@ -1,12 +1,24 @@
-package com.cskaoyan.bean.material;
+package com.cskaoyan.util;
 
 import java.util.List;
 
-public class MaterialPage<T> {
-
+/**
+ * @Author: XiaoLei
+ * @Date Created in 23:08 2019/8/8
+ * 封装查询的信息
+ */
+public class JsonFindResult<T> {
     private int total;
 
     private List<T> rows;
+
+    @Override
+    public String toString() {
+        return "JsonFindResult{" +
+                "total=" + total +
+                ", rows=" + rows +
+                '}';
+    }
 
     public int getTotal() {
         return total;
@@ -22,13 +34,5 @@ public class MaterialPage<T> {
 
     public void setRows(List<T> rows) {
         this.rows = rows;
-    }
-
-    @Override
-    public String toString() {
-        return "Page{" +
-                "total=" + total +
-                ", rows=" + rows +
-                '}';
     }
 }

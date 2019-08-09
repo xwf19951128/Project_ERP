@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mapper.department.DepartmentMapper">
+    <select id="getDepartmentList" resultType="com.cskaoyan.bean.department.Department">
+        select department_id as departmentId ,department_name as departmentName ,note
+        from department
+    </select>
+
+    <insert id="insertDepartment">
+        insert into department (department_id,department_name,note) values (#{departmentId},#{departmentName},#{note})
+    </insert>
+
+    <select id="queryDepartmentById" resultType="com.cskaoyan.bean.department.Department">
+         select department_id as departmentId ,department_name as departmentName ,note
+        from department
+        where department_id = #{departmentId}
+    </select>
+
+    <delete id="deleteBatch">
+        delete from department
+        where department_id in 
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateAll">
+        update department set department_name=#{departmentName}, note=#{note}
+        where department_id = #{departmentId}
+    </update>
+    <update id="updateNote">
+        update department set note=#{note}
+        where department_id = #{departmentId}
+    </update>
+
+    <select id="searchDepartmentById" resultType="com.cskaoyan.bean.department.Department">
+        select department_id as departmentId ,department_name as departmentName ,note
+        from department
+        where department_id like #{id}
+    </select>
+
+    <select id="searchDepartmentByName" resultType="com.cskaoyan.bean.department.Department">
+        select department_id as departmentId ,department_name as departmentName ,note
+        from department
+        where department_name like #{departmentName}
+    </select>
+</mapper>

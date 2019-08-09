@@ -19,18 +19,18 @@
 <div  id="toolbar_department" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
-		<c:if test="${per=='Department:add' }" >
+		<c:if test="${per=='department:add' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="department_add()">新增</a>  
 		    </div>  
 		</c:if>
-		<c:if test="${per=='Department:edit' }" >
+		<c:if test="${per=='department:edit' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" 
 		        	onclick="department_edit()">编辑</a>  
 		    </div>  
 		</c:if>
-		<c:if test="${per=='Department:delete' }" >
+		<c:if test="${per=='department:delete' }" >
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" 
 		        	onclick="department_delete()">删除</a>  
@@ -57,6 +57,7 @@
 
 </div>  
 
+<%--增删改组件--%>
 <div id="departmentEditWindow" class="easyui-window" title="编辑部门" 
 	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/edit'" 
 	style="width:65%;height:65%;padding:10px;">
@@ -92,7 +93,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 		$("#departmentList").datagrid({
 	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
 	        	method:'get', nowrap:true,  
-	        toolbar:"toolbar_department", url:'Department/list', method:'get', loadMsg:'数据加载中......',
+	        toolbar:"toolbar_department", url:'department/list', method:'get', loadMsg:'数据加载中......',
 	        	fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -105,7 +106,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 		$("#departmentList").datagrid({  
 	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
 	        	method:'get', nowrap:true,  
-	        toolbar:"toolbar_department", url:'Department/search_department_by_'+name+'?searchValue='+value,
+	        toolbar:"toolbar_department", url:'department/search_department_by_'+name+'?searchValue='+value,
 	        	loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
@@ -155,12 +156,12 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 	
 	//更新部门要求
 	function updateDepartmentNote(){
-		$.get("Department/edit_judge",'',function(data){
+		$.get("department/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
     			departmentNoteEditor.sync();
-    			$.post("Department/update_note",$("#departmentNoteForm").serialize(), function(data){
+    			$.post("department/update_note",$("#departmentNoteForm").serialize(), function(data){
     				if(data.status == 200){
     					$("#departmentNoteDialog").dialog("close");
     					$("#departmentList").datagrid("reload");
@@ -186,7 +187,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
     }
     
     function department_add(){
-    	$.get("Department/add_judge",'',function(data){
+    	$.get("department/add_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -196,7 +197,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
     }
     
     function department_edit(){
-    	$.get("Department/edit_judge",'',function(data){
+    	$.get("department/edit_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -228,7 +229,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
     }
     
     function department_delete(){
-    	$.get("Department/delete_judge",'',function(data){
+    	$.get("department/delete_judge",'',function(data){
       		if(data.msg != null){
       			$.messager.alert('提示', data.msg);
       		}else{
@@ -240,7 +241,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
             	$.messager.confirm('确认','确定删除ID为 '+ids+' 的部门吗？',function(r){
             	    if (r){
             	    	var params = {"ids":ids};
-                    	$.post("Department/delete_batch",params, function(data){
+                    	$.post("department/delete_batch",params, function(data){
                 			if(data.status == 200){
                 				$.messager.alert('提示','删除部门成功!',undefined,function(){
                 					$("#departmentList").datagrid("reload");

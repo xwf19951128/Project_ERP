@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cskaoyan.mapper.technology.TechnologyMapper">
-    <!--查询所有的process记录-->
+    <!--查询所有的记录-->
     <resultMap id="techMap" type="com.cskaoyan.bean.technology.Technology">
         <result column="technology_id" property="technologyId"></result>
         <result column="technology_name" property="technologyName"></result>
@@ -21,5 +21,54 @@
         standard_capacity,overtime_standard_capacity,overtime_overfulfil_capacity,
         double_capacity,overfulfil_capacity
         from technology
+    </select>
+
+    <!--新增一条technology工艺记录-->
+    <insert id="insertTechnology">
+        insert into technology (technology_id,technology_name,price,vital_process_period,
+        standard_capacity,overtime_standard_capacity,overtime_overfulfil_capacity,
+        double_capacity,overfulfil_capacity) values
+        (#{technology.technologyId},#{technology.technologyName},#{technology.price},#{technology.vitalProcessPeriod},
+        #{technology.standardCapacity},#{technology.overtimeStandardCapacity},#{technology.overtimeOverfulfilCapacity},
+        #{technology.doubleCapacity},#{technology.overfulfilCapacity})
+    </insert>
+
+    <!--批量删除工艺记录-->
+    <delete id="deleteTechnology">
+        delete from technology where technology_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--更新工艺记录-->
+    <update id="updateTechnology">
+        update technology set technology_name =#{tech.technologyName},
+        price = #{tech.price},vital_process_period = #{tech.vitalProcessPeriod},
+        standard_capacity = #{tech.standardCapacity},overtime_standard_capacity=#{tech.overtimeStandardCapacity},
+        overtime_overfulfil_capacity = #{tech.overtimeOverfulfilCapacity},
+        double_capacity = #{tech.doubleCapacity},overfulfil_capacity =#{tech.overfulfilCapacity}
+        where technology_id = #{tech.technologyId}
+    </update>
+
+    <!--根据一个id查询对应的工艺-->
+    <select id="queryTechById" resultMap="techMap">
+        select technology_id,technology_name,price,vital_process_period,
+        standard_capacity,overtime_standard_capacity,overtime_overfulfil_capacity,
+        double_capacity,overfulfil_capacity from technology where technology_id=#{id}
+    </select>
+
+    <!--根据工艺编号模糊搜索-->
+    <select id="queryTechByTechId" resultMap="techMap">
+         select technology_id,technology_name,price,vital_process_period,
+        standard_capacity,overtime_standard_capacity,overtime_overfulfil_capacity,
+        double_capacity,overfulfil_capacity
+        from technology where technology_id like #{value}
+    </select>
+    <!--根据工艺名称模糊搜索-->
+    <select id="queryTechByTechName" resultMap="techMap">
+         select technology_id,technology_name,price,vital_process_period,
+        standard_capacity,overtime_standard_capacity,overtime_overfulfil_capacity,
+        double_capacity,overfulfil_capacity
+        from technology where technology_name like #{value}
     </select>
 </mapper>
