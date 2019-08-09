@@ -23,4 +23,16 @@ public interface TechnologyPlanMapper {
      * 更新记录
      * */
     public int updateTechnologyPlan(@Param("techPlan")TechnologyPlan technologyPlan);
+    /**
+     * 根据id查询一条plan
+     * */
+    public TechnologyPlan queryTechPlanById(@Param("id")String id);
+    /**
+     *根据工艺计划编号模糊搜索
+     * */
+    public List<TechnologyPlan> queryPlanByPlanId(@Param("value") String searchValue);
+    /**
+     * 根据工艺名称模糊搜索
+     * */
+    public List<TechnologyPlan> queryPlanByTechName(@Param("value") String searchValue);
 }

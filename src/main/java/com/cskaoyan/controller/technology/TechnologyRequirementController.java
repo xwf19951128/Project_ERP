@@ -1,6 +1,7 @@
 package com.cskaoyan.controller.technology;
 
 import com.cskaoyan.bean.technology.Process;
+import com.cskaoyan.bean.technology.TechnologyPlan;
 import com.cskaoyan.bean.technology.TechnologyRequirement;
 import com.cskaoyan.service.technology.TechnologyRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,5 +124,38 @@ public class TechnologyRequirementController {
             stringObjectHashMap.put("msg","更新失败，请重试");
         }
         return stringObjectHashMap;
+    }
+
+    //
+    @RequestMapping("/update_requirement")
+    @ResponseBody
+    public Map updateNote(String technologyRequirementId,String requirement){
+        Map<String, Object> map = new HashMap<>();
+        int i = technologyRequirementService.updateNote(technologyRequirementId,requirement);
+        if (i==1){
+            map.put("status",200);
+            map.put("msg","ok");
+        }else {
+            map.put("status",288);
+            map.put("msg","失败");
+        }
+        return map;
+    }
+
+    //查询1：根据工艺要求编号
+    @RequestMapping("/search_technologyRequirement_by_technologyRequirementId")
+    @ResponseBody
+    public List<TechnologyRequirement> queryRequireByRequireId(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementService.queryRequireByRequireId(search);
+        return technologyRequirements;
+    }
+    //查询2：根据工艺名称
+    @RequestMapping("/search_technologyRequirement_by_technologyName")
+    @ResponseBody
+    public List<TechnologyRequirement> queryRequireByTechName(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementService.queryRequireByTechName(search);
+        return technologyRequirements;
     }
 }

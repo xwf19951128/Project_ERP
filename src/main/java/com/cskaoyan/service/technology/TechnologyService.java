@@ -15,4 +15,14 @@ public interface TechnologyService {
     public int deleteTechnology(int[] ids);
     //更新记录
     public int updateTechnology(Technology technology);
+    //查询id对应的工艺
+    public Technology queryTechById(String id);
+    /**
+     * 根据工艺编号模糊查询
+     * */
+    public List<Technology> queryTechByTechId(String searchValue);
+    /**
+     * 根据工艺名称模糊查询
+     * */
+    public List<Technology> queryTechByTechName(String searchValue);
 }

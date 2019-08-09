@@ -25,4 +25,16 @@ public interface TechnologyMapper {
      * */
     public int updateTechnology(@Param("tech")Technology technology);
 
+    /**
+     * 根据id值查询工艺信息
+     * */
+    public Technology queryTechById(@Param("id")String id);
+    /**
+     * 根据工艺编号模糊查询
+     * */
+    public List<Technology> queryTechByTechId(@Param("value") String searchValue);
+    /**
+     * 根据工艺名称模糊查询
+     * */
+    public List<Technology> queryTechByTechName(@Param("value") String searchValue);
 }

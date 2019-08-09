@@ -14,4 +14,14 @@ public interface TechnologyRequirementService {
     public int deleteTechnologyRequirement(int[] ids);
     //更新记录
     public int updateTechnologyRequirement(TechnologyRequirement technologyRequirement);
+    //更新工艺要求
+    public int updateNote(String technologyRequirementId, String requirement);
+    /**
+     * 根据工艺要求编号模糊查询
+     * */
+    public List<TechnologyRequirement> queryRequireByRequireId(String searchValue);
+    /**
+     * 根据工艺名称模糊查询
+     * */
+    public List<TechnologyRequirement> queryRequireByTechName(String searchValue);
 }

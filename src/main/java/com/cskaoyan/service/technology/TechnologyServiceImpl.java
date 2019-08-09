@@ -32,4 +32,19 @@ public class TechnologyServiceImpl implements TechnologyService {
     public int updateTechnology(Technology technology) {
         return technologyMapper.updateTechnology(technology);
     }
+
+    @Override
+    public Technology queryTechById(String id) {
+        return technologyMapper.queryTechById(id);
+    }
+
+    @Override
+    public List<Technology> queryTechByTechId(String searchValue) {
+        return technologyMapper.queryTechByTechId(searchValue);
+    }
+
+    @Override
+    public List<Technology> queryTechByTechName(String searchValue) {
+        return technologyMapper.queryTechByTechName(searchValue);
+    }
 }

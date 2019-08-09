@@ -17,4 +17,14 @@ public interface TechnologyPlanService {
     public int deleteTechnologyPlan(int[] ids);
     //更新记录
     public int updateTechnologyPlan(TechnologyPlan technologyPlan);
+    //根据id查询一条记录
+    public TechnologyPlan queryTechPlanById(String id);
+    /**
+     *根据工艺计划编号模糊搜索
+     * */
+    public List<TechnologyPlan> queryPlanByPlanId(String searchValue);
+    /**
+     * 根据工艺名称模糊搜索
+     * */
+    public List<TechnologyPlan> queryPlanByTechName(String searchValue);
 }
