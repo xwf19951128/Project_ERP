@@ -1,7 +1,7 @@
-package com.cskaoyan.service;
+package com.cskaoyan.service.material;
 
-import com.cskaoyan.bean.Material;
-import com.cskaoyan.mapper.MaterialMapper;
+import com.cskaoyan.bean.material.Material;
+import com.cskaoyan.mapper.material.MaterialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,14 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public List<Material> listPageMaterials(int page, int rows) {
-        return null;
+//        PageHelper.startPage(page, rows);
+        int limit = rows;
+        int offset = (page-1)*rows;
+        return materialMapper.listPageMaterials(limit, offset);
+    }
+
+    @Override
+    public int countMaterialCount() {
+        return materialMapper.countMaterialCount();
     }
 }
