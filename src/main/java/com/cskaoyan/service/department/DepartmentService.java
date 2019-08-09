@@ -1,7 +1,6 @@
-package com.cskaoyan.service.Department;
+package com.cskaoyan.service.department;
 
 import com.cskaoyan.bean.department.Department;
-import com.cskaoyan.bean.department.DepartmentPage;
 
 import java.util.List;
 
@@ -13,4 +12,8 @@ public interface DepartmentService {
     Department queryDepartmentById(Department department);
 
     int deleteBatch(String[] ids);
+
+    int updateAll(Department department);
+
+    int updateNote(Department department);
 }
