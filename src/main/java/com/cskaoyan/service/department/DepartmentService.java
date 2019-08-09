@@ -16,4 +16,8 @@ public interface DepartmentService {
     int updateAll(Department department);
 
     int updateNote(Department department);
+
+    List<Department> searchDepartmentById(String condition);
+
+    List<Department> searchDepartmentByName(String departmentName);
 }

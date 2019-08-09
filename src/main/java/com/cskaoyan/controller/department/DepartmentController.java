@@ -149,4 +149,36 @@ public class DepartmentController {
         }
         return data;
     }
+
+    /*id的模糊查询*/
+    @RequestMapping("search_department_by_departmentId")
+    @ResponseBody
+    public DepartmentPage searchDepartmentById(int searchValue,int rows, int page) {
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder condition = stringBuilder.append("%").append(searchValue).append("%");  // 拼接查詢條件
+        PageHelper.startPage(page,rows);
+        List<Department> list = departmentService.searchDepartmentById(condition.toString());
+        PageInfo<Department> pageInfo = new PageInfo<>(list);
+        long total = pageInfo.getTotal();
+        DepartmentPage departmentPage = new DepartmentPage();
+        departmentPage.setRows(list);
+        departmentPage.setTotal(((int) total));
+        return departmentPage;
+    }
+
+    /*部门名称的模糊查询*/
+    @RequestMapping("search_department_by_departmentName")
+    @ResponseBody
+    public DepartmentPage searchDepartmentByDepartmentName(String searchValue, int page, int rows) {
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder condition = stringBuilder.append("%").append(searchValue).append("%");  // 拼接查詢條件
+        PageHelper.startPage(page,rows);
+        List<Department> list = departmentService.searchDepartmentByName(condition.toString());
+        PageInfo<Department> pageInfo = new PageInfo<>(list);
+        long total = pageInfo.getTotal();
+        DepartmentPage departmentPage = new DepartmentPage();
+        departmentPage.setRows(list);
+        departmentPage.setTotal(((int) total));
+        return departmentPage;
+    }
 }

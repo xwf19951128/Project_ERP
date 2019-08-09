@@ -19,4 +19,8 @@ public interface DepartmentMapper {
     int updateAll(Department department);
 
     int updateNote(Department department);
+
+    List<Department> searchDepartmentById(String id);
+
+    List<Department> searchDepartmentByName(String departmentName);
 }

@@ -44,4 +44,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     public int updateNote(Department department) {
         return departmentMapper.updateNote(department);
     }
+
+    @Override
+    public List<Department> searchDepartmentById(String condition) {
+        return departmentMapper.searchDepartmentById(condition);
+    }
+
+    @Override
+    public List<Department> searchDepartmentByName(String departmentName) {
+        return departmentMapper.searchDepartmentByName(departmentName);
+    }
 }

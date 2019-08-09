@@ -34,4 +34,16 @@
         update department set note=#{note}
         where department_id = #{departmentId}
     </update>
+
+    <select id="searchDepartmentById" resultType="com.cskaoyan.bean.department.Department">
+        select department_id as departmentId ,department_name as departmentName ,note
+        from department
+        where department_id like #{id}
+    </select>
+
+    <select id="searchDepartmentByName" resultType="com.cskaoyan.bean.department.Department">
+        select department_id as departmentId ,department_name as departmentName ,note
+        from department
+        where department_name like #{departmentName}
+    </select>
 </mapper>
