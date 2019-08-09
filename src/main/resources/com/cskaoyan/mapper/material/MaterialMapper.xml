@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cskaoyan.mapper.material.MaterialMapper">
+    <!--查询所有物料-->
+    <select id="listPageMaterials" resultType="com.cskaoyan.bean.material.Material">
+        select
+        material_id as materialId,
+        material_type as materialType,
+        status,
+        remaining,
+        note
+        FROM material
+        limit #{limit}
+        offset #{offset}
+    </select>
+
+    <!--查询所有物料总数-->
+    <select id="countMaterialCount" resultType="java.lang.Integer">
+        select
+        count(material_id)
+        from material
+    </select>
+
+    <insert id="insertMaterial">
+        insert into
+        material(material_id, material_type, status, remaining, note)
+        values (#{material.materialId}, #{material.materialType}, #{material.status}, #{material.remaining}, #{material.note})
+    </insert>
+
+    <delete id="deleteMaterialsByIds">
+        delete from material
+        where material_id
+        in
+        (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+</mapper>

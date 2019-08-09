@@ -5,6 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.qualifyMonitor.EndProductQualifyMapper">
+    <!--查询全部成品计量信息-->
     <resultMap id="endProductQualifyMapper" type="com.cskaoyan.bean.qualifyMonitor.EndProductQualify">
         <result property="fMeasureCheckId" column="f_measure_check_id"/>
         <result property="orderId" column="order_id"/>
@@ -13,10 +14,8 @@
         <result property="measureData" column="measure_data"/>
         <result property="result" column="result"/>
         <result property="note" column="note"/>
-
         <result property="empName" column="emp_name"/>
     </resultMap>
-
     <select id="queryEndProductQualify" resultMap="endProductQualifyMapper">
         select
         fmc.f_measure_check_id,
@@ -30,4 +29,26 @@
         from final_measuret_check fmc
         left join employee emp on emp.emp_id = fmc.emp_id;
     </select>
+
+    <!--新增成品计量信息-->
+    <insert id="insertEndProductQualify">
+        insert into final_measuret_check (
+        f_measure_check_id,
+        order_id,
+        check_item,
+        cdate,
+        measure_data,
+        result,
+        note,
+        emp_id)
+        values (
+        #{endProductQualify.fMeasureCheckId},
+        #{endProductQualify.orderId},
+        #{endProductQualify.checkItem},
+        #{endProductQualify.cdate},
+        #{endProductQualify.measureData},
+        #{endProductQualify.result},
+        #{endProductQualify.note},
+        #{endProductQualify.empId});
+    </insert>
 </mapper>

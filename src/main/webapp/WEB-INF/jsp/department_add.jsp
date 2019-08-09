@@ -58,7 +58,7 @@
 		
 		//ajax的post方式提交表单
 		//$("#departmentAddForm").serialize()将表单序列号为key-value形式的字符串
-		$.post("Department/insert",$("#departmentAddForm").serialize(), function(data){
+		$.post("department/insert",$("#departmentAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增部门成功!');
 				clearDepartmentAddForm();

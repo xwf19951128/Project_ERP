@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mapper.device.DeviceMaintainMapper">
+  <!--sql和bean的对照 以及查询结果放入的对象-->
+  <resultMap id="deviceMaintainMap" type="com.cskaoyan.bean.device.DeviceMaintain">
+    <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
+    <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
+    <result column="device_maintain_emp_id" jdbcType="VARCHAR" property="deviceMaintainEmpId" />
+    <result column="device_maintain_date" jdbcType="TIMESTAMP" property="deviceMaintainDate" />
+    <result column="device_maintain_result" jdbcType="VARCHAR" property="deviceMaintainResult" />
+    <result column="device_maintain_cost" jdbcType="DECIMAL" property="deviceMaintainCost" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+
+  <resultMap id="deviceMaintainVoMap" type="com.cskaoyan.bean.device.more.DeviceMaintainVo">
+    <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
+    <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
+    <result column="device_maintain_emp_id" jdbcType="VARCHAR" property="deviceMaintainEmpId" />
+    <result column="device_maintain_date" jdbcType="TIMESTAMP" property="deviceMaintainDate" />
+    <result column="device_maintain_result" jdbcType="VARCHAR" property="deviceMaintainResult" />
+    <result column="device_maintain_cost" jdbcType="DECIMAL" property="deviceMaintainCost" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+
+    <result column="device_maintain_emp" property="deviceMaintainEmp" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="queryAllDeviceMaintain" resultMap="deviceMaintainVoMap">
+      select
+      device_maintain_id,
+      device_fault_id,
+      device_maintain_emp_id,
+      device_maintain_date,
+      device_maintain_result,
+      device_maintain_cost,
+      note,
+      e.emp_name as device_maintain_emp
+      from device_maintain dm
+      left join employee e on dm.device_maintain_emp_id=e.emp_id
+
+  </select>
+
+</mapper>

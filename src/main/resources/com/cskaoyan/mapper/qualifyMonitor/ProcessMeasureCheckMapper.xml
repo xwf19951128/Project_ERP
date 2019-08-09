@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--需要将命名空间改造成对应接口的全类名-->
+<mapper namespace="com.cskaoyan.mapper.qualifyMonitor.ProcessMeasureCheckMapper">
+    <resultMap id="measureCheckMapper" type="com.cskaoyan.bean.qualifyMonitor.ProcessMeasureCheck">
+        <result property="pMeasureCheckId" column="p_measure_check_id"/>
+        <result property="processId" column="process_id"/>
+        <result property="checkItem" column="check_item"/>
+        <result property="cdate" column="cdate"/>
+        <result property="measureData" column="measure_data"/>
+        <result property="result" column="result"/>
+        <result property="note" column="note"/>
+        <result property="empName" column="emp_name"/>
+    </resultMap>
+
+    <select id="queryMeasureCheck" resultMap="measureCheckMapper">
+        select
+        pmc.p_measure_check_id,
+        pmc.process_id,
+        pmc.check_item,
+        pmc.cdate,
+        pmc.measure_data,
+        pmc.result,
+        pmc.note,
+        emp.emp_name
+        from process_measure_check pmc
+        left join employee emp on emp.emp_id = pmc.emp_id;
+    </select>
+</mapper>
