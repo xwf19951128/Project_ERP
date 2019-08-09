@@ -92,7 +92,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 		$("#departmentList").datagrid({
 	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
 	        	method:'get', nowrap:true,  
-	        toolbar:"toolbar_department", url:'Department/list', method:'get', loadMsg:'数据加载中......',
+	        toolbar:"toolbar_department", url:'department/list', method:'get', loadMsg:'数据加载中......',
 	        	fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -105,7 +105,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 		$("#departmentList").datagrid({  
 	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
 	        	method:'get', nowrap:true,  
-	        toolbar:"toolbar_department", url:'Department/search_department_by_'+name+'?searchValue='+value,
+	        toolbar:"toolbar_department", url:'department/search_department_by_'+name+'?searchValue='+value,
 	        	loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
@@ -155,12 +155,12 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 	
 	//更新部门要求
 	function updateDepartmentNote(){
-		$.get("Department/edit_judge",'',function(data){
+		$.get("department/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
     			departmentNoteEditor.sync();
-    			$.post("Department/update_note",$("#departmentNoteForm").serialize(), function(data){
+    			$.post("department/update_note",$("#departmentNoteForm").serialize(), function(data){
     				if(data.status == 200){
     					$("#departmentNoteDialog").dialog("close");
     					$("#departmentList").datagrid("reload");
@@ -186,7 +186,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
     }
     
     function department_add(){
-    	$.get("Department/add_judge",'',function(data){
+    	$.get("department/add_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -196,7 +196,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
     }
     
     function department_edit(){
-    	$.get("Department/edit_judge",'',function(data){
+    	$.get("department/edit_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -228,7 +228,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
     }
     
     function department_delete(){
-    	$.get("Department/delete_judge",'',function(data){
+    	$.get("department/delete_judge",'',function(data){
       		if(data.msg != null){
       			$.messager.alert('提示', data.msg);
       		}else{
@@ -240,7 +240,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
             	$.messager.confirm('确认','确定删除ID为 '+ids+' 的部门吗？',function(r){
             	    if (r){
             	    	var params = {"ids":ids};
-                    	$.post("Department/delete_batch",params, function(data){
+                    	$.post("department/delete_batch",params, function(data){
                 			if(data.status == 200){
                 				$.messager.alert('提示','删除部门成功!',undefined,function(){
                 					$("#departmentList").datagrid("reload");
