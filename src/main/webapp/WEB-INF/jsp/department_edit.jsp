@@ -40,7 +40,7 @@
 	departmentEditEditor.sync();
 	
 	function submitDepartmentEditForm(){
-		$.get("Department/edit_judge",'',function(data){
+		$.get("department/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
@@ -50,7 +50,7 @@
     			}
     			departmentEditEditor.sync();
     			
-    			$.post("Department/update_all",$("#departmentEditForm").serialize(), function(data){
+    			$.post("department/update_all",$("#departmentEditForm").serialize(), function(data){
     				if(data.status == 200){
     					$.messager.alert('提示','修改部门成功!','info',function(){
     						$("#departmentEditWindow").window('close');

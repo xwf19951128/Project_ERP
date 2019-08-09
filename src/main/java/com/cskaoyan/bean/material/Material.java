@@ -7,6 +7,7 @@ public class Material {
     private String status;
     private int remaining;
     private String note;
+//    private String materialParams;
 
     public String getMaterialId() {
         return materialId;
@@ -48,10 +49,18 @@ public class Material {
         this.note = note;
     }
 
+/*    public String getMaterialParams() {
+        return materialParams;
+    }
+
+    public void setMaterialParams(String materialParams) {
+        this.materialParams = materialParams;
+    }*/
+
     @Override
     public String toString() {
         return "Material{" +
-                "materialId=" + materialId +
+                "materialId='" + materialId + '\'' +
                 ", materialType='" + materialType + '\'' +
                 ", status='" + status + '\'' +
                 ", remaining=" + remaining +

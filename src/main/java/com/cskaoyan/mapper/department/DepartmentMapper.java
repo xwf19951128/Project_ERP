@@ -15,4 +15,12 @@ public interface DepartmentMapper {
     Department queryDepartmentById(String departmentId);
 
     int deleteBatch(@Param("ids") String[] ids);
+
+    int updateAll(Department department);
+
+    int updateNote(Department department);
+
+    List<Department> searchDepartmentById(String id);
+
+    List<Department> searchDepartmentByName(String departmentName);
 }
