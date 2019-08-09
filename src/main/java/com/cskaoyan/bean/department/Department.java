@@ -1,17 +1,17 @@
-package com.cskaoyan.bean;
+package com.cskaoyan.bean.department;
 
 public class Department {
-    private int departmentId;
+    private String departmentId;
 
     private String departmentName;
 
     private String note;
 
-    public int getDepartmentId() {
+    public String getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
+    public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
 

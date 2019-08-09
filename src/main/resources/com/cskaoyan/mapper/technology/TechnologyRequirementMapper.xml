@@ -18,4 +18,25 @@
         from technology_requirement r
         left join technology  t on r.technology_id = t.technology_id
     </select>
+
+    <!--新增一条工艺需求-->
+    <insert id="insertTechnologyRequirement">
+        insert into technology_requirement (add_time,revise_time,requirement,technology_id,technology_requirement_id)
+        values (#{technologyRequirement.addTime},#{technologyRequirement.reviseTime},#{technologyRequirement.requirement},
+        #{technologyRequirement.technologyId},#{technologyRequirement.technologyRequirementId})
+    </insert>
+
+    <!--批量删除记录-->
+    <delete id="deleteTechnologyRequirement">
+        delete from technology_requirement where technology_requirement_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--更新工艺需求记录-->
+    <update id="updateTechnologyRequirement">
+        update technology_requirement set technology_id = #{techRequire.technologyId},
+        requirement = #{techRequire.requirement},add_time = #{techRequire.addTime},revise_time=#{techRequire.reviseTime}
+        where technology_requirement_id = #{techRequire.technologyRequirementId}
+    </update>
 </mapper>
