@@ -4,6 +4,7 @@
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cskaoyan.mapper.technology.ProcessMapper">
+
     <!--查询所有的process记录-->
     <resultMap id="processMap" type="com.cskaoyan.bean.technology.Process">
         <result column="process_id" property="processId"></result>
@@ -14,4 +15,25 @@
     <select id="queryAllProcesses" resultMap="processMap">
         select  process_id,technology_plan_id,sequence,quota from process
     </select>
+
+    <!--新增一条process数据-->
+    <insert id="insertProcess">
+        insert into process (process_id,technology_plan_id,sequence,quota) values
+        (#{process.processId},#{process.technologyPlanId},#{process.sequence},#{process.quota});
+    </insert>
+
+    <!--根据ids数组批量删除记录-->
+    <delete id="deleteProcess">
+        delete from process where process_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--更新记录-->
+    <update id="updateProcess">
+        update process set technology_plan_id = #{process.technologyPlanId},
+        sequence = #{process.sequence},quota = #{process.quota}
+        where process_id = #{process.processId}
+    </update>
 </mapper>

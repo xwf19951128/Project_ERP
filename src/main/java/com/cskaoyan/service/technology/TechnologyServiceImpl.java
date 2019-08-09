@@ -17,4 +17,19 @@ public class TechnologyServiceImpl implements TechnologyService {
     public List<Technology> queryAllTechnologies() {
         return technologyMapper.queryAllTechnologies();
     }
+
+    @Override
+    public int insertTechnology(Technology technology) {
+        return technologyMapper.insertTechnology(technology);
+    }
+
+    @Override
+    public int deleteTechnology(int[] ids) {
+        return technologyMapper.deleteTechnology(ids);
+    }
+
+    @Override
+    public int updateTechnology(Technology technology) {
+        return technologyMapper.updateTechnology(technology);
+    }
 }
