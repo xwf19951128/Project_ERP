@@ -1,8 +1,8 @@
 package com.cskaoyan.controller.qualifyMonitor;
 
 import com.cskaoyan.bean.qualifyMonitor.JavaBean;
-import com.cskaoyan.bean.qualifyMonitor.MeasureCheck;
-import com.cskaoyan.service.qualifyMonitor.MeasureCheckService;
+import com.cskaoyan.bean.qualifyMonitor.ProcessMeasureCheck;
+import com.cskaoyan.service.qualifyMonitor.ProcessMeasureCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +14,11 @@ import java.util.List;
 @Controller
 // 映射到url请求
 @RequestMapping("p_measure_check")
-public class MeasureCheckController {
+public class ProcessMeasureCheckController {
 
     // 从容器中取出Service
     @Autowired
-    MeasureCheckService measureCheckService;
+    ProcessMeasureCheckService processMeasureCheckService;
 
     // 跳转到工序计量质检列表页面
     @RequestMapping("/find")
@@ -29,15 +29,15 @@ public class MeasureCheckController {
     // 把查询到的数据封装到Javabean
     @RequestMapping("/list")
     @ResponseBody
-    public JavaBean<MeasureCheck> queryMeasureCheck() {
+    public JavaBean<ProcessMeasureCheck> queryMeasureCheck() {
         // 生成一个JavaBean 来存 List和total
-        JavaBean<MeasureCheck> measureCheckJavaBean = new JavaBean<>();
+        JavaBean<ProcessMeasureCheck> measureCheckJavaBean = new JavaBean<>();
         // 获取MeasureCheck集合
-        List<MeasureCheck> measureChecks = measureCheckService.queryMeasureCheck();
+        List<ProcessMeasureCheck> processMeasureChecks = processMeasureCheckService.queryMeasureCheck();
         // 存List
-        measureCheckJavaBean.setRows(measureChecks);
+        measureCheckJavaBean.setRows(processMeasureChecks);
         // 存total
-        measureCheckJavaBean.setTotal(measureChecks.size());
+        measureCheckJavaBean.setTotal(processMeasureChecks.size());
         // 返回封装结果
         return measureCheckJavaBean;
     }

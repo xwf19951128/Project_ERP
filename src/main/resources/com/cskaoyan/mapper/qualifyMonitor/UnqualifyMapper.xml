@@ -5,6 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.qualifyMonitor.UnqualifyMapper">
+    <!--查询不合格产品列表-->
     <resultMap id="unqualifyMapper" type="com.cskaoyan.bean.qualifyMonitor.UnqualifyApply">
         <result property="unqualifyApplyId" column="unqualify_apply_id"/>
         <result property="unqualifyItem" column="unqualify_item"/>
@@ -19,7 +20,6 @@
         <result property="empId" column="emp_id"/>
         <result property="empName" column="emp_name"/>
     </resultMap>
-
     <select id="queryUnqualifyApply" resultMap="unqualifyMapper">
         select
         ua.unqualify_apply_id,
@@ -36,4 +36,28 @@
         left join employee em on ua.emp_id = em.emp_id
         left join product pr on pr.product_id = ua.product_id;
     </select>
+
+
+    <!--新增不合格产品-->
+    <insert id="insertUnqualify">
+        insert into unqualify_apply (
+        unqualify_apply_id,
+        product_id,
+        unqualify_item,
+        unqualify_count,
+        assembly_date,
+        emp_id,
+        apply_date,
+        note)
+        values (
+        #{unqualifyApply.unqualifyApplyId},
+        #{unqualifyApply.productId},
+        #{unqualifyApply.unqualifyItem},
+        #{unqualifyApply.unqualifyCount},
+        #{unqualifyApply.assemblyDate},
+        #{unqualifyApply.empId},
+        #{unqualifyApply.applyDate},
+        #{unqualifyApply.note});
+    </insert>
+
 </mapper>

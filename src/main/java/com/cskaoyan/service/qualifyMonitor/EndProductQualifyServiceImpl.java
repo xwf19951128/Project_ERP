@@ -18,4 +18,9 @@ public class EndProductQualifyServiceImpl implements EndProductQualifyService {
     public List<EndProductQualify> EndProductQualify() {
         return endProductQualifyMapper.queryEndProductQualify();
     }
+
+    @Override
+    public int insertEndProductQualify(EndProductQualify endProductQualify) {
+        return endProductQualifyMapper.insertEndProductQualify(endProductQualify);
+    }
 }
