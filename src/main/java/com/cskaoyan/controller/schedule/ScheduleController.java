@@ -1,6 +1,7 @@
 package com.cskaoyan.controller.schedule;
 
 import com.cskaoyan.bean.schedule.*;
+import com.cskaoyan.bean.technology.Process;
 import com.cskaoyan.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class ScheduleController {
     ScheduleService service;
     @RequestMapping("/custom/list")
     @ResponseBody
-    public SchedulList<Custom> showCustomList(int page, int rows, HttpServletRequest request, HttpServletResponse response){
+    public List<Custom> showCustomList(int page, int rows, HttpServletRequest request, HttpServletResponse response){
         ArrayList<String> list = new ArrayList<>();
         list.add("order:add");
         list.add("order:edit");
@@ -28,13 +29,57 @@ public class ScheduleController {
         return service.queryCustomListByPage(page,rows);
     }
     @RequestMapping("/order/find")
-    public String showOrderList( HttpServletRequest request, HttpServletResponse response){
+    public String showOrderList( HttpServletRequest request){
         ArrayList<String> list = new ArrayList<>();
         list.add("order:add");
         list.add("order:edit");
         list.add("order:delete");
         request.getSession().setAttribute("sysPermissionList",list);
         return "/WEB-INF/jsp/order_list.jsp";
+    }
+    @RequestMapping("/custom/find")
+    public String showCustomList( HttpServletRequest request){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("custom:add");
+        list.add("custom:edit");
+        list.add("custom:delete");
+        request.getSession().setAttribute("sysPermissionList",list);
+        return "/WEB-INF/jsp/custom_list.jsp";
+    }
+    @RequestMapping("/product/find")
+    public String showProductList( HttpServletRequest request){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("product:add");
+        list.add("product:edit");
+        list.add("product:delete");
+        request.getSession().setAttribute("sysPermissionList",list);
+        return "/WEB-INF/jsp/product_list.jsp";
+    }@RequestMapping("/work/find")
+    public String showWorkList( HttpServletRequest request){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("work:add");
+        list.add("work:edit");
+        list.add("work:delete");
+        request.getSession().setAttribute("sysPermissionList",list);
+        return "/WEB-INF/jsp/work_list.jsp";
+    }
+    @RequestMapping("/manufacture/find")
+    public String showManufactureList( HttpServletRequest request){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("manufacture:add");
+        list.add("manufacture:edit");
+        list.add("manufacture:delete");
+        request.getSession().setAttribute("sysPermissionList",list);
+        return "/WEB-INF/jsp/manufacture_list.jsp";
+    }
+    @RequestMapping("/task/find")
+    public String showTaskList( HttpServletRequest request){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("task:add");
+        list.add("task:edit");
+        list.add("task:delete");
+        request.getSession().setAttribute("sysPermissionList",list);
+        return "/WEB-INF/jsp/task_list.jsp";
     }
     @RequestMapping("/order/list")
     @ResponseBody
@@ -44,7 +89,7 @@ public class ScheduleController {
 
     @RequestMapping("/product/list")
     @ResponseBody
-    public SchedulList<Product> showProductList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
+    public List<Product> showProductList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
         ArrayList<String> list = new ArrayList<>();
         list.add("order:add");
         list.add("order:edit");
@@ -54,7 +99,7 @@ public class ScheduleController {
     }
     @RequestMapping("/work/list")
     @ResponseBody
-    public SchedulList<Work> showWorkList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
+    public List<Work> showWorkList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
         ArrayList<String> list = new ArrayList<>();
         list.add("order:add");
         list.add("order:edit");
@@ -64,7 +109,7 @@ public class ScheduleController {
     }
     @RequestMapping("/manufacture/list")
     @ResponseBody
-    public SchedulList<Manufacture> showManufactureList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
+    public List<Manufacture> showManufactureList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
         ArrayList<String> list = new ArrayList<>();
         list.add("order:add");
         list.add("order:edit");
@@ -74,7 +119,7 @@ public class ScheduleController {
     }
     @RequestMapping("/task/list")
     @ResponseBody
-    public SchedulList<Task> showTaskList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
+    public List<Task> showTaskList(int page, int rows , HttpServletRequest request, HttpServletResponse response){
         ArrayList<String> list = new ArrayList<>();
         list.add("order:add");
         list.add("order:edit");
@@ -143,5 +188,20 @@ public class ScheduleController {
     @ResponseBody
     public List<Product> getAllProducts(){
         return service.queryProducts();
+    }
+    @RequestMapping("/deviceList/get_data")
+    @ResponseBody
+    public List<Product> getAllDevices(){
+        return service.queryProducts();
+    }
+    @RequestMapping("/order/get_data")
+    @ResponseBody
+    public List<Order> getAllOrder(){
+        return service.queryOrders();
+    }
+    @RequestMapping("/process/get_data")
+    @ResponseBody
+    public List<Process> getAllProcess(){
+        return null;
     }
 }

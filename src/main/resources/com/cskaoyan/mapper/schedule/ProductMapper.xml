@@ -225,4 +225,9 @@
       status = #{status,jdbcType=INTEGER}
     where product_id = #{productId,jdbcType=VARCHAR}
   </update>
+  <select id="queryList" resultType="com.cskaoyan.bean.schedule.Product" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+  </select>
 </mapper>

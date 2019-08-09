@@ -225,4 +225,9 @@
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
+  <select id="queryList" resultType="com.cskaoyan.bean.schedule.Work" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from work
+  </select>
 </mapper>

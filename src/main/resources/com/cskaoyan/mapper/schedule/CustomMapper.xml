@@ -89,6 +89,11 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="queryList" resultType="com.cskaoyan.bean.schedule.Custom" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from custom
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

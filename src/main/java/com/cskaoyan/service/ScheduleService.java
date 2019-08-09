@@ -7,17 +7,17 @@ import java.util.List;
 public interface ScheduleService {
 
 
-    SchedulList<Custom> queryCustomListByPage(Integer page, Integer rows);
+    List<Custom> queryCustomListByPage(Integer page, Integer rows);
 
     SchedulList<Order> queryOrderListByPage(Integer page, Integer rows);
 
-    SchedulList<Product> queryProductListByPage(Integer page, Integer rows);
+    List<Product> queryProductListByPage(Integer page, Integer rows);
 
-    SchedulList<Work> queryWorkListByPage(Integer page, Integer rows);
+    List<Work> queryWorkListByPage(Integer page, Integer rows);
 
-    SchedulList<Manufacture> queryManufactureByPage(Integer page, Integer rows);
+    List<Manufacture> queryManufactureByPage(Integer page, Integer rows);
 
-    SchedulList<Task> queryTaskByPage(Integer page, Integer rows);
+    List<Task> queryTaskByPage(Integer page, Integer rows);
 
     SchedulList<Order> searchOrderListByID(Integer searchValue, Integer page, Integer rows);
 

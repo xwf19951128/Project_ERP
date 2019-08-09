@@ -24,10 +24,20 @@
     <!--sqlsessionFactoryBean-->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="myds"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>helperDialect=mysql</value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!--mapperScanner-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"></property>
         <property name="basePackage" value="com.cskaoyan.mapper"></property>
     </bean>
+
 </beans>

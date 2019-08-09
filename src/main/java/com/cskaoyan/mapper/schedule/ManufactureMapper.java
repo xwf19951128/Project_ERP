@@ -1,11 +1,13 @@
 package com.cskaoyan.mapper.schedule;
 
+import com.cskaoyan.bean.schedule.Custom;
 import com.cskaoyan.bean.schedule.Manufacture;
 import com.cskaoyan.bean.schedule.ManufactureExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ManufactureMapper {
+    List<Manufacture> queryList();
     long countByExample(ManufactureExample example);
 
     int deleteByExample(ManufactureExample example);

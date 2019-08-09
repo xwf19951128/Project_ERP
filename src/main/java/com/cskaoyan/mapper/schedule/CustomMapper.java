@@ -17,6 +17,7 @@ public interface CustomMapper {
     int insertSelective(Custom record);
 
     List<Custom> selectByExample(CustomExample example);
+    List<Custom> queryList();
 
     Custom selectByPrimaryKey(String customId);
 

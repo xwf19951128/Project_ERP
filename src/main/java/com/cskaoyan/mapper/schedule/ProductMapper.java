@@ -1,5 +1,6 @@
 package com.cskaoyan.mapper.schedule;
 
+import com.cskaoyan.bean.schedule.Custom;
 import com.cskaoyan.bean.schedule.Product;
 import com.cskaoyan.bean.schedule.ProductExample;
 import java.util.List;
@@ -27,4 +28,5 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+    List<Product> queryList();
 }

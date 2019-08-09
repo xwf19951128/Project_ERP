@@ -1,8 +1,8 @@
 package com.cskaoyan.service;
 
 import com.cskaoyan.bean.schedule.*;
-import com.cskaoyan.mapper.schedule.ProductMapper;
-import com.cskaoyan.mapper.schedule.ScheduleMapper;
+import com.cskaoyan.mapper.schedule.*;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,18 @@ public class ScheduleServiceImp implements ScheduleService{
     ScheduleMapper scheduleMapper;
     @Autowired
     ProductMapper productMapper;
-
+@Autowired
+    ManufactureMapper manufactureMapper;
+@Autowired
+    WorkMapper workMapper;
+@Autowired
+    TaskMapper taskMapper;
+@Autowired
+CustomMapper customMapper;
     @Override
-    public SchedulList<Custom> queryCustomListByPage(Integer page, Integer rows) {
-        return null;
+    public List<Custom> queryCustomListByPage(Integer page, Integer rows) {
+
+        PageHelper.startPage(page,rows);return customMapper.queryList();
     }
 
     @Override
@@ -30,23 +38,27 @@ public class ScheduleServiceImp implements ScheduleService{
     }
 
     @Override
-    public SchedulList<Product> queryProductListByPage(Integer page, Integer rows) {
-        return null;
+    public List<Product> queryProductListByPage(Integer page, Integer rows) {
+        PageHelper.startPage(page,rows);
+        return productMapper.queryList();
     }
 
     @Override
-    public SchedulList<Work> queryWorkListByPage(Integer page, Integer rows) {
-        return null;
+    public List<Work> queryWorkListByPage(Integer page, Integer rows) {
+        PageHelper.startPage(page,rows);
+        return workMapper.queryList();
     }
 
     @Override
-    public SchedulList<Manufacture> queryManufactureByPage(Integer page, Integer rows) {
-        return null;
+    public List<Manufacture> queryManufactureByPage(Integer page, Integer rows) {
+
+        PageHelper.startPage(page,rows);
+        return manufactureMapper.queryList();
     }
 
     @Override
-    public SchedulList<Task> queryTaskByPage(Integer page, Integer rows) {
-        return null;
+    public List<Task> queryTaskByPage(Integer page, Integer rows) {
+        PageHelper.startPage(page,rows);return taskMapper.queryList();
     }
 
     @Override

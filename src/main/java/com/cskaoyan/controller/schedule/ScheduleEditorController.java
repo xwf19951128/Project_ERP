@@ -2,6 +2,7 @@ package com.cskaoyan.controller.schedule;
 
 import com.cskaoyan.bean.schedule.*;
 import com.cskaoyan.service.ScheduleService;
+import com.cskaoyan.utils.RandomId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -82,11 +83,12 @@ public class ScheduleEditorController {
         if(uploadFile==null){
             return new FileUpLoadBean(1,"");
         }
-        String realpath=request.getSession().getServletContext().getRealPath("WEB-INF/image/"+uploadFile.getOriginalFilename());
+        String randomid=RandomId.getRandomId();
+        String realpath=request.getSession().getServletContext().getRealPath("WEB-INF/image/"+randomid+uploadFile.getOriginalFilename());
         File newfile=new File(realpath);
         try {
             uploadFile.transferTo(newfile);
-            return new FileUpLoadBean(0,"/image/"+uploadFile.getOriginalFilename());
+            return new FileUpLoadBean(0,"/image/"+randomid+uploadFile.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
             return new FileUpLoadBean(1,"");
@@ -102,25 +104,37 @@ public class ScheduleEditorController {
     }
     @RequestMapping("/file/delete")
     @ResponseBody
-    public HashMap<String, String> DeleteFile(String fileName,HttpServletRequest request){
+    public HashMap<String, String> deleteFile(String fileName,HttpServletRequest request){
         if(fileName.contains("fileName=/file")){
     String[] filetemp=fileName.split("fileName=/file");
             fileName=filetemp[1];
     }
-//        Order thisorder= (Order) request.getSession().getAttribute("myorder");
-//        String oid=thisorder.getOrderId();
-//        String path=thisorder.getFile();
-//        if(!path.contains(",/file/"+fileName)){
-//        path.replace("/file/"+fileName,"");}else {
-//        path.replace(",/file/"+fileName,"");}
         String realpath=request.getSession().getServletContext().getRealPath("WEB-INF/file/"+fileName);
         File deletedFile=new File(realpath);
         HashMap<String, String> success = new HashMap<>();
-        if(deletedFile.delete()){
+        if(deletedFile.exists()){
             success.put("data","success");
             return success;
         }
         success.put("data","failed");
+        return success;
+    }
+    @RequestMapping("/pic/delete")
+    @ResponseBody
+    public HashMap<String, String> deletePic(String picName,HttpServletRequest request){
+        String realpath=request.getSession().getServletContext().getRealPath("WEB-INF"+picName);
+        File deletedFile=new File(realpath);
+        HashMap<String, String> success = new HashMap<>();
+            success.put("data","success");
+            return success;
+    }
+    @RequestMapping("/file/download")
+    @ResponseBody
+    public HashMap<String, String> fileDownLoad(String fileName,HttpServletRequest request){
+        String realpath=request.getSession().getServletContext().getRealPath("WEB-INF"+fileName);
+        File deletedFile=new File(realpath);
+        HashMap<String, String> success = new HashMap<>();
+        success.put("data","success");
         return success;
     }
 }
