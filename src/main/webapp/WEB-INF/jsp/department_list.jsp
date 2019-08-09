@@ -57,6 +57,7 @@
 
 </div>  
 
+<%--增删改组件--%>
 <div id="departmentEditWindow" class="easyui-window" title="编辑部门" 
 	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/edit'" 
 	style="width:65%;height:65%;padding:10px;">
