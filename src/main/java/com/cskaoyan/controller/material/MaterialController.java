@@ -1,19 +1,24 @@
-package com.cskaoyan.controller;
+package com.cskaoyan.controller.material;
 
-import com.cskaoyan.bean.Material;
-import com.cskaoyan.service.MaterialService;
+import com.cskaoyan.bean.material.Material;
+import com.cskaoyan.bean.material.MaterialPage;
+import com.cskaoyan.service.material.MaterialService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MaterialController {
+
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     MaterialService materialService;
@@ -35,10 +40,23 @@ public class MaterialController {
 
     @RequestMapping("/material/list")
     @ResponseBody
-    public List<Material> listMaterials(int page, int rows){
-//        List<Material> materialList = materialService.listMaterials();
+/*    public MaterialPage listMaterials(int page, int rows){
+        MaterialPage<Material> materialPage = new MaterialPage<>();
+        int materialCount = materialService.countMaterialCount();
         List<Material> materialList = materialService.listPageMaterials(page, rows);
-        return materialList;
+        logger.info(materialList);
+        materialPage.setTotal(materialCount);
+        materialPage.setRows(materialList);
+        return materialPage;
+    }  */
+    public Map<String, Object> listMaterials(int page, int rows){
+        HashMap<String, Object> map = new HashMap<>();
+        int materialCount = materialService.countMaterialCount();
+        List<Material> materialList = materialService.listPageMaterials(page, rows);
+//        logger.info(materialList);
+        map.put("total", materialCount);
+        map.put("rows", materialList);
+        return map;
     }
 
     @RequestMapping("/material/add_judge")
