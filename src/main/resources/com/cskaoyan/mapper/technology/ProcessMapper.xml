@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cskaoyan.mapper.technology.ProcessMapper">
+    <!--查询所有的process记录-->
+    <resultMap id="processMap" type="com.cskaoyan.bean.technology.Process">
+        <result column="process_id" property="processId"></result>
+        <result column="technology_plan_id" property="technologyPlanId"></result>
+        <result column="sequence" property="sequence"></result>
+        <result column="quota" property="quota"></result>
+    </resultMap>
+    <select id="queryAllProcesses" resultMap="processMap">
+        select  process_id,technology_plan_id,sequence,quota from process
+    </select>
+</mapper>

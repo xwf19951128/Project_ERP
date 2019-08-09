@@ -11,10 +11,9 @@
             <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>
         </context:component-scan>
 
-
+    <context:property-placeholder location="classpath:mydb.properties"/>
 
     <!--数据源-->
-    <context:property-placeholder location="classpath:mydb.properties"/>
     <bean id="myds" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${ss.driver}"/>
         <property name="url" value="${ss.jdbc}"/>
@@ -22,7 +21,6 @@
         <property name="password" value="${ss.password}"/>
         <property name="filters" value="stat"></property>
     </bean>
-
     <!--sqlsessionFactoryBean-->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="myds"/>

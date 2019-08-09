@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--需要将命名空间改造成对应接口的全类名-->
+<mapper namespace="com.cskaoyan.mapper.qualifyMonitor.UnqualifyMapper">
+    <resultMap id="unqualifyMapper" type="com.cskaoyan.bean.qualifyMonitor.UnqualifyApply">
+        <result property="unqualifyApplyId" column="unqualify_apply_id"/>
+        <result property="unqualifyItem" column="unqualify_item"/>
+        <result property="unqualifyCount" column="unqualify_count"/>
+        <result property="assemblyDate" column="assembly_date"/>
+        <result property="applyDate" column="apply_date"/>
+        <result property="note" column="note"/>
+        
+        <result property="productId" column="product_id"/>
+        <result property="productName" column="product_name"/>
+
+        <result property="empId" column="emp_id"/>
+        <result property="empName" column="emp_name"/>
+    </resultMap>
+
+    <select id="queryUnqualifyApply" resultMap="unqualifyMapper">
+        select
+        ua.unqualify_apply_id,
+        ua.product_id,
+        ua.unqualify_item,
+        ua.unqualify_count,
+        ua.assembly_date,
+        ua.emp_id,
+        ua.apply_date,
+        ua.note,
+        em.emp_name,
+        pr.product_name 
+        from unqualify_apply ua
+        left join employee em on ua.emp_id = em.emp_id
+        left join product pr on pr.product_id = ua.product_id;
+    </select>
+</mapper>
