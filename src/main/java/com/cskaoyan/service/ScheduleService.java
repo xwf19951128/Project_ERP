@@ -57,4 +57,13 @@ public interface ScheduleService {
 
     int deleteTaskByIds(String[] ids);
 
+    /*根据taskId模糊查询生产派工管理*/
+    public List<Task> searchTaskByTaskId(String searchValue);
+    /*根据WorkId模糊查询生产派工管理*/
+    public List<Task> searchTaskByWorkId(String searchValue);
+    /*根据生产批号SN模糊查询生产派工管理*/
+    public List<Task> searchTaskByManufactureSn(String searchValue);
+
+
+
 }

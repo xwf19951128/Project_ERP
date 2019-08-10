@@ -106,4 +106,26 @@ public class TaskController {
         return new MessageBean("404","false",null);
     }
 
+    /*模糊查询：根据生产派工编号查询派工管理*/
+    @RequestMapping("/task/search_task_by_taskId")
+    @ResponseBody
+    public List<Task> searchTaskByTaskId(String searchValue){
+        List<Task> tasks = scheduleService.searchTaskByTaskId(searchValue);
+        return tasks;
+    }
+    /*模糊查询：根据作业编号查询派工管理*/
+    @RequestMapping("/task/search_task_by_taskWorkId")
+    @ResponseBody
+    public List<Task> searchTaskByWorkId(String searchValue){
+        List<Task> tasks = scheduleService.searchTaskByWorkId(searchValue);
+        return tasks;
+    }
+    /*模糊查询：根据生产批号查询派工管理*/
+    @RequestMapping("/task/search_task_by_taskManufactureSn")
+    @ResponseBody
+    public List<Task> searchTaskByManufactureSn(String searchValue){
+        List<Task> tasks = scheduleService.searchTaskByManufactureSn(searchValue);
+        return tasks;
+    }
+
 }

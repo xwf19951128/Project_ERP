@@ -168,4 +168,37 @@ CustomMapper customMapper;
         }
         return result;
     }
+
+    @Override
+    public List<Task> searchTaskByTaskId(String searchValue) {
+        //根据taskid模糊查询
+        String value = "%"+searchValue+"%";
+        TaskExample taskExample = new TaskExample();
+        TaskExample.Criteria criteria = taskExample.createCriteria();
+        criteria.andTaskIdLike(value);
+        List<Task> tasks = taskMapper.selectByExample(taskExample);
+        return tasks;
+    }
+
+    @Override
+    public List<Task> searchTaskByWorkId(String searchValue) {
+        //根据taskid模糊查询
+        String value = "%"+searchValue+"%";
+        TaskExample taskExample = new TaskExample();
+        TaskExample.Criteria criteria = taskExample.createCriteria();
+        criteria.andWorkIdLike(value);
+        List<Task> tasks = taskMapper.selectByExample(taskExample);
+        return tasks;
+    }
+
+    @Override
+    public List<Task> searchTaskByManufactureSn(String searchValue) {
+        //根据taskid模糊查询
+        String value = "%"+searchValue+"%";
+        TaskExample taskExample = new TaskExample();
+        TaskExample.Criteria criteria = taskExample.createCriteria();
+        criteria.andManufactureSnLike(value);
+        List<Task> tasks = taskMapper.selectByExample(taskExample);
+        return tasks;
+    }
 }
