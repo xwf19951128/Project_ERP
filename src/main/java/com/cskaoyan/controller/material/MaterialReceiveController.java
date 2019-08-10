@@ -54,17 +54,6 @@ public class MaterialReceiveController {
     @ResponseBody
     public Map<String, Object> insert(MaterialReceive materialReceive, Material material){
         HashMap<String, Object> map = new HashMap<>();
-        int ammount;
-        try{
-            ammount = materialReceive.getAmmount();
-        }catch (Exception e){
-            map.put("msg", "收入数量必须为大于等于0的数");
-            return map;
-        }
-        if(ammount < 0){
-            map.put("msg", "收入数量必须为大于等于0的数");
-            return map;
-        }
         int insertResult = materialReceiveService.insertMaterialReceive(materialReceive, material);
         if(insertResult == 1) {
             map.put("status", 200);

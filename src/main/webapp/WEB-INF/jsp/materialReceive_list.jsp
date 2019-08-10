@@ -118,7 +118,7 @@
 	        <tr>
 	            <td>剩余数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="remaining"/>
+	            	<input class="easyui-numberbox" type="text" name="remaining"/>
 	            </td>
 	        </tr>
 	        
