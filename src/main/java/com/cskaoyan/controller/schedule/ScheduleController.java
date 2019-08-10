@@ -199,9 +199,9 @@ public class ScheduleController {
     public List<Order> getAllOrder(){
         return service.queryOrders();
     }
-    @RequestMapping("/process/get_data")
-    @ResponseBody
-    public List<Process> getAllProcess(){
-        return null;
-    }
+//     @RequestMapping("/process/get_data")
+//     @ResponseBody
+//     public List<Process> getAllProcess(){
+//         return null;
+//     }
 }
