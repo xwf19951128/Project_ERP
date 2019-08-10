@@ -51,7 +51,6 @@ CustomMapper customMapper;
 
     @Override
     public List<Manufacture> queryManufactureByPage(Integer page, Integer rows) {
-
         PageHelper.startPage(page,rows);
         return manufactureMapper.queryList();
     }
@@ -74,6 +73,16 @@ CustomMapper customMapper;
     @Override
     public Product queryProductByID(Integer pid) {
         return scheduleMapper.queryProductByID(pid);
+    }
+
+    @Override
+    public Work queryWorkById(String id) {
+        return workMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Manufacture queryManufactureById(String id) {
+        return manufactureMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -106,8 +115,8 @@ CustomMapper customMapper;
     }
 
     @Override
-    public int updateInfo(Task task) {
-        return 0;
+    public int updateTask(Task task) {
+        return taskMapper.updateByPrimaryKeySelective(task);
     }
 
     @Override
@@ -142,5 +151,21 @@ CustomMapper customMapper;
     @Override
     public int deletepathByOid(String oid) {
         return scheduleMapper.deletepathByOid(oid);
+    }
+
+    //插入新task
+    @Override
+    public int insertTask(Task task) {
+        return taskMapper.insert(task);
+    }
+
+    @Override
+    public int deleteTaskByIds(String[] ids) {
+        int result = 0;
+        for (String id :ids){
+            int i = taskMapper.deleteByPrimaryKey(id);
+            result +=i;
+        }
+        return result;
     }
 }
