@@ -78,4 +78,9 @@ public class MaterialServiceImpl implements MaterialService {
         String like = "%" + searchValue + "%";
         return materialMapper.listPageSearchMaterialsByType(limit, offset, like);
     }
+
+    @Override
+    public Material getMaterialById(String materialId) {
+        return materialMapper.getMaterialById(materialId);
+    }
 }

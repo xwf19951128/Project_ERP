@@ -19,11 +19,11 @@ public interface MaterialReceiveService {
 
     int deleteMaterialReceivesByIds(String[] ids);
 
-    int countSearchMaterialReceiveCountById(String searchValue);
+    int countSearchMaterialReceiveCountByReceiveId(String searchValue);
 
-    List<MaterialReceive> listPageSearchMaterialReceivesById(int page, int rows, String searchValue);
+    List<MaterialReceive> listPageSearchMaterialReceivesByReceiveId(int page, int rows, String searchValue);
 
-    int countSearchMaterialCountByType(String searchValue);
+    int countSearchMaterialReceiveCountByMaterialId(String searchValue);
 
-    List<MaterialReceive> listPageSearchMaterialsByType(int page, int rows, String searchValue);
+    List<MaterialReceive> listPageSearchMaterialReceivesByMaterialId(int page, int rows, String searchValue);
 }

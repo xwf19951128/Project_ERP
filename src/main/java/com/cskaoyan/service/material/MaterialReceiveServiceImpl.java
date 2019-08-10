@@ -28,7 +28,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 
     @Override
     public int updateNoteById(MaterialReceive materialReceive) {
-        return 0;
+        return materialReceiveMapper.updateNoteById(materialReceive);
     }
 
     @Override
@@ -47,22 +47,30 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
     }
 
     @Override
-    public int countSearchMaterialReceiveCountById(String searchValue) {
-        return 0;
+    public int countSearchMaterialReceiveCountByReceiveId(String searchValue) {
+        String like = "%" + searchValue + "%";
+        return materialReceiveMapper.countSearchMaterialReceiveCountByReceiveId(like);
     }
 
     @Override
-    public List<MaterialReceive> listPageSearchMaterialReceivesById(int page, int rows, String searchValue) {
-        return null;
+    public List<MaterialReceive> listPageSearchMaterialReceivesByReceiveId(int page, int rows, String searchValue) {
+        int limit = rows;
+        int offset = (page-1)*rows;
+        String like = "%" + searchValue + "%";
+        return materialReceiveMapper.listPageSearchMaterialReceivesByReceiveId(limit, offset, like);
     }
 
     @Override
-    public int countSearchMaterialCountByType(String searchValue) {
-        return 0;
+    public int countSearchMaterialReceiveCountByMaterialId(String searchValue) {
+        String like = "%" + searchValue + "%";
+        return materialReceiveMapper.countSearchMaterialReceiveCountByMaterialId(like);
     }
 
     @Override
-    public List<MaterialReceive> listPageSearchMaterialsByType(int page, int rows, String searchValue) {
-        return null;
+    public List<MaterialReceive> listPageSearchMaterialReceivesByMaterialId(int page, int rows, String searchValue) {
+        int limit = rows;
+        int offset = (page-1)*rows;
+        String like = "%" + searchValue + "%";
+        return materialReceiveMapper.listPageSearchMaterialReceivesByMaterialId(limit, offset, like);
     }
 }

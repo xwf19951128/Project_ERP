@@ -1,7 +1,9 @@
 package com.cskaoyan.controller.material;
 
+import com.cskaoyan.bean.material.Material;
 import com.cskaoyan.bean.material.MaterialReceive;
 import com.cskaoyan.service.material.MaterialReceiveService;
+import com.cskaoyan.service.material.MaterialService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class MaterialReceiveController {
     @Autowired
     MaterialReceiveService materialReceiveService;
 
+    @Autowired
+    MaterialService materialService;
+
 
     public void addSysPermissionList(HttpSession session){
         List sysPermissionList = new ArrayList<String>();
@@ -43,14 +48,37 @@ public class MaterialReceiveController {
     public Map<String, Object> listPageMaterialReceives(int page, int rows){
         HashMap<String, Object> map = new HashMap<>();
         int materialReceiveCount = materialReceiveService.countMaterialReceiveCount();
-        System.out.println("materialReceiveCount = " + materialReceiveCount);
+//        System.out.println("materialReceiveCount = " + materialReceiveCount);
         List<MaterialReceive> materialReceiveList = materialReceiveService.listPageMaterialReceives(page, rows);
-        System.out.println("materialReceiveList = " + materialReceiveList);
+//        System.out.println("materialReceiveList = " + materialReceiveList);
 //        logger.info(materialList);
         map.put("total", materialReceiveCount);
         map.put("rows", materialReceiveList);
         return map;
     }
+    /*模糊查询*/
+    @RequestMapping("/search_materialReceive_by_receiveId")
+    @ResponseBody
+    public Map<String, Object> listPageSearchMaterialReceivesById(int page, int rows, String searchValue){
+        HashMap<String, Object> map = new HashMap<>();
+        int materialReceiveCount = materialReceiveService.countSearchMaterialReceiveCountByReceiveId(searchValue);
+        List<MaterialReceive> materialReceiveList = materialReceiveService.listPageSearchMaterialReceivesByReceiveId(page, rows, searchValue);
+        map.put("total", materialReceiveCount);
+        map.put("rows", materialReceiveList);
+        return map;
+    }
+    @RequestMapping("/search_materialReceive_by_materialId")
+    @ResponseBody
+    public Map<String, Object> listPageSearchMaterialsByMaterialId(int page, int rows, String searchValue){
+        HashMap<String, Object> map = new HashMap<>();
+        int materialReceiveCount = materialReceiveService.countSearchMaterialReceiveCountByMaterialId(searchValue);
+        List<MaterialReceive> materialReceiveList = materialReceiveService.listPageSearchMaterialReceivesByMaterialId(page, rows, searchValue);
+        map.put("total", materialReceiveCount);
+        map.put("rows", materialReceiveList);
+        return map;
+    }
+
+
 
     /*改*/
     @RequestMapping("/edit_judge")
@@ -94,6 +122,8 @@ public class MaterialReceiveController {
 
 
 
+
+
     /*增*/
     @RequestMapping("/add_judge")
     @ResponseBody
@@ -121,6 +151,9 @@ public class MaterialReceiveController {
     }
 
 
+
+
+
     /*删*/
     @RequestMapping("/delete_judge")
     @ResponseBody
@@ -144,26 +177,6 @@ public class MaterialReceiveController {
         return map;
     }
 
-    /*模糊查询*/
-    @RequestMapping("/search_materialReceive_by_receiveId")
-    @ResponseBody
-    public Map<String, Object> listPageSearchMaterialReceivesById(int page, int rows, String searchValue){
-        HashMap<String, Object> map = new HashMap<>();
-        int materialReceiveCount = materialReceiveService.countSearchMaterialReceiveCountById(searchValue);
-        List<MaterialReceive> materialReceiveList = materialReceiveService.listPageSearchMaterialReceivesById(page, rows, searchValue);
-        map.put("total", materialReceiveCount);
-        map.put("rows", materialReceiveList);
-        return map;
-    }
-    @RequestMapping("/material/search_materialReceive_by_materialId")
-    @ResponseBody
-    public Map<String, Object> listPageSearchMaterialsByType(int page, int rows, String searchValue){
-        HashMap<String, Object> map = new HashMap<>();
-        int materialCount = materialReceiveService.countSearchMaterialCountByType(searchValue);
-        List<MaterialReceive> materialList = materialReceiveService.listPageSearchMaterialsByType(page, rows, searchValue);
-        map.put("total", materialCount);
-        map.put("rows", materialList);
-        return map;
-    }
+
 
 }

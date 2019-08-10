@@ -5,6 +5,7 @@ import com.cskaoyan.service.material.MaterialService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,6 +49,13 @@ public class MaterialController {
         map.put("total", materialCount);
         map.put("rows", materialList);
         return map;
+    }
+    /*从materialReceive查询*/
+    @RequestMapping("material/get/{materialId}")
+    @ResponseBody
+    public Material getMaterialById(@PathVariable("materialId") String materialId){
+        Material material = materialService.getMaterialById(materialId);
+        return material;
     }
 
     /*改*/
@@ -164,5 +172,7 @@ public class MaterialController {
         map.put("rows", materialList);
         return map;
     }
+
+
 
 }

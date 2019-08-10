@@ -31,7 +31,6 @@ public interface MaterialMapper {
     @Select("select count(material_id) from material where material_id like #{like}")
     int countSearchMaterialCountById(@Param("like") String like);
 
-
     @Select("select material_id as materialId, material_type as materialType, status, remaining, note from material where material_id like #{like} limit #{limit} offset #{offset}")
     List<Material> listPageSearchMaterialsById(@Param("limit") int limit, @Param("offset") int offset, @Param("like") String like);
 
@@ -40,4 +39,7 @@ public interface MaterialMapper {
 
     @Select("select material_id as materialId, material_type as materialType, status, remaining, note from material where material_type like #{like} limit #{limit} offset #{offset}")
     List<Material> listPageSearchMaterialsByType(@Param("limit") int limit, @Param("offset") int offset, @Param("like") String like);
+
+    @Select("select material_id as materialId, material_type as materialType, status, remaining, note from material where material_id = #{materialId}")
+    Material getMaterialById(@Param("materialId") String materialId);
 }
