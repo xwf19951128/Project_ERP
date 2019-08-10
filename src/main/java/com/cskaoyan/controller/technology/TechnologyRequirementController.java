@@ -1,9 +1,12 @@
 package com.cskaoyan.controller.technology;
 
 import com.cskaoyan.bean.technology.Process;
+import com.cskaoyan.bean.technology.QueryResult;
 import com.cskaoyan.bean.technology.TechnologyPlan;
 import com.cskaoyan.bean.technology.TechnologyRequirement;
 import com.cskaoyan.service.technology.TechnologyRequirementService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +38,14 @@ public class TechnologyRequirementController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<TechnologyRequirement> list(){
+    public QueryResult<TechnologyRequirement> list(){
+        PageHelper.startPage(1,10);
+        QueryResult<TechnologyRequirement> queryResult = new QueryResult<>();
         List<TechnologyRequirement> technologyRequirements = technologyRequirementService.queryAllTechnologyRequirements();
-        return technologyRequirements;
+        long total = new PageInfo<>(technologyRequirements).getTotal();
+        queryResult.setRows(technologyRequirements);
+        queryResult.setTotal((int)total);
+        return queryResult;
     }
 
     //点击add按钮时需要发送过来ajax请求验证
