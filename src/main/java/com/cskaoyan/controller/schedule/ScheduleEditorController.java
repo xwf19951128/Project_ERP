@@ -1,17 +1,17 @@
 package com.cskaoyan.controller.schedule;
 
 import com.cskaoyan.bean.schedule.*;
-import com.cskaoyan.service.ScheduleService;
+import com.cskaoyan.bean.technology.Technology;
+import com.cskaoyan.service.schedule.ScheduleService;
 import com.cskaoyan.utils.RandomId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +20,15 @@ import java.util.HashMap;
 public class ScheduleEditorController {
     @Autowired
     ScheduleService service;
-    @RequestMapping("custom/update_all")
+    @RequestMapping("/order/update_all")
+    @ResponseBody
+    public MessageBean editorAll(Order order){
+        if(service.updateOrder(order)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+    @RequestMapping("/custom/update_all")
     @ResponseBody
     public MessageBean editor(Custom custom){
         System.out.println(custom);
@@ -29,7 +37,7 @@ public class ScheduleEditorController {
         }
     return new MessageBean("404",null,null );
     }
-    @RequestMapping("product/update_all")
+    @RequestMapping("/product/update_all")
     @ResponseBody
     public MessageBean editor(Product product){
         if(service.updateInfo(product)==1){
@@ -37,7 +45,31 @@ public class ScheduleEditorController {
         }
         return new MessageBean("404",null,null );
     }
-    @RequestMapping("order/update_note")
+    @RequestMapping("/work/update_all")
+    @ResponseBody
+    public MessageBean editor(Work product){
+        if(service.updateInfo(product)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+//    @RequestMapping("/task/update_all")
+//    @ResponseBody
+//    public MessageBean editor(Task product){
+//        if(service.updateInfo(product)==1){
+//            return new MessageBean("200","ok",null);
+//        }
+//        return new MessageBean("404",null,null );
+//    }
+    @RequestMapping("/manufacture/update_all")
+    @ResponseBody
+    public MessageBean editor(Manufacture product){
+        if(service.updateInfo(product)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+    @RequestMapping("/order/update_note")
     @ResponseBody
     public MessageBean editor(Order order){
         if(service.updateInfo(order)==1){
@@ -45,15 +77,24 @@ public class ScheduleEditorController {
         }
         return new MessageBean("404",null,null );
     }
-    @RequestMapping("order/update_all")
+    @RequestMapping("/custom/update_note")
     @ResponseBody
-    public MessageBean editorAll(Order order){
-        if(service.updateOrder(order)==1){
+    public MessageBean editorNote(Custom custom){
+        if(service.updateInfo(custom)==1){
             return new MessageBean("200","ok",null);
         }
         return new MessageBean("404",null,null );
     }
-    @RequestMapping("order/insert")
+    @RequestMapping("/product/update_note")
+    @ResponseBody
+    public MessageBean editorNote(Product product){
+        if(service.updateInfo(product)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+
+    @RequestMapping("/order/insert")
     @ResponseBody
     public MessageBean insertOrder(Order order){
         if(service.insertOrder(order)==1){
@@ -61,13 +102,94 @@ public class ScheduleEditorController {
         }
         return new MessageBean("404",null,null );
     }
-    @RequestMapping("file/upload")
+    @RequestMapping("/custom/insert")
+    @ResponseBody
+    public MessageBean insertCustom(Custom custom){
+        if(service.insertCustom(custom)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+    @RequestMapping("/product/insert")
+    @ResponseBody
+    public MessageBean insertProduct(Product custom){
+        if(service.insertProduct(custom)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+    @RequestMapping("/work/insert")
+    @ResponseBody
+    public MessageBean insertWork(Work custom){
+        if(service.insertWork(custom)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+    @RequestMapping("/manufacture/insert")
+    @ResponseBody
+    public MessageBean insertManufacture(Manufacture custom){
+        if(service.insertManufacture(custom)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("404",null,null );
+    }
+//    @RequestMapping("/task/insert")
+//    @ResponseBody
+//    public MessageBean insertTask(Task custom){
+//        if(service.insertTask(custom)==1){
+//            return new MessageBean("200","ok",null);
+//        }
+//        return new MessageBean("404",null,null );
+//    }
+@RequestMapping("/order/delete_batch")
+@ResponseBody
+public MessageBean DeleteOrderConfirm(String ids){
+    if(service.deleteOrderByID(ids)==1){
+        return new MessageBean("200","ok",null);
+    }
+    return new MessageBean("500",null,null );
+}
+    @RequestMapping("/custom/delete_batch")
+    @ResponseBody
+    public MessageBean DeleteCustomConfirm(String ids){
+        if(service.deleteCustomByID(ids)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("500",null,null );
+    }
+    @RequestMapping("/product/delete_batch")
+    @ResponseBody
+    public MessageBean DeleteProductConfirm(String ids){
+        if(service.deleteProductByID(ids)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("500",null,null );
+    }
+    @RequestMapping("/work/delete_batch")
+    @ResponseBody
+    public MessageBean DeleteWorkConfirm(String ids){
+        if(service.deleteWorkByID(ids)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("500",null,null );
+    }
+    @RequestMapping("/manufacture/delete_batch")
+    @ResponseBody
+    public MessageBean DeleteManufactureConfirm(String ids){
+        if(service.deleteManufactureByID(ids)==1){
+            return new MessageBean("200","ok",null);
+        }
+        return new MessageBean("500",null,null );
+    }
+    @RequestMapping("/file/upload")
     @ResponseBody
     public FileUpLoadBean fileupload(MultipartFile file,HttpServletRequest request){
         if(file==null){
             return new FileUpLoadBean(1,"");
         }
-        String realpath=request.getSession().getServletContext().getRealPath("WEB-INF/file/"+file.getOriginalFilename());
+        String randomid=RandomId.getShortRandomId();
+        String realpath=request.getSession().getServletContext().getRealPath("WEB-INF/file/"+randomid+file.getOriginalFilename());
         File newfile=new File(realpath);
         try {
             file.transferTo(newfile);
@@ -75,9 +197,9 @@ public class ScheduleEditorController {
             e.printStackTrace();
             return new FileUpLoadBean(1,"");
         }
-        return new FileUpLoadBean(0,"/file/"+file.getOriginalFilename());
+        return new FileUpLoadBean(0,"/file/"+randomid+file.getOriginalFilename());
     }
-    @RequestMapping("pic/upload")
+    @RequestMapping("/pic/upload")
     @ResponseBody
     public FileUpLoadBean picupload(MultipartFile uploadFile ,HttpServletRequest request){
         if(uploadFile==null){
@@ -94,14 +216,6 @@ public class ScheduleEditorController {
             return new FileUpLoadBean(1,"");
         }
     }
-    @RequestMapping("/order/delete_batch")
-    @ResponseBody
-    public MessageBean DeleteOrderconfirm(String ids){
-        if(service.deleteOrderByID(ids)==1){
-            return new MessageBean("200","ok",null);
-        }
-        return new MessageBean("500",null,null );
-    }
     @RequestMapping("/file/delete")
     @ResponseBody
     public HashMap<String, String> deleteFile(String fileName,HttpServletRequest request){
@@ -112,11 +226,7 @@ public class ScheduleEditorController {
         String realpath=request.getSession().getServletContext().getRealPath("WEB-INF/file/"+fileName);
         File deletedFile=new File(realpath);
         HashMap<String, String> success = new HashMap<>();
-        if(deletedFile.exists()){
             success.put("data","success");
-            return success;
-        }
-        success.put("data","failed");
         return success;
     }
     @RequestMapping("/pic/delete")
@@ -129,12 +239,8 @@ public class ScheduleEditorController {
             return success;
     }
     @RequestMapping("/file/download")
-    @ResponseBody
-    public HashMap<String, String> fileDownLoad(String fileName,HttpServletRequest request){
-        String realpath=request.getSession().getServletContext().getRealPath("WEB-INF"+fileName);
-        File deletedFile=new File(realpath);
-        HashMap<String, String> success = new HashMap<>();
-        success.put("data","success");
-        return success;
+    public String fileDownLoad(String fileName, HttpServletResponse response){
+        response.setHeader("Content-Disposition","attachment;"+fileName);
+        return fileName;
     }
 }

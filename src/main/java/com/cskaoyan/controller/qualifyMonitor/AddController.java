@@ -1,6 +1,5 @@
 package com.cskaoyan.controller.qualifyMonitor;
 
-import com.cskaoyan.bean.Order;
 import com.cskaoyan.bean.qualifyMonitor.Employee;
 import com.cskaoyan.bean.qualifyMonitor.Product;
 import com.cskaoyan.service.qualifyMonitor.EmployeeService;
@@ -21,13 +20,7 @@ public class AddController {
     @Autowired
     EmployeeService employeeService;
 
-    // 获取产品名称
-    @RequestMapping("/product/get_data")
-    @ResponseBody
-    public List<Product> getProduct() {
-        List<Product> products = productService.queryProduct();
-        return products;
-    }
+
 
     // 获取员工名称
     @RequestMapping("/employee/get_data")

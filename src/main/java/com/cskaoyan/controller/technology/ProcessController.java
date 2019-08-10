@@ -139,7 +139,6 @@ public class ProcessController {
         List<Process> processes = processService.queryProcessByProcessId(search);
         return processes;
     }
-
     //查询2：根据工艺计划编号模糊查询工序
     @RequestMapping("/search_process_by_technologyPlanId")
     @ResponseBody
