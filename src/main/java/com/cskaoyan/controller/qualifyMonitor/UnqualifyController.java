@@ -1,11 +1,7 @@
 package com.cskaoyan.controller.qualifyMonitor;
 
-import com.cskaoyan.bean.qualifyMonitor.Employee;
 import com.cskaoyan.bean.qualifyMonitor.JavaBean;
-import com.cskaoyan.bean.qualifyMonitor.Product;
 import com.cskaoyan.bean.qualifyMonitor.UnqualifyApply;
-import com.cskaoyan.service.qualifyMonitor.EmployeeService;
-import com.cskaoyan.service.qualifyMonitor.ProductService;
 import com.cskaoyan.service.qualifyMonitor.UnqualifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
