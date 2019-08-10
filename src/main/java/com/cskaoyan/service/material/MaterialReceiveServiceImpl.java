@@ -33,8 +33,8 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
     }
 
     @Override
-    public int updateAllById(MaterialReceive materialReceive) {
-        return 0;
+    public int updateAllById(MaterialReceive materialReceive, Material material) {
+        return materialReceiveMapper.updateAllById(materialReceive, material);
     }
 
     @Override

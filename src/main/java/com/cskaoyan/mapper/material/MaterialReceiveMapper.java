@@ -32,4 +32,7 @@ public interface MaterialReceiveMapper {
     @Insert("insert into material_receive (receive_id, material_id, amount, receive_date, sender, receiver, note)" +
             "values (#{mr.receiveId}, #{m.materialId}, #{mr.ammount}, #{mr.receiveDate}, #{mr.sender}, #{mr.receiver}, #{mr.note})")
     int insertMaterialReceive(@Param("mr") MaterialReceive materialReceive, @Param("m") Material material); //mr.material.materialId直接封装
+
+    @Update("update material_receive set material_id = #{m.materialId}, amount = #{mr.ammount}, receive_date = #{mr.receiveDate}, sender = #{mr.sender}, receiver = #{mr.receiver}, note = #{mr.note} where receive_id = #{mr.receiveId}")
+    int updateAllById(@Param("mr") MaterialReceive materialReceive, @Param("m") Material material);
 }

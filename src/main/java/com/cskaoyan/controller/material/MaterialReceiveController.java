@@ -136,8 +136,8 @@ public class MaterialReceiveController {
     }
     @RequestMapping("/update_all")
     @ResponseBody
-    public Map<String, Object> updateAll(MaterialReceive materialReceive){
-        int updateResult = materialReceiveService.updateAllById(materialReceive);
+    public Map<String, Object> updateAll(MaterialReceive materialReceive, Material material){
+        int updateResult = materialReceiveService.updateAllById(materialReceive, material);
         HashMap<String, Object> map = new HashMap<>();
         if(updateResult == 1) {
             map.put("status", 200);

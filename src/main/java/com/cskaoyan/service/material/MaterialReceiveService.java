@@ -14,7 +14,7 @@ public interface MaterialReceiveService {
 
     int updateNoteById(MaterialReceive materialReceive);
 
-    int updateAllById(MaterialReceive materialReceive);
+    int updateAllById(MaterialReceive materialReceive, Material material);
 
     int insertMaterialReceive(MaterialReceive materialReceive, Material material);
 
