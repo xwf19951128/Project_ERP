@@ -48,6 +48,14 @@ public class TechnologyRequirementController {
         return queryResult;
     }
 
+    //给其他模块提供一个获取数据的方法接口
+    @RequestMapping("/get_data")
+    @ResponseBody
+    public List<TechnologyRequirement> get_data(){
+        List<TechnologyRequirement> list = technologyRequirementService.queryAllTechnologyRequirements();
+        return list;
+    }
+
     //点击add按钮时需要发送过来ajax请求验证
     @RequestMapping("/add_judge")
     @ResponseBody
@@ -69,16 +77,22 @@ public class TechnologyRequirementController {
     @ResponseBody
     public Map insert(TechnologyRequirement technologyRequirement){
         HashMap<String, Object> result = new HashMap<>();
-        int i = technologyRequirementService.insertTechnologyRequirement(technologyRequirement);
-        if (i==1){
-            result.put("status",200);
-            result.put("msg","ok");
-            return result;
+        String technologyRequirementId = technologyRequirement.getTechnologyRequirementId();
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementService.queryRequireByRequireId(technologyRequirementId);
+        if (technologyRequirements!=null){
+            result.put("status",444);
+            result.put("msg","ID重复，请重新输入");
         }else {
-            result.put("status",288);
-            result.put("msg","添加失败，请确定参数是否正确");
-            return result;
+            int i = technologyRequirementService.insertTechnologyRequirement(technologyRequirement);
+            if (i==1){
+                result.put("status",200);
+                result.put("msg","ok");
+            }else {
+                result.put("status",288);
+                result.put("msg","添加失败，请确定参数是否正确");
+            }
         }
+       return result;
     }
     //删除权限的验证
     @RequestMapping("/delete_judge")

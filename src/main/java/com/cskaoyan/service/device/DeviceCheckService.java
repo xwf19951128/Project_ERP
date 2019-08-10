@@ -11,4 +11,10 @@ import java.util.List;
  */
 public interface DeviceCheckService {
     List<DeviceCheck> queryAllDeviceCheck();
+
+    int insertDeviceCheck();
+
+    List<DeviceCheck> searchDeviceCheckByDeviceCheckId(String searchValue);
+
+    List<DeviceCheck> searchDeviceCheckByDeviceName(String searchValue);
 }

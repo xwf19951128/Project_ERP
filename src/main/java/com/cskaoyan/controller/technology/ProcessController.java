@@ -49,6 +49,13 @@ public class ProcessController {
         return processQueryResult;
     }
 
+//    @RequestMapping("/get_data")
+//    @ResponseBody
+//    public List<Process> get_data(){
+//        List<Process> processes = processService.queryAllProcesses();
+//        return processes;
+//    }
+
     //新增add需要校验
     @RequestMapping("/add_judge")
     @ResponseBody
@@ -68,18 +75,24 @@ public class ProcessController {
     //但是返回值必须是jason！！！！！
     @RequestMapping("/insert")
     @ResponseBody
-    public Map insert(Process process){
+    public Map insert(Process process) {
         HashMap<String, Object> result = new HashMap<>();
-        int i = processService.insertProcess(process);
-        if (i==1){
-            result.put("status",200);
-            result.put("msg","ok");
-            return result;
-        }else {
-            result.put("status",288);
-            result.put("msg","添加失败，请确定参数是否正确");
-            return result;
+        String processId = process.getProcessId();
+        List<Process> processes = processService.queryProcessByProcessId(processId);
+        if (process != null) {
+            result.put("status", 500);
+            result.put("msg", "ID重复，请重新输入ID");
+        } else {
+            int i = processService.insertProcess(process);
+            if (i == 1) {
+                result.put("status", 200);
+                result.put("msg", "ok");
+            } else {
+                result.put("status", 288);
+                result.put("msg", "添加失败，请确定参数是否正确");
+            }
         }
+        return result;
     }
 
     @RequestMapping("/delete_judge")

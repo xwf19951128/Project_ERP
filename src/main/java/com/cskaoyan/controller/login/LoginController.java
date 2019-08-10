@@ -32,6 +32,12 @@ public class LoginController {
         return "/WEB-INF/jsp/login.jsp";
     }
 
+    @RequestMapping("logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("activeUser");
+        return "/WEB-INF/jsp/login.jsp";
+    }
+
     //此方法用来处理登陆按钮发送的ajax请求
     @RequestMapping("/ajaxLogin")  //这是login页面中ajax请求指定的url名字
     @ResponseBody //需要把返回值类型设为Jason

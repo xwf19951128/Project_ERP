@@ -43,5 +43,37 @@
       left join employee e on e.emp_id=dc.device_check_emp_id
     </select>
 
+    <!--1.模糊查询1-->
+    <select id="searchDeviceCheckByDeviceCheckId" resultMap="deviceCheckVoMap">
+      select
+      dc.device_check_id,
+      dc.device_id,
+      dc.device_check_emp_id,
+      dc.device_check_date,
+      dc.device_check_result,
+      dc.device_check_fault_id,
+      e.emp_name as device_check_emp,
+      d.device_name
+      from device_check dc
+      left join device d on d.device_id=dc.device_id
+      left join employee e on e.emp_id=dc.device_check_emp_id
+      where dc.device_check_id like concat('%',#{searchValue},'%')
+    </select>
+    <!--模糊查询2-->
+    <select id="searchDeviceCheckByDeviceName" resultMap="deviceCheckVoMap">
+         select
+      dc.device_check_id,
+      dc.device_id,
+      dc.device_check_emp_id,
+      dc.device_check_date,
+      dc.device_check_result,
+      dc.device_check_fault_id,
+      e.emp_name as device_check_emp,
+      d.device_name
+      from device_check dc
+      left join device d on d.device_id=dc.device_id
+      left join employee e on e.emp_id=dc.device_check_emp_id
+      where d.device_name like concat('%',#{searchValue},'%')
+    </select>
 
 </mapper>

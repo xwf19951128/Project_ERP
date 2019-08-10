@@ -24,6 +24,11 @@ public interface ScheduleService {
     Custom queryCustomByID(Integer id);
 
     Product queryProductByID(Integer pid);
+
+    Work queryWorkById(String id);
+
+    Manufacture queryManufactureById(String id);
+
     List<Order> queryOrders();
 
     int updateCustom(Custom custom);
@@ -34,7 +39,7 @@ public interface ScheduleService {
     int updateOrder(Order order);
 
     int updateInfo(Manufacture manufacture);
-    int updateInfo(Task task);
+    int updateTask(Task task);
     int updateInfo(Work work);
     int updateInfo(Order order);
 
@@ -47,4 +52,18 @@ public interface ScheduleService {
     int deleteOrderByID(String id);
 
     int deletepathByOid(String oid);
+
+    int insertTask(Task task);
+
+    int deleteTaskByIds(String[] ids);
+
+    /*根据taskId模糊查询生产派工管理*/
+    public List<Task> searchTaskByTaskId(String searchValue);
+    /*根据WorkId模糊查询生产派工管理*/
+    public List<Task> searchTaskByWorkId(String searchValue);
+    /*根据生产批号SN模糊查询生产派工管理*/
+    public List<Task> searchTaskByManufactureSn(String searchValue);
+
+
+
 }

@@ -88,16 +88,22 @@ public class TechnologyController {
     @ResponseBody
     public Map insert(Technology technology){
         HashMap<String, Object> result = new HashMap<>();
-        int i = technologyService.insertTechnology(technology);
-        if (i==1){
-            result.put("status",200);
-            result.put("msg","ok");
-            return result;
+        String technologyId = technology.getTechnologyId();
+        Technology technology1 = technologyService.queryTechById(technologyId);
+        if (technology1!=null){
+            result.put("status",299);
+            result.put("msg","ID重复，请重新输入");
         }else {
-            result.put("status",288);
-            result.put("msg","添加失败，请确定参数是否正确");
-            return result;
+            int i = technologyService.insertTechnology(technology);
+            if (i==1){
+                result.put("status",200);
+                result.put("msg","ok");
+            }else {
+                result.put("status",288);
+                result.put("msg","添加失败，请确定参数是否正确");
+            }
         }
+        return result;
     }
 
     //删除之前需要先验证权限

@@ -13,4 +13,12 @@ public interface DeviceListService {
 
 
     List<Device> queryAllDevices();
+
+    int insertDevice(Device device);
+
+    List<Device> searchDeviceByDeviceId(String searchValue);
+
+    List<Device> searchDeviceByDeviceName(String searchValue);
+
+    List<Device> searchDeviceByDeviceTypeName(String searchValue);
 }
