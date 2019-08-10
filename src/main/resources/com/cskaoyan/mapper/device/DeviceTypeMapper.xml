@@ -22,6 +22,7 @@
     device_type_producer, device_type_quantity, device_type_warranty
     </sql>
 
+    <!--查询所有的列表清单-->
     <select id="queryAllDeviceType" resultMap="deviceTypeMap">
         select
         <include refid="Base_Column_List"/>
@@ -29,4 +30,66 @@
         order by device_type_id ASC
     </select>
 
+
+    <!--新增javabean前进行的判断操作-->
+    <select id="queryDeviceTypeById" resultMap="deviceTypeMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device_type
+        where device_type_id = #{deviceTypeId}
+    </select>
+
+
+    <!--新增一个javabean数据-->
+    <insert id="insertDeviceType">
+        insert  into device_type
+        ( <include refid="Base_Column_List"/>)
+        values
+        (#{deviceTypeId,jdbcType=VARCHAR},
+        #{deviceTypeName,jdbcType=VARCHAR},
+        #{deviceTypeModel,jdbcType=VARCHAR},
+        #{deviceTypeSpec,jdbcType=VARCHAR},
+        #{deviceTypeSupplier,jdbcType=VARCHAR},
+        #{deviceTypeProducer,jdbcType=VARCHAR},
+        #{deviceTypeQuantity,jdbcType=INTEGER},
+        #{deviceTypeWarranty,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--删除数据，可以是一个或多个-->
+    <delete id="deleteDeviceType">
+        delete from device_type where device_type_id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--更新数据-->
+    <update id="updateDeviceType">
+        update device_type set
+        device_type_name = #{deviceTypeName,jdbcType=VARCHAR},
+        device_type_model = #{deviceTypeModel,jdbcType=VARCHAR},
+        device_type_spec = #{deviceTypeSpec,jdbcType=VARCHAR},
+        device_type_supplier = #{deviceTypeSupplier,jdbcType=VARCHAR},
+        device_type_producer = #{deviceTypeProducer,jdbcType=VARCHAR},
+        device_type_quantity = #{deviceTypeQuantity,jdbcType=INTEGER},
+        device_type_warranty = #{deviceTypeWarranty,jdbcType=TIMESTAMP}
+        where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+    </update>
+
+    <!--模糊搜索1，根据输入id，查找所有device-->
+    <select id="queryDeviceTypeByDeviceTypeId" resultMap="deviceTypeMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device_type
+        where device_type_id like concat('%',#{searchValue},'%')
+    </select>
+
+    <!--模糊搜索2，根据输入name，查找所有的deviceType-->
+    <select id="searchDeviceTypeByDeviceTypeName" resultMap="deviceTypeMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device_type
+        where device_type_name like concat('%',#{searchValue},'%')
+    </select>
 </mapper>
