@@ -21,4 +21,14 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
     public List<DeviceMaintain> queryAllDeviceMaintain() {
         return mapper.queryAllDeviceMaintain();
     }
+
+    @Override
+    public List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(String searchValue) {
+        return mapper.searchDeviceMaintainByDeviceFaultId(searchValue);
+    }
+
+    @Override
+    public List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(String searchValue) {
+        return mapper.searchDeviceMaintainByDeviceMaintainId(searchValue);
+    }
 }

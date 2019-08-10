@@ -22,4 +22,26 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
     public List<DeviceFault> queryAllDeviceFault() {
         return mapper.queryAllDeviceFault();
     }
+
+    @Override
+    public int insertDeviceFault(DeviceFault deviceFault) {
+        //首先要进行重复id判断操作，如果数据库中有相同id，则返回true
+        DeviceFault deviceFault1 = mapper.queryDeviceFaultById(deviceFault.getDeviceFaultId());
+        if(deviceFault1!=null){
+            return 2;
+        }else{
+            return mapper.insertDeviceFault(deviceFault);
+        }
+
+    }
+
+    @Override
+    public List<DeviceFault> searchDeviceFaultByDeviceFaultId(String searchValue) {
+        return mapper.searchDeviceFaultByDeviceFaultId(searchValue);
+    }
+
+    @Override
+    public List<DeviceFault> searchDeviceFaultByDeviceFaultName(String searchValue) {
+        return mapper.searchDeviceFaultByDeviceFaultName(searchValue);
+    }
 }
