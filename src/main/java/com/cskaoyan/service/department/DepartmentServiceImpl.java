@@ -1,7 +1,8 @@
-package com.cskaoyan.service.department;
+package com.cskaoyan.service.Department;
 
 import com.cskaoyan.bean.department.Department;
 import com.cskaoyan.mapper.department.DepartmentMapper;
+import com.cskaoyan.service.Department.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

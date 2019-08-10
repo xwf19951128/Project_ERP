@@ -2,7 +2,7 @@ package com.cskaoyan.controller.department;
 
 import com.cskaoyan.bean.department.Department;
 import com.cskaoyan.bean.department.DepartmentPage;
-import com.cskaoyan.service.department.DepartmentService;
+import com.cskaoyan.service.Department.DepartmentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;

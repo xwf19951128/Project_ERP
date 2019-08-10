@@ -1,8 +1,11 @@
 package com.cskaoyan.controller.technology;
 
 import com.cskaoyan.bean.technology.Process;
+import com.cskaoyan.bean.technology.QueryResult;
 import com.cskaoyan.bean.technology.TechnologyPlan;
 import com.cskaoyan.service.technology.TechnologyPlanService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,9 +40,14 @@ public class TechnologyPlanController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<TechnologyPlan> list(){
+    public QueryResult<TechnologyPlan> list(){
+        PageHelper.startPage(1,10);
+        QueryResult<TechnologyPlan> queryResult = new QueryResult<TechnologyPlan>();
         List<TechnologyPlan> technologyPlans = technologyPlanService.queryAllTechPlans();
-        return technologyPlans;
+        long total = new PageInfo<>(technologyPlans).getTotal();
+        queryResult.setRows(technologyPlans);
+        queryResult.setTotal((int) total);
+        return queryResult;
     }
 
     //工序管理页面，点击工艺计划编号，就会执行一个rest风格的方法,根据planId找到这个工艺计划对象并返回

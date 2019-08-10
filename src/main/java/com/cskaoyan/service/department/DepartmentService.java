@@ -1,4 +1,4 @@
-package com.cskaoyan.service.department;
+package com.cskaoyan.service.Department;
 
 import com.cskaoyan.bean.department.Department;
 
