@@ -286,11 +286,24 @@ TechnologyService technologyMapper;
 
     @Override
     public SchedulList<Custom> searchCustomListByName(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Custom> customSchedulList = new SchedulList<>();
+        List<Custom> list=customMapper.searchCustomListByName("%"+searchValue+"%");
+        PageInfo<Custom> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Custom> searchCustomListByID(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Custom> customSchedulList = new SchedulList<>();
+        List<Custom> list=customMapper.searchCustomListByID("%"+searchValue+"%");
+        PageInfo<Custom> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
+
     }
 }

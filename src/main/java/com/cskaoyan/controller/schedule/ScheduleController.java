@@ -132,7 +132,7 @@ public class ScheduleController {
         return service.searchCustomListByID(searchValue,page,rows);
     }
     @ResponseBody
-    @RequestMapping("/custom/search_custom_by_customId")
+    @RequestMapping("/custom/search_custom_by_customName")
     public SchedulList<Custom> searchCustomListN(String searchValue,int page,int rows){
         return service.searchCustomListByName(searchValue,page,rows);
     }
@@ -275,11 +275,11 @@ public class ScheduleController {
     public String goAddManufacture0(){
         return null;
     }
-    @RequestMapping("/task/add_judge")
-    @ResponseBody
-    public String goAddTask0(){
-        return null;
-    }
+//    @RequestMapping("/task/add_judge")
+//    @ResponseBody
+//    public String goAddTask0(){
+//        return null;
+//    }
     @RequestMapping("/order/add")
     public String goAddOrder0(){
         return "/WEB-INF/jsp/order_add.jsp";
@@ -300,10 +300,10 @@ public class ScheduleController {
     public String goAddManufacture(){
         return "/WEB-INF/jsp/manufacture_add.jsp";
     }
-    @RequestMapping("/task/add")
-    public String goAddTask(){
-        return "/WEB-INF/jsp/task_add.jsp";
-    }
+//    @RequestMapping("/task/add")
+//    public String goAddTask(){
+//        return "/WEB-INF/jsp/task_add.jsp";
+//    }
 
     @RequestMapping("/order/delete_judge")
     @ResponseBody
