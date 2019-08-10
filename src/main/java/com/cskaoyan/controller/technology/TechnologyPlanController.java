@@ -1,11 +1,15 @@
 package com.cskaoyan.controller.technology;
 
 import com.cskaoyan.bean.technology.Process;
+import com.cskaoyan.bean.technology.QueryResult;
 import com.cskaoyan.bean.technology.TechnologyPlan;
 import com.cskaoyan.service.technology.TechnologyPlanService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,9 +40,22 @@ public class TechnologyPlanController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<TechnologyPlan> list(){
+    public QueryResult<TechnologyPlan> list(){
+        PageHelper.startPage(1,10);
+        QueryResult<TechnologyPlan> queryResult = new QueryResult<TechnologyPlan>();
         List<TechnologyPlan> technologyPlans = technologyPlanService.queryAllTechPlans();
-        return technologyPlans;
+        long total = new PageInfo<>(technologyPlans).getTotal();
+        queryResult.setRows(technologyPlans);
+        queryResult.setTotal((int) total);
+        return queryResult;
+    }
+
+    //工序管理页面，点击工艺计划编号，就会执行一个rest风格的方法,根据planId找到这个工艺计划对象并返回
+    @ResponseBody
+    @RequestMapping("/get/{planId}")
+    public TechnologyPlan getPlan(@PathVariable("planId") String id){
+        TechnologyPlan technologyPlan = technologyPlanService.queryTechPlanById(id);
+        return technologyPlan;
     }
 
     //新增工序管理时，需要获取它的数据get_data
@@ -134,5 +151,23 @@ public class TechnologyPlanController {
             stringObjectHashMap.put("msg","更新失败，请重试");
         }
         return stringObjectHashMap;
+    }
+
+    //查询1：根据工艺计划编号模糊查询工艺计划
+    @RequestMapping("/search_technologyPlan_by_technologyPlanId")
+    @ResponseBody
+    public List<TechnologyPlan> queryPlanByPlanId(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<TechnologyPlan> technologyPlans = technologyPlanService.queryPlanByPlanId(search);
+        return technologyPlans;
+    }
+
+    //查询2：根据工艺名称模糊查询工艺计划
+    @RequestMapping("/search_technologyPlan_by_technologyName")
+    @ResponseBody
+    public List<TechnologyPlan> queryPlanByTechName(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<TechnologyPlan> technologyPlans = technologyPlanService.queryPlanByTechName(search);
+        return technologyPlans;
     }
 }

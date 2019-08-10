@@ -33,7 +33,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
+        return "department{" +
                 "departmentId=" + departmentId +
                 ", departmentName='" + departmentName + '\'' +
                 ", note='" + note + '\'' +

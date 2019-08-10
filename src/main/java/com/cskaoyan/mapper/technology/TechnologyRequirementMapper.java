@@ -23,4 +23,17 @@ public interface TechnologyRequirementMapper {
      * 更新记录
      * */
     public int updateTechnologyRequirement(@Param("techRequire") TechnologyRequirement technologyRequirement);
+    /**
+     * 更新工艺要求
+     * */
+    //更新工艺要求
+    public int updateNote(@Param("id") String technologyRequirementId, @Param("note") String requirement);
+    /**
+     * 根据工艺要求编号模糊查询
+     * */
+    public List<TechnologyRequirement> queryRequireByRequireId(@Param("value") String searchValue);
+    /**
+     * 根据工艺名称模糊查询
+     * */
+    public List<TechnologyRequirement> queryRequireByTechName(@Param("value") String searchValue);
 }

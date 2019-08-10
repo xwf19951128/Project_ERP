@@ -3,6 +3,8 @@ package com.cskaoyan.controller.technology;
 import com.cskaoyan.bean.technology.Process;
 import com.cskaoyan.bean.technology.QueryResult;
 import com.cskaoyan.service.technology.ProcessService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,10 +40,12 @@ public class ProcessController {
     @RequestMapping("/list")
     @ResponseBody
     public QueryResult<Process> listProcess(){
+        PageHelper.startPage(1,10);
         List<Process> processes1 = processService.queryAllProcesses();
+        long total = new PageInfo<>(processes1).getTotal();
         QueryResult<Process> processQueryResult = new QueryResult<>();
         processQueryResult.setRows(processes1);
-        processQueryResult.setTotal(processes1.size());
+        processQueryResult.setTotal((int) total);
         return processQueryResult;
     }
 
@@ -129,5 +133,23 @@ public class ProcessController {
             stringObjectHashMap.put("msg","更新失败，请重试");
         }
         return stringObjectHashMap;
+    }
+
+    //查询1：根据工序编号模糊查询工序
+    @RequestMapping("/search_process_by_processId")
+    @ResponseBody
+    public List<Process> queryProcessByProcessId(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<Process> processes = processService.queryProcessByProcessId(search);
+        return processes;
+    }
+
+    //查询2：根据工艺计划编号模糊查询工序
+    @RequestMapping("/search_process_by_technologyPlanId")
+    @ResponseBody
+    public List<Process> queryProcessByPlanId(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<Process> processes = processService.queryProcessByPlanId(search);
+        return processes;
     }
 }

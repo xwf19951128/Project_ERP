@@ -36,4 +36,13 @@
         sequence = #{process.sequence},quota = #{process.quota}
         where process_id = #{process.processId}
     </update>
+
+    <!--工序id模糊搜索工序-->
+    <select id="queryProcessByProcessId" resultMap="processMap">
+        select  process_id,technology_plan_id,sequence,quota from process where process_id like #{value}
+    </select>
+    <!--工艺计划id模糊搜索工序-->
+    <select id="queryProcessByPlanId" resultMap="processMap">
+        select  process_id,technology_plan_id,sequence,quota from process where technology_plan_id like #{value}
+    </select>
 </mapper>

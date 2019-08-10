@@ -3,12 +3,14 @@ package com.cskaoyan.controller.technology;
 import com.cskaoyan.bean.technology.Process;
 import com.cskaoyan.bean.technology.QueryResult;
 import com.cskaoyan.bean.technology.Technology;
+import com.cskaoyan.bean.technology.TechnologyPlan;
 import com.cskaoyan.service.technology.TechnologyService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -48,6 +50,14 @@ public class TechnologyController {
        technologyQueryResult.setTotal((int) total);
        return technologyQueryResult;
    }
+
+   //这是工艺计划界面，点击工艺名称就会进入这个restful风格的方法
+    @ResponseBody
+    @RequestMapping("/get/{techId}")
+    public Technology techId(@PathVariable("techId") String id){
+        Technology technology = technologyService.queryTechById(id);
+        return technology;
+    }
 
    // 这是工序管理页面所需要的get_data方法
     @RequestMapping("/get_data")
@@ -142,5 +152,22 @@ public class TechnologyController {
             stringObjectHashMap.put("msg","更新失败，请重试");
         }
         return stringObjectHashMap;
+    }
+
+    //查询1：根据工艺编号，模糊查询工艺
+    @RequestMapping("/search_technology_by_technologyId")
+    @ResponseBody
+    public List<Technology> queryTechByTechId(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<Technology> technologies = technologyService.queryTechByTechId(search);
+        return technologies;
+    }
+    //查询2：根据工艺名称模糊查询工艺
+    @RequestMapping("/search_technology_by_technologyName")
+    @ResponseBody
+    public List<Technology> queryTechByTechName(String searchValue){
+        String search = "%"+searchValue+"%";
+        List<Technology> technologies = technologyService.queryTechByTechName(search);
+        return technologies;
     }
 }

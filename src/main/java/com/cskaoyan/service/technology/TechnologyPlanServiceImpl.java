@@ -33,4 +33,19 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService {
     public int updateTechnologyPlan(TechnologyPlan technologyPlan) {
         return technologyPlanMapper.updateTechnologyPlan(technologyPlan);
     }
+
+    @Override
+    public TechnologyPlan queryTechPlanById(String id) {
+        return technologyPlanMapper.queryTechPlanById(id);
+    }
+
+    @Override
+    public List<TechnologyPlan> queryPlanByPlanId(String searchValue) {
+        return technologyPlanMapper.queryPlanByPlanId(searchValue);
+    }
+
+    @Override
+    public List<TechnologyPlan> queryPlanByTechName(String searchValue) {
+        return technologyPlanMapper.queryPlanByTechName(searchValue);
+    }
 }

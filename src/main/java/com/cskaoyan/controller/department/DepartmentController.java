@@ -2,13 +2,11 @@ package com.cskaoyan.controller.department;
 
 import com.cskaoyan.bean.department.Department;
 import com.cskaoyan.bean.department.DepartmentPage;
-import com.cskaoyan.bean.login.SysUser;
-import com.cskaoyan.service.Department.DepartmentService;
+import com.cskaoyan.service.department.DepartmentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,9 +28,9 @@ public class DepartmentController {
     @RequestMapping("find")
     public String find(HttpServletRequest request) {
         List<String> sysPermissionList = new ArrayList<>();
-        sysPermissionList.add("Department:add");
-        sysPermissionList.add("Department:edit");
-        sysPermissionList.add("Department:delete");
+        sysPermissionList.add("department:add");
+        sysPermissionList.add("department:edit");
+        sysPermissionList.add("department:delete");
         request.getSession().setAttribute("sysPermissionList",sysPermissionList);
         return "/WEB-INF/jsp/department_list.jsp";
     }
@@ -73,6 +71,19 @@ public class DepartmentController {
         return data;
     }
 
+    /*修改判断*/
+    @RequestMapping("edit_judge")
+    @ResponseBody
+    public Map<String, String> editJudge() {
+        return new HashMap<>();
+    }
+
+    /*跳转修改页面*/
+    @RequestMapping("edit")
+    public String edit() {
+        return "/WEB-INF/jsp/department_edit.jsp";
+    }
+
 
     /*新增*/
     @RequestMapping("insert")
@@ -106,5 +117,68 @@ public class DepartmentController {
             data.put("msg","删除失败");
         }
         return data;
+    }
+
+    /*提交修改所有信息*/
+    @RequestMapping("update_all")
+    @ResponseBody
+    public Map<String, Object> updateAll(Department department) {
+        Map<String, Object> data = new HashMap<>();
+        int i = departmentService.updateAll(department);
+        if (i > 0) {
+            data.put("status",200);
+            data.put("msg","OK");
+            data.put("data",null);
+        } else {
+            data.put("meg","服务器开小差了，请稍后再试");
+        }
+        return data;
+    }
+
+    @RequestMapping("update_note")
+    @ResponseBody
+    public Map<String, Object> updateNote(Department department) {
+        Map<String,Object> data = new HashMap<>();
+        int i = departmentService.updateNote(department);
+        if (i > 0) {
+            data.put("status",200);
+            data.put("msg","OK");
+            data.put("data",null);
+        } else {
+            data.put("meg","服务器开小差了，请稍后再试");
+        }
+        return data;
+    }
+
+    /*id的模糊查询*/
+    @RequestMapping("search_department_by_departmentId")
+    @ResponseBody
+    public DepartmentPage searchDepartmentById(int searchValue,int rows, int page) {
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder condition = stringBuilder.append("%").append(searchValue).append("%");  // 拼接查詢條件
+        PageHelper.startPage(page,rows);
+        List<Department> list = departmentService.searchDepartmentById(condition.toString());
+        PageInfo<Department> pageInfo = new PageInfo<>(list);
+        long total = pageInfo.getTotal();
+        DepartmentPage departmentPage = new DepartmentPage();
+        departmentPage.setRows(list);
+        departmentPage.setTotal(((int) total));
+        return departmentPage;
+    }
+
+    /*部门名称的模糊查询*/
+    @RequestMapping("search_department_by_departmentName")
+    @ResponseBody
+    public DepartmentPage searchDepartmentByDepartmentName(String searchValue, int page, int rows) {
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder condition = stringBuilder.append("%").append(searchValue).append("%");  // 拼接查詢條件
+        PageHelper.startPage(page,rows);
+        List<Department> list = departmentService.searchDepartmentByName(condition.toString());
+        PageInfo<Department> pageInfo = new PageInfo<>(list);
+        long total = pageInfo.getTotal();
+        DepartmentPage departmentPage = new DepartmentPage();
+        departmentPage.setRows(list);
+        departmentPage.setTotal(((int) total));
+        return departmentPage;
     }
 }

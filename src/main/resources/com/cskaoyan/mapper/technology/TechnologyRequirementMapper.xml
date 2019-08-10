@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cskaoyan.mapper.technology.TechnologyRequirementMapper">
-    <!--查询所有的process记录-->
+    <!--查询所有的记录-->
     <resultMap id="requireMap" type="com.cskaoyan.bean.technology.TechnologyRequirement">
         <result column="add_time" property="addTime"></result>
         <result column="revise_time" property="reviseTime"></result>
@@ -39,4 +39,22 @@
         requirement = #{techRequire.requirement},add_time = #{techRequire.addTime},revise_time=#{techRequire.reviseTime}
         where technology_requirement_id = #{techRequire.technologyRequirementId}
     </update>
+
+    <!--更新工艺要求-->
+    <update id="updateNote">
+        update technology_requirement set requirement = #{note} where technology_requirement_id = #{id}
+    </update>
+
+    <!--工艺要求编号模糊搜索-->
+    <select id="queryRequireByRequireId" resultMap="requireMap">
+        select  r.add_time,r.revise_time,r.requirement,r.technology_id,t.technology_name,r.technology_requirement_id
+        from technology_requirement r
+        left join technology  t on r.technology_id = t.technology_id where r.technology_requirement_id like #{value}
+    </select>
+    <!--工艺名称模糊搜索-->
+    <select id="queryRequireByTechName" resultMap="requireMap">
+        select  r.add_time,r.revise_time,r.requirement,r.technology_id,t.technology_name,r.technology_requirement_id
+        from technology_requirement r
+        left join technology  t on r.technology_id = t.technology_id where t.technology_name like #{value}
+    </select>
 </mapper>

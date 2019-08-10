@@ -25,4 +25,12 @@ public interface ProcessMapper {
      * 更新记录
      * */
     public int updateProcess(@Param("process")Process process);
+    /**
+     * 根据工序id模糊搜索
+     * */
+    public List<Process> queryProcessByProcessId(@Param("value") String searchValue);
+    /**
+     * 根据工艺计划id模糊搜索
+     * */
+    public List<Process> queryProcessByPlanId(@Param("value") String searchValue);
 }
