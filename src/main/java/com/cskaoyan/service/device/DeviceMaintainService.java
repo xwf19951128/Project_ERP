@@ -10,4 +10,8 @@ import java.util.List;
  */
 public interface DeviceMaintainService {
     List<DeviceMaintain> queryAllDeviceMaintain();
+
+    List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(String searchValue);
+
+    List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(String searchValue);
 }

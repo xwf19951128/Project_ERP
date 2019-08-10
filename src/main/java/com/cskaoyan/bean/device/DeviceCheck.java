@@ -12,7 +12,7 @@ public class DeviceCheck {
 
     private String deviceCheckEmpId;
 
-    private Date deviceCheckDate;
+    private String deviceCheckDate;
 
     private String deviceCheckResult;
 
@@ -21,9 +21,7 @@ public class DeviceCheck {
     public DeviceCheck() {
     }
 
-    public DeviceCheck(String deviceCheckId, String deviceId,
-                       String deviceCheckEmpId, Date deviceCheckDate,
-                       String deviceCheckResult, String deviceCheckFaultId) {
+    public DeviceCheck(String deviceCheckId, String deviceId, String deviceCheckEmpId, String deviceCheckDate, String deviceCheckResult, String deviceCheckFaultId) {
         this.deviceCheckId = deviceCheckId;
         this.deviceId = deviceId;
         this.deviceCheckEmpId = deviceCheckEmpId;
@@ -68,11 +66,11 @@ public class DeviceCheck {
         this.deviceCheckEmpId = deviceCheckEmpId;
     }
 
-    public Date getDeviceCheckDate() {
+    public String getDeviceCheckDate() {
         return deviceCheckDate;
     }
 
-    public void setDeviceCheckDate(Date deviceCheckDate) {
+    public void setDeviceCheckDate(String deviceCheckDate) {
         this.deviceCheckDate = deviceCheckDate;
     }
 

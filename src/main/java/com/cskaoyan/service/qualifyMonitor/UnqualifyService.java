@@ -1,6 +1,5 @@
 package com.cskaoyan.service.qualifyMonitor;
 
-import com.cskaoyan.bean.qualifyMonitor.Product;
 import com.cskaoyan.bean.qualifyMonitor.UnqualifyApply;
 
 import java.util.List;

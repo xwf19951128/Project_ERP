@@ -22,4 +22,19 @@ public class DeviceCheckServiceImpl implements DeviceCheckService {
     public List<DeviceCheck> queryAllDeviceCheck() {
         return mapper.queryAllDeviceCheck();
     }
+
+    @Override
+    public int insertDeviceCheck() {
+        return 0;
+    }
+
+    @Override
+    public List<DeviceCheck> searchDeviceCheckByDeviceCheckId(String searchValue) {
+        return mapper.searchDeviceCheckByDeviceCheckId(searchValue);
+    }
+
+    @Override
+    public List<DeviceCheck> searchDeviceCheckByDeviceName(String searchValue) {
+        return mapper.searchDeviceCheckByDeviceName(searchValue);
+    }
 }

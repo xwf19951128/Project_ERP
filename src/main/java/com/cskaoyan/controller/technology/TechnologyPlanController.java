@@ -1,8 +1,11 @@
 package com.cskaoyan.controller.technology;
 
 import com.cskaoyan.bean.technology.Process;
+import com.cskaoyan.bean.technology.QueryResult;
 import com.cskaoyan.bean.technology.TechnologyPlan;
 import com.cskaoyan.service.technology.TechnologyPlanService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,9 +40,14 @@ public class TechnologyPlanController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<TechnologyPlan> list(){
+    public QueryResult<TechnologyPlan> list(){
+        PageHelper.startPage(1,10);
+        QueryResult<TechnologyPlan> queryResult = new QueryResult<TechnologyPlan>();
         List<TechnologyPlan> technologyPlans = technologyPlanService.queryAllTechPlans();
-        return technologyPlans;
+        long total = new PageInfo<>(technologyPlans).getTotal();
+        queryResult.setRows(technologyPlans);
+        queryResult.setTotal((int) total);
+        return queryResult;
     }
 
     //工序管理页面，点击工艺计划编号，就会执行一个rest风格的方法,根据planId找到这个工艺计划对象并返回
@@ -79,16 +87,22 @@ public class TechnologyPlanController {
     @ResponseBody
     public Map insert(TechnologyPlan technologyPlan){
         HashMap<String, Object> result = new HashMap<>();
-        int i = technologyPlanService.insertTechnologyPlan(technologyPlan);
-        if (i==1){
-            result.put("status",200);
-            result.put("msg","ok");
-            return result;
+        String technologyPlanId = technologyPlan.getTechnologyPlanId();
+        List<TechnologyPlan> technologyPlans = technologyPlanService.queryPlanByPlanId(technologyPlanId);
+        if (technologyPlans!=null){
+            result.put("status",999);
+            result.put("msg","已存在相同的ID，请重新输入");
         }else {
-            result.put("status",288);
-            result.put("msg","添加失败，请确定参数是否正确");
-            return result;
+            int i = technologyPlanService.insertTechnologyPlan(technologyPlan);
+            if (i==1){
+                result.put("status",200);
+                result.put("msg","ok");
+            }else {
+                result.put("status",288);
+                result.put("msg","添加失败，请确定参数是否正确");
+            }
         }
+        return result;
     }
 
     //验证删除权限

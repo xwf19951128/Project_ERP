@@ -67,9 +67,11 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List">
     product_id, product_name, product_type, image, note, status
   </sql>
+
   <select id="selectByExample" parameterType="com.cskaoyan.bean.schedule.ProductExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -216,6 +218,7 @@
     </set>
     where product_id = #{productId,jdbcType=VARCHAR}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.schedule.Product">
     update product
     set product_name = #{productName,jdbcType=VARCHAR},

@@ -1,19 +1,21 @@
-package com.cskaoyan.bean.department;
+package com.cskaoyan.bean.employee;
+
 
 
 import java.util.List;
 
-public class DepartmentPage {
+public class EmployeePage {
 
-    private List<Department> rows;
+    private List<Employee> rows;
+
 
     private int total;
 
-    public List<Department> getRows() {
+    public List<Employee> getRows() {
         return rows;
     }
 
-    public void setRows(List<Department> rows) {
+    public void setRows(List<Employee> rows) {
         this.rows = rows;
     }
 
@@ -24,4 +26,6 @@ public class DepartmentPage {
     public void setTotal(int total) {
         this.total = total;
     }
+
+
 }
