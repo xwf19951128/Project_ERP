@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cskaoyan.mapper.material.MaterialReceiveMapper">
+    <!--查询所有物料收入-->
+    <select id="listPageMaterialReceives" resultMap="materialReceiveMap">
+        select
+        receive_id as receiveId,
+        material_id as materialId,
+        amount,
+        receive_date as receiveDate,
+        sender,
+        receiver,
+        note
+        FROM material_receive
+        limit #{limit}
+        offset #{offset}
+    </select>
+    <resultMap id="materialReceiveMap" type="com.cskaoyan.bean.material.MaterialReceive">
+        <result column="receiveId" property="receiveId"></result>
+        <result column="amount" property="amount"></result>
+        <result column="receiveDate" property="receiveDate"></result>
+        <result column="sender" property="sender"></result>
+        <result column="receiver" property="receiver"></result>
+        <result column="note" property="note"></result>
+        <association property="material" javaType="com.cskaoyan.bean.material.Material">
+            <result column="materialId" property="materialId"></result>
+            <result column="note" property="note"></result>
+        </association>
+    </resultMap>
+
+
+    <insert id="insertMaterial">
+        insert into
+        material(material_id, material_type, status, remaining, note)
+        values (#{material.materialId}, #{material.materialType}, #{material.status}, #{material.remaining}, #{material.note})
+    </insert>
+
+    <delete id="deleteMaterialsByIds">
+        delete from material
+        where material_id
+        in
+        (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+</mapper>
