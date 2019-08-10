@@ -35,4 +35,6 @@ public interface MaterialReceiveMapper {
 
     @Update("update material_receive set material_id = #{m.materialId}, amount = #{mr.ammount}, receive_date = #{mr.receiveDate}, sender = #{mr.sender}, receiver = #{mr.receiver}, note = #{mr.note} where receive_id = #{mr.receiveId}")
     int updateAllById(@Param("mr") MaterialReceive materialReceive, @Param("m") Material material);
+
+    int deleteMaterialReceivesByIds(@Param("ids") String[] ids);
 }

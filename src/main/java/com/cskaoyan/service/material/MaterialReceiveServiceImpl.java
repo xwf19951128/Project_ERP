@@ -44,7 +44,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 
     @Override
     public int deleteMaterialReceivesByIds(String[] ids) {
-        return 0;
+        return materialReceiveMapper.deleteMaterialReceivesByIds(ids);
     }
 
     @Override

@@ -64,4 +64,16 @@
     </select>
 
 
+    <!--批量删除-->
+    <delete id="deleteMaterialReceivesByIds">
+        delete from material_receive
+        where receive_id
+        in
+        (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
 </mapper>

@@ -53,8 +53,19 @@ public class MaterialReceiveController {
     @RequestMapping("/insert")
     @ResponseBody
     public Map<String, Object> insert(MaterialReceive materialReceive, Material material){
-        int insertResult = materialReceiveService.insertMaterialReceive(materialReceive, material);
         HashMap<String, Object> map = new HashMap<>();
+        int ammount;
+        try{
+            ammount = materialReceive.getAmmount();
+        }catch (Exception e){
+            map.put("msg", "收入数量必须为大于等于0的数");
+            return map;
+        }
+        if(ammount < 0){
+            map.put("msg", "收入数量必须为大于等于0的数");
+            return map;
+        }
+        int insertResult = materialReceiveService.insertMaterialReceive(materialReceive, material);
         if(insertResult == 1) {
             map.put("status", 200);
             map.put("msg", "OK");
@@ -151,14 +162,6 @@ public class MaterialReceiveController {
 
 
 
-
-
-
-
-
-
-
-
     /*删*/
     @RequestMapping("/delete_judge")
     @ResponseBody
@@ -170,14 +173,13 @@ public class MaterialReceiveController {
     @ResponseBody
     public Map<String, Object> deleteBatch(String[] ids){
         int deleteResult = materialReceiveService.deleteMaterialReceivesByIds(ids);
-        logger.info(deleteResult);
         HashMap<String, Object> map = new HashMap<>();
         if(deleteResult == 1) {
             map.put("status", 200);
             map.put("msg", "OK");
             map.put("data", null);
         }else {
-            map.put("msg", "服务器开小差了，删除物料失败");
+            map.put("msg", "服务器开小差了，删除物料收入失败");
         }
         return map;
     }
