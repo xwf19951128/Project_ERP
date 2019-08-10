@@ -29,8 +29,8 @@
     <mvc:resources mapping="/css/**" location="/WEB-INF/css/"></mvc:resources>
     <mvc:resources mapping="/image/**" location="/WEB-INF/image/"></mvc:resources>
     <mvc:resources mapping="/file/**" location="/WEB-INF/file/"></mvc:resources>
-    
-    <mvc:interceptors>
-        <bean class="com.cskaoyan.interceptor.LoginInterceptor"/>
-    </mvc:interceptors>
+<!--    -->
+<!--    <mvc:interceptors>-->
+<!--        <bean class="com.cskaoyan.interceptor.LoginInterceptor"/>-->
+<!--    </mvc:interceptors>-->
 </beans>
