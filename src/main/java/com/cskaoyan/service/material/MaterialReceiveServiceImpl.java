@@ -1,5 +1,6 @@
 package com.cskaoyan.service.material;
 
+import com.cskaoyan.bean.material.Material;
 import com.cskaoyan.bean.material.MaterialReceive;
 import com.cskaoyan.mapper.material.MaterialReceiveMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
     }
 
     @Override
-    public int insertMaterialReceive(MaterialReceive materialReceive) {
-        return materialReceiveMapper.insertMaterialReceive(materialReceive);
+    public int insertMaterialReceive(MaterialReceive materialReceive, Material material) {
+        return materialReceiveMapper.insertMaterialReceive(materialReceive, material);
     }
 
     @Override

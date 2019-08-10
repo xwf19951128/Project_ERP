@@ -1,5 +1,6 @@
 package com.cskaoyan.mapper.material;
 
+import com.cskaoyan.bean.material.Material;
 import com.cskaoyan.bean.material.MaterialReceive;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -29,6 +30,6 @@ public interface MaterialReceiveMapper {
     int updateNoteById(@Param("materialReceive") MaterialReceive materialReceive);
 
     @Insert("insert into material_receive (receive_id, material_id, amount, receive_date, sender, receiver, note)" +
-            "values (mr.receiveId, mr.materialId, mr.ammount, mr.receiveDate, mr.sender, mr.receiver, mr.note)")
-    int insertMaterialReceive(@Param("mr") MaterialReceive materialReceive);
+            "values (#{mr.receiveId}, #{m.materialId}, #{mr.ammount}, #{mr.receiveDate}, #{mr.sender}, #{mr.receiver}, #{mr.note})")
+    int insertMaterialReceive(@Param("mr") MaterialReceive materialReceive, @Param("m") Material material); //mr.material.materialId直接封装
 }

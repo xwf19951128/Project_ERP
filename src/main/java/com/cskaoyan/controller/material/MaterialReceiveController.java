@@ -52,8 +52,8 @@ public class MaterialReceiveController {
     }
     @RequestMapping("/insert")
     @ResponseBody
-    public Map<String, Object> insert(MaterialReceive materialReceive){
-        int insertResult = materialReceiveService.insertMaterialReceive(materialReceive);
+    public Map<String, Object> insert(MaterialReceive materialReceive, Material material){
+        int insertResult = materialReceiveService.insertMaterialReceive(materialReceive, material);
         HashMap<String, Object> map = new HashMap<>();
         if(insertResult == 1) {
             map.put("status", 200);

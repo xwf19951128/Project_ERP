@@ -1,5 +1,6 @@
 package com.cskaoyan.service.material;
 
+import com.cskaoyan.bean.material.Material;
 import com.cskaoyan.bean.material.MaterialReceive;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface MaterialReceiveService {
 
     int updateAllById(MaterialReceive materialReceive);
 
-    int insertMaterialReceive(MaterialReceive material);
+    int insertMaterialReceive(MaterialReceive materialReceive, Material material);
 
     int deleteMaterialReceivesByIds(String[] ids);
 
