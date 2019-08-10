@@ -87,16 +87,22 @@ public class TechnologyPlanController {
     @ResponseBody
     public Map insert(TechnologyPlan technologyPlan){
         HashMap<String, Object> result = new HashMap<>();
-        int i = technologyPlanService.insertTechnologyPlan(technologyPlan);
-        if (i==1){
-            result.put("status",200);
-            result.put("msg","ok");
-            return result;
+        String technologyPlanId = technologyPlan.getTechnologyPlanId();
+        List<TechnologyPlan> technologyPlans = technologyPlanService.queryPlanByPlanId(technologyPlanId);
+        if (technologyPlans!=null){
+            result.put("status",999);
+            result.put("msg","已存在相同的ID，请重新输入");
         }else {
-            result.put("status",288);
-            result.put("msg","添加失败，请确定参数是否正确");
-            return result;
+            int i = technologyPlanService.insertTechnologyPlan(technologyPlan);
+            if (i==1){
+                result.put("status",200);
+                result.put("msg","ok");
+            }else {
+                result.put("status",288);
+                result.put("msg","添加失败，请确定参数是否正确");
+            }
         }
+        return result;
     }
 
     //验证删除权限

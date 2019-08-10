@@ -37,6 +37,36 @@
       from device_maintain dm
       left join employee e on dm.device_maintain_emp_id=e.emp_id
 
-  </select>
+    </select>
+    <!--模糊查询1-->
+    <select id="searchDeviceMaintainByDeviceFaultId" resultMap="deviceMaintainVoMap">
+      select
+      device_maintain_id,
+      device_fault_id,
+      device_maintain_emp_id,
+      device_maintain_date,
+      device_maintain_result,
+      device_maintain_cost,
+      note,
+      e.emp_name as device_maintain_emp
+      from device_maintain dm
+      left join employee e on dm.device_maintain_emp_id=e.emp_id
+      where dm.device_fault_id like concat('%',#{searchValue},'%')
+    </select>
+    <!--模糊查询2：-->
+    <select id="searchDeviceMaintainByDeviceMaintainId" resultMap="deviceMaintainVoMap">
+          select
+      device_maintain_id,
+      device_fault_id,
+      device_maintain_emp_id,
+      device_maintain_date,
+      device_maintain_result,
+      device_maintain_cost,
+      note,
+      e.emp_name as device_maintain_emp
+      from device_maintain dm
+      left join employee e on dm.device_maintain_emp_id=e.emp_id
+      where dm.device_maintain_id like concat('%',#{searchValue},'%')
+    </select>
 
 </mapper>

@@ -25,7 +25,17 @@
         <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
     </resultMap>
 
-    
+    <!--sql片段-->
+    <sql id="Base_Column_List">
+    device_fault_id,
+    device_id,
+    device_fault_cause,
+    device_fault_detail,
+    device_fault_date,
+    device_fault_maintenance
+  </sql>
+
+    <!--查询列表清单-->
     <select id="queryAllDeviceFault" resultMap="deviceFaultVoMap">
         select
         device_fault_id,
@@ -40,5 +50,52 @@
 
     </select>
 
+    <!--新增javabean前进行的操作-->
+    <select id="queryDeviceFaultById" resultMap="deviceFaultVoMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device_fault
+        where device_fault_id=#{deviceFaultId}
+    </select>
 
+    <!--新增数据-->
+    <insert id="insertDeviceFault" >
+        insert into device_fault
+        (<include refid="Base_Column_List" />)
+        values
+        (#{deviceFaultId}, #{deviceId}, #{deviceFaultCause},
+        #{deviceFaultDetail}, #{deviceFaultDate}, #{deviceFaultMaintenance}
+        )
+    </insert>
+
+    <!--模糊查询1：根据id-->
+    <select id="searchDeviceFaultByDeviceFaultId" resultMap="deviceFaultVoMap">
+        select
+        device_fault_id,
+        df.device_id,
+        device_fault_cause,
+        device_fault_detail,
+        device_fault_date,
+        device_fault_maintenance,
+        d.device_name
+        from device_fault df
+        left join device d on df.device_id=d.device_id
+        where device_fault_id like Concat('%',#{searchValue},'%')
+
+    </select>
+
+    <!--模糊查询2：根据name-->
+    <select id="searchDeviceFaultByDeviceFaultName" resultMap="deviceFaultVoMap">
+        select
+        device_fault_id,
+        df.device_id,
+        device_fault_cause,
+        device_fault_detail,
+        device_fault_date,
+        device_fault_maintenance,
+        d.device_name
+        from device_fault df
+        left join device d on df.device_id=d.device_id
+        where d.device_name like Concat('%',#{searchValue},'%')
+    </select>
 </mapper>

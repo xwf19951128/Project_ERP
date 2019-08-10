@@ -9,6 +9,25 @@
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="rating" jdbcType="INTEGER" property="rating" />
   </resultMap>
+  <resultMap id="AdvanceMap" type="com.cskaoyan.bean.schedule.Work">
+  <id column="work_id" jdbcType="VARCHAR" property="workId" />
+  <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
+  <result column="product_id" jdbcType="VARCHAR" property="productId" />
+  <result column="process_id" jdbcType="VARCHAR" property="processId" />
+  <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+  <result column="rating" jdbcType="INTEGER" property="rating" />
+    <association property="device" javaType="com.cskaoyan.bean.device.Device">
+      <id property="deviceId" column="device_id"/>
+      <id property="deviceName" column="device_name" jdbcType="VARCHAR"/>
+    </association>
+    <association property="process" javaType="com.cskaoyan.bean.technology.Process">
+      <id property="processId" column="process_id" />
+    </association>
+    <association property="product" javaType="com.cskaoyan.bean.schedule.Product">
+      <id property="productId" column="product_id"/>
+      <id property="productName" column="product_name" jdbcType="VARCHAR"/>
+    </association>
+</resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -225,9 +244,24 @@
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
-  <select id="queryList" resultType="com.cskaoyan.bean.schedule.Work" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from work
+  <select id="queryList" resultType="com.cskaoyan.bean.schedule.Work" resultMap="AdvanceMap">
+	SELECT
+	w.work_id,
+	w.process_number,
+	w.product_id,
+	w.process_id,
+	w.device_id,
+	w.rating,
+	p.product_id,
+	p.product_name,
+	d.device_id,
+	d.device_name
+FROM
+	work w
+	LEFT JOIN (product p,device d)
+	on (w.product_id=p.product_id and w.device_id=d.device_id) limit #{rows} offset #{page}
+  </select>
+  <select id="queryCount" resultType="_long">
+    select count(work_id) from work
   </select>
 </mapper>

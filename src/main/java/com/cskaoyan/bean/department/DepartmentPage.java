@@ -1,5 +1,6 @@
 package com.cskaoyan.bean.department;
 
+
 import java.util.List;
 
 public class DepartmentPage {

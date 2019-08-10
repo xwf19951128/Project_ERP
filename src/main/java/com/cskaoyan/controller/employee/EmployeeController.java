@@ -35,6 +35,7 @@ public class EmployeeController {
         return "/WEB-INF/jsp/employee_list.jsp";
     }
 
+
     /*查*/
     @RequestMapping("list")
     @ResponseBody
@@ -47,6 +48,14 @@ public class EmployeeController {
         employeePage.setRows(employeeList);
         employeePage.setTotal((int) total);
         return employeePage;
+    }
+
+    //给其他模块提供一个获取数据的方法
+    @RequestMapping("get_data")
+    @ResponseBody
+    public List<Employee> get_data(){
+        List<Employee> employeeList = employeeService.getEmployeeList();
+        return employeeList;
     }
 
     /*增加判断*/
