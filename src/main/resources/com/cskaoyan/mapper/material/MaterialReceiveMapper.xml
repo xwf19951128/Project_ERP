@@ -20,7 +20,7 @@
     </select>
     <resultMap id="materialReceiveMap" type="com.cskaoyan.bean.material.MaterialReceive">
         <result column="receiveId" property="receiveId"></result>
-        <result column="amount" property="amount"></result>
+        <result column="amount" property="ammount"></result>
         <result column="receiveDate" property="receiveDate"></result>
         <result column="sender" property="sender"></result>
         <result column="receiver" property="receiver"></result>
@@ -31,23 +31,6 @@
         </association>
     </resultMap>
 
-
-    <insert id="insertMaterial">
-        insert into
-        material(material_id, material_type, status, remaining, note)
-        values (#{material.materialId}, #{material.materialType}, #{material.status}, #{material.remaining}, #{material.note})
-    </insert>
-
-    <delete id="deleteMaterialsByIds">
-        delete from material
-        where material_id
-        in
-        (
-        <foreach collection="ids" item="id" separator=",">
-            #{id}
-        </foreach>
-        )
-    </delete>
 
     <!--根据ReceiveId模糊查询物料-->
     <select id="listPageSearchMaterialReceivesByReceiveId" resultMap="materialReceiveMap">
@@ -79,7 +62,6 @@
         limit #{limit}
         offset #{offset}
     </select>
-
 
 
 </mapper>

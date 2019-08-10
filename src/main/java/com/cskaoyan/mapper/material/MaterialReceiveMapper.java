@@ -1,6 +1,7 @@
 package com.cskaoyan.mapper.material;
 
 import com.cskaoyan.bean.material.MaterialReceive;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -26,4 +27,8 @@ public interface MaterialReceiveMapper {
 
     @Update("update material_receive set note = #{materialReceive.note} where receive_id = #{materialReceive.receiveId}")
     int updateNoteById(@Param("materialReceive") MaterialReceive materialReceive);
+
+    @Insert("insert into material_receive (receive_id, material_id, amount, receive_date, sender, receiver, note)" +
+            "values (mr.receiveId, mr.materialId, mr.ammount, mr.receiveDate, mr.sender, mr.receiver, mr.note)")
+    int insertMaterialReceive(@Param("mr") MaterialReceive materialReceive);
 }

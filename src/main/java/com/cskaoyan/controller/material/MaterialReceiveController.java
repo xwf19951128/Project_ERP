@@ -37,6 +37,35 @@ public class MaterialReceiveController {
         session.setAttribute("sysPermissionList", sysPermissionList);
     }
 
+
+
+    /*增*/
+    @RequestMapping("/add_judge")
+    @ResponseBody
+    public Map<String, Object> addJudge(){
+        HashMap<String, Object> map = new HashMap<>();
+        return map;
+    }
+    @RequestMapping("/add")
+    public String add(){
+        return "/WEB-INF/jsp/materialReceive_add.jsp";
+    }
+    @RequestMapping("/insert")
+    @ResponseBody
+    public Map<String, Object> insert(MaterialReceive materialReceive){
+        int insertResult = materialReceiveService.insertMaterialReceive(materialReceive);
+        HashMap<String, Object> map = new HashMap<>();
+        if(insertResult == 1) {
+            map.put("status", 200);
+            map.put("msg", "OK");
+            map.put("data", null);
+        }else {
+            map.put("msg", "服务器开小差了，新增物料收入失败");
+        }
+        return map;
+    }
+
+
     /*查*/
     @RequestMapping("/find")
     public String find(HttpSession session){
@@ -124,31 +153,7 @@ public class MaterialReceiveController {
 
 
 
-    /*增*/
-    @RequestMapping("/add_judge")
-    @ResponseBody
-    public Map<String, Object> addJudge(){
-        HashMap<String, Object> map = new HashMap<>();
-        return map;
-    }
-    @RequestMapping("/add")
-    public String add(){
-        return "/WEB-INF/jsp/materialReceive_add.jsp";
-    }
-    @RequestMapping("/insert")
-    @ResponseBody
-    public Map<String, Object> insert(MaterialReceive material){
-        int insertResult = materialReceiveService.insertMaterialReceive(material);
-        HashMap<String, Object> map = new HashMap<>();
-        if(insertResult == 1) {
-            map.put("status", 200);
-            map.put("msg", "OK");
-            map.put("data", null);
-        }else {
-            map.put("msg", "服务器开小差了，修改描述失败");
-        }
-        return map;
-    }
+
 
 
 

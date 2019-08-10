@@ -37,8 +37,8 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
     }
 
     @Override
-    public int insertMaterialReceive(MaterialReceive material) {
-        return 0;
+    public int insertMaterialReceive(MaterialReceive materialReceive) {
+        return materialReceiveMapper.insertMaterialReceive(materialReceive);
     }
 
     @Override

@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface MaterialMapper {
 
+    @Select("select material_id as materialId, material_type as materialType, status, remaining, note from material")
     List<Material> listMaterials();
 
     int countMaterialCount();
-
 
     List<Material> listPageMaterials(@Param("limit") int limit, @Param("offset") int offset);
 

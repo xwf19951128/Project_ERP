@@ -6,7 +6,7 @@ public class MaterialReceive {
 
     private String receiveId;
     private Material material;
-    private int amount;
+    private int ammount;
     private Date receiveDate;
     private String sender;
     private String receiver;
@@ -28,12 +28,12 @@ public class MaterialReceive {
         this.material = material;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getAmmount() {
+        return ammount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmmount(int ammount) {
+        this.ammount = ammount;
     }
 
     public Date getReceiveDate() {
@@ -73,7 +73,7 @@ public class MaterialReceive {
         return "MaterialReceive{" +
                 "receiveId='" + receiveId + '\'' +
                 ", material=" + material +
-                ", amount=" + amount +
+                ", ammount=" + ammount +
                 ", receiveDate='" + receiveDate + '\'' +
                 ", sender='" + sender + '\'' +
                 ", receiver='" + receiver + '\'' +

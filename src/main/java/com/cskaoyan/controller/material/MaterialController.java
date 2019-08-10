@@ -50,12 +50,18 @@ public class MaterialController {
         map.put("rows", materialList);
         return map;
     }
-    /*从materialReceive查询*/
+    /*从materialReceive查询material*/
     @RequestMapping("material/get/{materialId}")
     @ResponseBody
     public Material getMaterialById(@PathVariable("materialId") String materialId){
         Material material = materialService.getMaterialById(materialId);
         return material;
+    }
+    /*materialReceive查询List<Material>*/
+    @RequestMapping("material/get_data")
+    @ResponseBody
+    public List<Material> getData(){
+        return materialService.listMaterials();
     }
 
     /*改*/
@@ -125,6 +131,7 @@ public class MaterialController {
         }
         return map;
     }
+
 
 
     /*删*/
