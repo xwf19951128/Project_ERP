@@ -13,6 +13,12 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
+  <select id="searchCustomListByID" resultType="com.cskaoyan.bean.schedule.Custom" resultMap="BaseResultMap">
+    select * from custom where custom_id like #{id}
+  </select>
+  <select id="searchCustomListByName" resultType="com.cskaoyan.bean.schedule.Custom" resultMap="BaseResultMap">
+     select * from custom where custom_name like #{id}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
