@@ -24,4 +24,66 @@
         LEFT JOIN technology t
         on p.technology_id = t.technology_id
     </select>
+
+    <!--新增一条工艺计划的记录-->
+    <insert id="insertTechnologyPlan">
+        insert into technology_plan (batch_amount,commit_plan,end_plan,start_plan,
+        technology_id,technology_plan_id,
+        technology_plan_end,technology_plan_start) values (
+        #{technologyPlan.batchAmount},#{technologyPlan.commitPlan},#{technologyPlan.endPlan},
+        #{technologyPlan.startPlan},#{technologyPlan.technologyId},#{technologyPlan.technologyPlanId},
+        #{technologyPlan.technologyPlanEnd},#{technologyPlan.technologyPlanStart})
+    </insert>
+
+    <!--批量删除记录-->
+    <delete id="deleteTechnologyPlan">
+        delete from technology_plan where technology_plan_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--更新工艺计划记录-->
+    <update id="updateTechnologyPlan">
+        update technology_plan set technology_id = #{techPlan.technologyId},
+        batch_amount = #{techPlan.batchAmount},start_plan =#{techPlan.startPlan},end_plan=#{techPlan.endPlan},
+        commit_plan =#{techPlan.commitPlan},technology_plan_start =#{techPlan.technologyPlanStart},
+        technology_plan_end =#{techPlan.technologyPlanEnd}
+        where technology_plan_id = #{techPlan.technologyPlanId}
+    </update>
+
+    <!--根据id查询一个plan记录-->
+    <resultMap id="idMap" type="com.cskaoyan.bean.technology.TechnologyPlan">
+        <result column="technology_plan_id" property="technologyPlanId"></result>
+        <result column="technology_id" property="technologyId"></result>
+        <result column="batch_amount" property="batchAmount"></result>
+        <result column="start_plan" property="startPlan"></result>
+        <result column="end_plan" property="endPlan"></result>
+        <result column="commit_plan" property="commitPlan"></result>
+        <result column="technology_plan_start" property="technologyPlanStart"></result>
+        <result column="technology_plan_end" property="technologyPlanEnd"></result>
+    </resultMap>
+    <select id="queryTechPlanById" resultMap="idMap">
+        select technology_plan_id,technology_id,batch_amount,start_plan,end_plan,
+        commit_plan,technology_plan_start,technology_plan_end from
+        technology_plan where technology_plan_id=#{id}
+    </select>
+
+    <!--工艺计划编号模糊搜索-->
+    <select id="queryPlanByPlanId" resultMap="techPlanMap">
+        select p.batch_amount,p.commit_plan,p.end_plan,p.start_plan,
+        p.technology_id,t.technology_name,p.technology_plan_id,
+        p.technology_plan_end,p.technology_plan_start
+        from technology_plan p
+        LEFT JOIN technology t
+        on p.technology_id = t.technology_id where p.technology_plan_id like #{value}
+    </select>
+    <!--工艺名称模糊搜索-->
+    <select id="queryPlanByTechName" resultMap="techPlanMap">
+        select p.batch_amount,p.commit_plan,p.end_plan,p.start_plan,
+        p.technology_id,t.technology_name,p.technology_plan_id,
+        p.technology_plan_end,p.technology_plan_start
+        from technology_plan p
+        LEFT JOIN technology t
+        on p.technology_id = t.technology_id where t.technology_name like #{value}
+    </select>
 </mapper>

@@ -43,7 +43,7 @@
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='unqualify:add' }" >
-		    <div style="float: left;">  
+		    <div style="float: left;">
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="unqualify_add()">
 					新增
 				</a>
