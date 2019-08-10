@@ -276,4 +276,24 @@
       <result column="work_id" property="workId"></result>
     </association>
   </resultMap>
+
+  <!--模糊查询全部MaterialConsume-->
+  <select id="listAllSearchMaterialConsumesByConsumeId" resultMap="MaterialConsumeMap">
+    SELECT consume_id, work_id, material_id, consume_amount, consume_date, sender, receiver, note
+    FROM material_consume
+    where consume_id
+    like #{like}
+  </select>
+  <select id="listAllSearchMaterialConsumesByWorkId" resultMap="MaterialConsumeMap">
+    SELECT consume_id, work_id, material_id, consume_amount, consume_date, sender, receiver, note
+    FROM material_consume
+    where work_id
+    like #{like}
+  </select>
+  <select id="listAllSearchMaterialConsumesByMaterialId" resultMap="MaterialConsumeMap">
+    SELECT consume_id, work_id, material_id, consume_amount, consume_date, sender, receiver, note
+    FROM material_consume
+    where material_id
+    like #{like}
+  </select>
 </mapper>

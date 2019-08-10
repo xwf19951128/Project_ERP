@@ -43,13 +43,47 @@ public class MaterialConsumeController {
         HashMap<String, Object> map = new HashMap<>();
 //        int materialReceiveCount = materialConsumeService.countMaterialConsumeCount();
 //        System.out.println("materialReceiveCount = " + materialReceiveCount);
-        List<MaterialConsume> materialReceiveList = materialConsumeService.listPageMaterialConsumes(page, rows);
+        List<MaterialConsume> materialConsumeList = materialConsumeService.listPageMaterialConsumes(page, rows);
 //        System.out.println("materialReceiveList = " + materialReceiveList);
 //        logger.info(materialList);
-        PageInfo<MaterialConsume> materialReceivePageInfo = new PageInfo<>(materialReceiveList);
+        PageInfo<MaterialConsume> materialReceivePageInfo = new PageInfo<>(materialConsumeList);
         long total = materialReceivePageInfo.getTotal();
         map.put("total", total);
-        map.put("rows", materialReceiveList);
+        map.put("rows", materialConsumeList);
+        return map;
+    }
+    /*模糊查询*/
+    @RequestMapping(value = {"/search_materialConsume_by_consumeId"})
+    @ResponseBody
+    public Map<String, Object> listPageSearchMaterialConsumesByConsumeId(int page, int rows, String searchValue){
+        HashMap<String, Object> map = new HashMap<>();
+        List<MaterialConsume> materialConsumeList = materialConsumeService.listPageSearchMaterialConsumesByConsumeId(page, rows, searchValue);
+        PageInfo<MaterialConsume> materialReceivePageInfo = new PageInfo<>(materialConsumeList);
+        long total = materialReceivePageInfo.getTotal();
+        map.put("total", total);
+        map.put("rows", materialConsumeList);
+        return map;
+    }
+    @RequestMapping("/search_materialConsume_by_workId")
+    @ResponseBody
+    public Map<String, Object> listPageSearchMaterialConsumesByWorkId(int page, int rows, String searchValue){
+        HashMap<String, Object> map = new HashMap<>();
+        List<MaterialConsume> materialConsumeList = materialConsumeService.listPageSearchMaterialConsumesByWorkId(page, rows, searchValue);
+        PageInfo<MaterialConsume> materialReceivePageInfo = new PageInfo<>(materialConsumeList);
+        long total = materialReceivePageInfo.getTotal();
+        map.put("total", total);
+        map.put("rows", materialConsumeList);
+        return map;
+    }
+    @RequestMapping("/search_materialConsume_by_materialId")
+    @ResponseBody
+    public Map<String, Object> listPageSearchMaterialConsumesByMaterialId(int page, int rows, String searchValue){
+        HashMap<String, Object> map = new HashMap<>();
+        List<MaterialConsume> materialConsumeList = materialConsumeService.listPageSearchMaterialConsumesByMaterialId(page, rows, searchValue);
+        PageInfo<MaterialConsume> materialReceivePageInfo = new PageInfo<>(materialConsumeList);
+        long total = materialReceivePageInfo.getTotal();
+        map.put("total", total);
+        map.put("rows", materialConsumeList);
         return map;
     }
 

@@ -8,4 +8,10 @@ import java.util.List;
 public interface MaterialConsumeService {
 
     List<MaterialConsume> listPageMaterialConsumes(int page, int rows);
+
+    List<MaterialConsume> listPageSearchMaterialConsumesByConsumeId(int page, int rows, String searchValue);
+
+    List<MaterialConsume> listPageSearchMaterialConsumesByWorkId(int page, int rows, String searchValue);
+
+    List<MaterialConsume> listPageSearchMaterialConsumesByMaterialId(int page, int rows, String searchValue);
 }

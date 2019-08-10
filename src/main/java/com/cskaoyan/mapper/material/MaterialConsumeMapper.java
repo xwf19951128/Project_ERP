@@ -30,4 +30,10 @@ public interface MaterialConsumeMapper {
     int updateByPrimaryKey(MaterialConsume record);
 
     List<MaterialConsume> listAllMaterialConsumes();
+
+    List<MaterialConsume> listAllSearchMaterialConsumesByConsumeId(@Param("like") String like);
+
+    List<MaterialConsume> listAllSearchMaterialConsumesByWorkId(String like);
+
+    List<MaterialConsume> listAllSearchMaterialConsumesByMaterialId(String like);
 }
