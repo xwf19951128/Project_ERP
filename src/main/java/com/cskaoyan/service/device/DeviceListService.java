@@ -21,4 +21,8 @@ public interface DeviceListService {
     List<Device> searchDeviceByDeviceName(String searchValue);
 
     List<Device> searchDeviceByDeviceTypeName(String searchValue);
+
+    int updateDevice(Device device);
+
+    int deleteDevice(String[] devices);
 }

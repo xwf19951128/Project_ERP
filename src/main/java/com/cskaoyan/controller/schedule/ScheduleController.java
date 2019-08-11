@@ -189,11 +189,6 @@ public class ScheduleController {
     public List<Product> getAllProducts(){
         return service.queryProducts();
     }
-    @RequestMapping("/deviceList/get_data")
-    @ResponseBody
-    public List<Product> getAllDevices(){
-        return service.queryProducts();
-    }
     @RequestMapping("/order/get_data")
     @ResponseBody
     public List<Order> getAllOrder(){

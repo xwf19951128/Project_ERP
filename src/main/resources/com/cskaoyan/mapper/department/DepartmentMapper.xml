@@ -4,21 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.department.DepartmentMapper">
     <select id="getDepartmentList" resultType="com.cskaoyan.bean.department.Department">
-<<<<<<< HEAD
         select department_id as departmentId,department_name as departmentName,note
-=======
-        select department_id as departmentId ,department_name as departmentName ,note
->>>>>>> 5b39410ffaf5b97dfb97ec0973e246a5c235df8c
         from department
     </select>
 
     <insert id="insertDepartment">
-<<<<<<< HEAD
         insert into department (department_id,department_name,note)
         values(#{department.departmentId}, #{department.departmentName}, #{department.note})
-=======
-        insert into department (department_id,department_name,note) values (#{departmentId},#{departmentName},#{note})
->>>>>>> 5b39410ffaf5b97dfb97ec0973e246a5c235df8c
     </insert>
 
     <select id="queryDepartmentById" resultType="com.cskaoyan.bean.department.Department">

@@ -68,6 +68,24 @@
         )
     </insert>
 
+    <!--编辑操作-->
+    <update id="updateDeviceFault">
+        update device_fault set
+        device_id = #{deviceId},
+        device_fault_date =#{deviceFaultDate},
+        device_fault_cause = #{deviceFaultCause},
+        device_fault_maintenance = #{deviceFaultMaintenance},
+        device_fault_detail = #{deviceFaultDetail}
+        where device_fault_id=#{deviceFaultId}
+    </update>
+
+    <delete id="deleteDeviceFault">
+        delete from device_fault where device_fault_id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
     <!--模糊查询1：根据id-->
     <select id="searchDeviceFaultByDeviceFaultId" resultMap="deviceFaultVoMap">
         select

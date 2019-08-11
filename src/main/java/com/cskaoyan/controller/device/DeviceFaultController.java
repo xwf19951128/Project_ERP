@@ -78,6 +78,67 @@ public class DeviceFaultController {
     }
 
     /**
+     * 编辑判断
+     * @return
+     */
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public Map editShow(){
+        return null;
+    }
+
+    /**
+     * 跳转到编辑页面
+     * @return
+     */
+    @RequestMapping("/edit")
+    public String editShowPage(){
+        return "/WEB-INF/jsp/deviceFault_edit.jsp";
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public HashMap updateDeviceFault(DeviceFault deviceFault){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        int i=deviceFaultService.updateDeviceFault(deviceFault);
+        if(i==1){
+            hashMap.put("status",200);
+        }
+        else{
+            hashMap.put("msg","失败了吗，弟弟");
+        }
+        return hashMap;
+    }
+
+    /**
+     * 进行判断是否删除的请求
+     * @return
+     */
+    @RequestMapping("/delete_judge")
+    @ResponseBody
+    public Map deleteShow(){
+        return null;
+    }
+
+    /**
+     * 删除分支，返回的是一个键值对，这个并不需要跳到其他页面
+     * @return
+     */
+    @RequestMapping("/delete_batch")
+    @ResponseBody
+    public HashMap deleteDeviceFault(String ids){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        //注意这样写会错误，因为是string类型，相当于“1,2,3，”d string类型
+        //所以需要根据，分割一下，变为string数组,分割后数组内没有","
+        String[] deviceFault = ids.split(",");
+        int i=deviceFaultService.deleteDeviceFault(deviceFault);
+        if(i>=1){
+            hashMap.put("status",200);
+        }
+        return hashMap;
+    }
+
+    /**
      * 模糊查询：根据id
      * @param searchValue
      * @return
