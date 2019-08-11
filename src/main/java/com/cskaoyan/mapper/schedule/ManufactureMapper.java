@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ManufactureMapper {
-    List<Manufacture> queryList();
+    List<Manufacture> queryList(@Param("page") int page,@Param("rows") int rows);
     long countByExample(ManufactureExample example);
 
     int deleteByExample(ManufactureExample example);
@@ -29,4 +29,12 @@ public interface ManufactureMapper {
     int updateByPrimaryKeySelective(Manufacture record);
 
     int updateByPrimaryKey(Manufacture record);
+
+    long countNumber();
+
+    List<Manufacture> searchManufactureByTecName(@Param("value") String s);
+
+    List<Manufacture> searchManufactureByID(@Param("value")String s);
+
+    List<Manufacture> searchManufactureByOrderID(@Param("value")String s);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface WorkMapper {
-    List<Work> queryList();
+    List<Work> queryList(@Param("rows") Integer rows, @Param("page") int i);
     long countByExample(WorkExample example);
 
     int deleteByExample(WorkExample example);
@@ -29,4 +29,14 @@ public interface WorkMapper {
     int updateByPrimaryKeySelective(Work record);
 
     int updateByPrimaryKey(Work record);
+
+    long queryCount();
+
+    List<Work> searchWorkListByProcessId(@Param("value") String s);
+
+    List<Work> searchWorkListByDev(@Param("value")String s);
+
+    List<Work> searchWorkListByName(@Param("value")String s);
+
+    List<Work> searchWorkListByID(@Param("value")String s);
 }

@@ -1,19 +1,10 @@
 package com.cskaoyan.bean.schedule;
 
+import com.cskaoyan.bean.technology.Technology;
+
 import java.util.Date;
 
 public class Manufacture {
-    @Override
-    public String toString() {
-        return "Manufacture{" +
-                "manufactureSn='" + manufactureSn + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", technologyId='" + technologyId + '\'' +
-                ", launchQuantity=" + launchQuantity +
-                ", beginDate=" + beginDate +
-                ", endDate=" + endDate +
-                '}';
-    }
 
     private String manufactureSn;
 
@@ -26,6 +17,38 @@ public class Manufacture {
     private Date beginDate;
 
     private Date endDate;
+    private Order cOrder;
+    private Technology technology;
+
+    @Override
+    public String toString() {
+        return "Manufacture{" +
+                "manufactureSn='" + manufactureSn + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", technologyId='" + technologyId + '\'' +
+                ", launchQuantity=" + launchQuantity +
+                ", beginDate=" + beginDate +
+                ", endDate=" + endDate +
+                ", cOrder=" + cOrder +
+                ", technology=" + technology +
+                '}';
+    }
+
+    public Order getcOrder() {
+        return cOrder;
+    }
+
+    public void setcOrder(Order cOrder) {
+        this.cOrder = cOrder;
+    }
+
+    public Technology getTechnology() {
+        return technology;
+    }
+
+    public void setTechnology(Technology technology) {
+        this.technology = technology;
+    }
 
     public String getManufactureSn() {
         return manufactureSn;
