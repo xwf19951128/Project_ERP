@@ -32,7 +32,7 @@
 
 
     <!--插入-->
-    <insert id="insertEndProductCount">
+    <insert id="insertProcessMeasureCheck">
         insert into process_measure_check (
         p_measure_check_id,
         process_id,
