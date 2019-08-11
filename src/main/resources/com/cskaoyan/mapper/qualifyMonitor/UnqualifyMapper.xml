@@ -60,4 +60,64 @@
         #{unqualifyApply.note});
     </insert>
 
+    
+    <!--删除-->
+    <delete id="deleteUnqualifyById">
+        delete from unqualify_apply where unqualify_apply_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <!--编辑不合格产品-->
+    <update id="editUnqualify">
+        update unqualify_apply set
+        product_id = #{unqualifyApply.productId},
+        unqualify_item = #{unqualifyApply.unqualifyItem},
+        unqualify_count = #{unqualifyApply.unqualifyCount},
+        assembly_date = #{unqualifyApply.assemblyDate},
+        emp_id = #{unqualifyApply.empId},
+        apply_date = #{unqualifyApply.applyDate},
+        note = #{unqualifyApply.note}
+        where unqualify_apply_id = #{unqualifyApply.unqualifyApplyId}
+    </update>
+
+    <!--根据id进行模糊查询-->
+    <select id="searchUnqualifyById" resultMap="unqualifyMapper">
+        select
+        ua.unqualify_apply_id,
+        ua.product_id,
+        ua.unqualify_item,
+        ua.unqualify_count,
+        ua.assembly_date,
+        ua.emp_id,
+        ua.apply_date,
+        ua.note,
+        em.emp_name,
+        pr.product_name
+        from unqualify_apply ua
+        left join employee em on ua.emp_id = em.emp_id
+        left join product pr on pr.product_id = ua.product_id
+        where ua.unqualify_apply_id like #{id};
+    </select>
+
+    <!--根据产品名称进行模糊查询-->
+    <select id="searchUnqualifyByName" resultMap="unqualifyMapper">
+        select
+        ua.unqualify_apply_id,
+        ua.product_id,
+        ua.unqualify_item,
+        ua.unqualify_count,
+        ua.assembly_date,
+        ua.emp_id,
+        ua.apply_date,
+        ua.note,
+        em.emp_name,
+        pr.product_name
+        from unqualify_apply ua
+        left join employee em on ua.emp_id = em.emp_id
+        left join product pr on pr.product_id = ua.product_id
+        where pr.product_name like #{productName};
+    </select>
 </mapper>

@@ -26,4 +26,28 @@ public class UnqualifyServiceImpl implements UnqualifyService {
         return unqualifyMapper.insertUnqualify(unqualifyApply);
     }
 
+    // 删除
+    @Override
+    public int deleteUnqualifyById(String[] ids) {
+        return unqualifyMapper.deleteUnqualifyById(ids);
+    }
+
+    // 编辑
+    @Override
+    public int editUnqualify(UnqualifyApply unqualifyApply) {
+        return unqualifyMapper.editUnqualify(unqualifyApply);
+    }
+
+    // 根据id进行模糊查询
+    @Override
+    public List<UnqualifyApply> searchUnqualifyById(String id) {
+        return unqualifyMapper.searchUnqualifyById(id);
+    }
+
+    // 根据产品名称进行模糊查询
+    @Override
+    public List<UnqualifyApply> searchUnqualifyByName(String name) {
+        return unqualifyMapper.searchUnqualifyByName(name);
+    }
+
 }
