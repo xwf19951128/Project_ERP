@@ -164,7 +164,7 @@ public class ScheduleController {
         return service.searchWorkProductListByName(searchValue,page,rows);
     }
     @ResponseBody
-    @RequestMapping("/work/search_work_by_workDevi")
+    @RequestMapping("/work/search_work_by_workDevice")
     public SchedulList<Work> searchWorkByDev(String searchValue,int page,int rows){
         return service.searchWorkByDev(searchValue,page,rows);
     }

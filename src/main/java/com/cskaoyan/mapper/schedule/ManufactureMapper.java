@@ -31,4 +31,10 @@ public interface ManufactureMapper {
     int updateByPrimaryKey(Manufacture record);
 
     long countNumber();
+
+    List<Manufacture> searchManufactureByTecName(@Param("value") String s);
+
+    List<Manufacture> searchManufactureByID(@Param("value")String s);
+
+    List<Manufacture> searchManufactureByOrderID(@Param("value")String s);
 }

@@ -26,7 +26,7 @@ public class ScheduleEditorController {
         if(service.updateOrder(order)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
     @RequestMapping("/custom/update_all")
     @ResponseBody
@@ -35,7 +35,7 @@ public class ScheduleEditorController {
         if(service.updateInfo(custom)==1){
          return new MessageBean("200","ok",null);
         }
-    return new MessageBean("404",null,null );
+    return new MessageBean("404","修改失败",null );
     }
     @RequestMapping("/product/update_all")
     @ResponseBody
@@ -43,7 +43,7 @@ public class ScheduleEditorController {
         if(service.updateInfo(product)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
     @RequestMapping("/work/update_all")
     @ResponseBody
@@ -51,7 +51,7 @@ public class ScheduleEditorController {
         if(service.updateInfo(product)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
 //    @RequestMapping("/task/update_all")
 //    @ResponseBody
@@ -67,7 +67,7 @@ public class ScheduleEditorController {
         if(service.updateInfo(product)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
     @RequestMapping("/order/update_note")
     @ResponseBody
@@ -75,7 +75,7 @@ public class ScheduleEditorController {
         if(service.updateInfo(order)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
     @RequestMapping("/custom/update_note")
     @ResponseBody
@@ -83,7 +83,7 @@ public class ScheduleEditorController {
         if(service.updateInfo(custom)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
     @RequestMapping("/product/update_note")
     @ResponseBody
@@ -91,7 +91,7 @@ public class ScheduleEditorController {
         if(service.updateInfo(product)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
 
     @RequestMapping("/order/insert")
@@ -100,7 +100,7 @@ public class ScheduleEditorController {
         if(service.insertOrder(order)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","修改失败",null );
     }
     @RequestMapping("/custom/insert")
     @ResponseBody
@@ -108,7 +108,7 @@ public class ScheduleEditorController {
         if(service.insertCustom(custom)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","添加失败",null );
     }
     @RequestMapping("/product/insert")
     @ResponseBody
@@ -116,7 +116,7 @@ public class ScheduleEditorController {
         if(service.insertProduct(custom)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","添加失败",null );
     }
     @RequestMapping("/work/insert")
     @ResponseBody
@@ -124,7 +124,7 @@ public class ScheduleEditorController {
         if(service.insertWork(custom)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","添加失败",null );
     }
     @RequestMapping("/manufacture/insert")
     @ResponseBody
@@ -132,7 +132,7 @@ public class ScheduleEditorController {
         if(service.insertManufacture(custom)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("404",null,null );
+        return new MessageBean("404","添加失败",null );
     }
 //    @RequestMapping("/task/insert")
 //    @ResponseBody
@@ -148,7 +148,7 @@ public MessageBean DeleteOrderConfirm(String ids){
     if(service.deleteOrderByID(ids)==1){
         return new MessageBean("200","ok",null);
     }
-    return new MessageBean("500",null,null );
+    return new MessageBean("500","删除失败",null );
 }
     @RequestMapping("/custom/delete_batch")
     @ResponseBody
@@ -156,7 +156,7 @@ public MessageBean DeleteOrderConfirm(String ids){
         if(service.deleteCustomByID(ids)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("500",null,null );
+        return new MessageBean("500","删除失败",null );
     }
     @RequestMapping("/product/delete_batch")
     @ResponseBody
@@ -164,7 +164,7 @@ public MessageBean DeleteOrderConfirm(String ids){
         if(service.deleteProductByID(ids)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("500",null,null );
+        return new MessageBean("500","删除失败",null );
     }
     @RequestMapping("/work/delete_batch")
     @ResponseBody
@@ -172,7 +172,7 @@ public MessageBean DeleteOrderConfirm(String ids){
         if(service.deleteWorkByID(ids)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("500",null,null );
+        return new MessageBean("500","删除失败",null );
     }
     @RequestMapping("/manufacture/delete_batch")
     @ResponseBody
@@ -180,7 +180,7 @@ public MessageBean DeleteOrderConfirm(String ids){
         if(service.deleteManufactureByID(ids)==1){
             return new MessageBean("200","ok",null);
         }
-        return new MessageBean("500",null,null );
+        return new MessageBean("500","删除失败",null );
     }
     @RequestMapping("/file/upload")
     @ResponseBody
