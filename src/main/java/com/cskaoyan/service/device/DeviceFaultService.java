@@ -10,4 +10,14 @@ import java.util.List;
  */
 public interface DeviceFaultService {
     List<DeviceFault> queryAllDeviceFault();
+
+    int insertDeviceFault(DeviceFault deviceFault);
+
+    List<DeviceFault> searchDeviceFaultByDeviceFaultId(String searchValue);
+
+    List<DeviceFault> searchDeviceFaultByDeviceFaultName(String searchValue);
+
+    int updateDeviceFault(DeviceFault deviceFault);
+
+    int deleteDeviceFault(String[] deviceFault);
 }

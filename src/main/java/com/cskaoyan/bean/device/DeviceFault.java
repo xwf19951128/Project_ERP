@@ -18,7 +18,7 @@ public class DeviceFault {
 
     private String deviceFaultDetail;
 
-    private Date deviceFaultDate;
+    private String deviceFaultDate;
 
     private String deviceFaultMaintenance;
 
@@ -54,11 +54,11 @@ public class DeviceFault {
         this.deviceFaultDetail = deviceFaultDetail;
     }
 
-    public Date getDeviceFaultDate() {
+    public String getDeviceFaultDate() {
         return deviceFaultDate;
     }
 
-    public void setDeviceFaultDate(Date deviceFaultDate) {
+    public void setDeviceFaultDate(String deviceFaultDate) {
         this.deviceFaultDate = deviceFaultDate;
     }
 

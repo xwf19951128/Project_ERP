@@ -10,4 +10,14 @@ import java.util.List;
  */
 public interface DeviceTypeService {
     List<DeviceType> queryAllDeviceType();
+
+    int insertDeviceType(DeviceType deviceType);
+
+    int deleteDeviceType(String[] deviceTypes);
+
+    int updateDeviceType(DeviceType deviceType);
+
+    List<DeviceType> queryDeviceTypeByDeviceTypeId(String searchValue);
+
+    List<DeviceType> searchDeviceTypeByDeviceTypeName(String searchValue);
 }

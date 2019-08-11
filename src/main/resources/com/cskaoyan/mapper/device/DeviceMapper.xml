@@ -38,7 +38,22 @@
         <result column="device_keeper" property="deviceKeeper" jdbcType="VARCHAR" />
     </resultMap>
 
+    <!--sql片段1-->
+    <sql id="Base_Column_List">
+    device_id,
+    device_name,
+    device_type_id,
+    device_status_id,
+    device_status,
+    device_purchase_date,
+    device_purchase_price,
+    device_manufacture_date,
+    device_service_life,
+    device_keeper_id,
+    note
+  </sql>
 
+    <!--1.显示列表-->
     <select id="queryAllDevices" resultMap="deviceVoMap">
         select
           d.device_id,
@@ -58,4 +73,113 @@
           left join device_type dt on dt.device_type_id=d.device_type_id
           left join employee e on e.emp_id=d.device_keeper_id
     </select>
+
+    <!--新增数据前的判空操作-->
+   <select id="queryDeviceById" resultMap="deviceVoMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device
+        where device_id =#{deviceId}
+   </select>
+
+    <!--新增一个操作-->
+    <insert id="insertDevice">
+        insert into device
+        (<include refid="Base_Column_List" />)
+        values (#{deviceId,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{deviceTypeId,jdbcType=VARCHAR},
+        #{deviceStatusId,jdbcType=VARCHAR}, #{deviceStatus,jdbcType=VARCHAR}, #{devicePurchaseDate,jdbcType=TIMESTAMP},
+        #{devicePurchasePrice,jdbcType=DECIMAL}, #{deviceManufactureDate,jdbcType=TIMESTAMP},
+        #{deviceServiceLife,jdbcType=TIMESTAMP}, #{deviceKeeperId,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--编辑更新一个操作-->
+    <update id="updateDevice">
+    update device
+    set device_name = #{deviceName,jdbcType=VARCHAR},
+    device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+    device_status_id = #{deviceStatusId,jdbcType=VARCHAR},
+    device_status = #{deviceStatus,jdbcType=VARCHAR},
+    device_purchase_date = #{devicePurchaseDate,jdbcType=TIMESTAMP},
+    device_purchase_price = #{devicePurchasePrice,jdbcType=DECIMAL},
+    device_manufacture_date = #{deviceManufactureDate,jdbcType=TIMESTAMP},
+    device_service_life = #{deviceServiceLife,jdbcType=TIMESTAMP},
+    device_keeper_id = #{deviceKeeperId,jdbcType=VARCHAR},
+    note = #{note,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteDevice">
+        delete from device where device_id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--模糊查询1：根据id-->
+    <select id="searchDeviceByDeviceId" resultMap="deviceVoMap">
+        select
+          d.device_id,
+          d.device_name,
+          d.device_type_id,
+          d.device_status_id,
+          d.device_status,
+          d.device_purchase_date,
+          d.device_purchase_price,
+          d.device_manufacture_date,
+          d.device_service_life,
+          d.device_keeper_id,
+          d.note,
+          dt.device_type_name,
+          e.emp_name as device_keeper
+          from device d
+          left join device_type dt on dt.device_type_id=d.device_type_id
+          left join employee e on e.emp_id=d.device_keeper_id
+          where d.device_id like concat('%',#{searchValue},'%')
+    </select>
+
+    <!--模糊查询2：-->
+    <select id="searchDeviceByDeviceName" resultMap="deviceVoMap">
+        select
+          d.device_id,
+          d.device_name,
+          d.device_type_id,
+          d.device_status_id,
+          d.device_status,
+          d.device_purchase_date,
+          d.device_purchase_price,
+          d.device_manufacture_date,
+          d.device_service_life,
+          d.device_keeper_id,
+          d.note,
+          dt.device_type_name,
+          e.emp_name as device_keeper
+          from device d
+          left join device_type dt on dt.device_type_id=d.device_type_id
+          left join employee e on e.emp_id=d.device_keeper_id
+          where d.device_name like concat('%',#{searchValue},'%')
+    </select>
+
+    <!--模糊查询3-->
+    <select id="searchDeviceByDeviceTypeName" resultMap="deviceVoMap">
+        select
+          d.device_id,
+          d.device_name,
+          d.device_type_id,
+          d.device_status_id,
+          d.device_status,
+          d.device_purchase_date,
+          d.device_purchase_price,
+          d.device_manufacture_date,
+          d.device_service_life,
+          d.device_keeper_id,
+          d.note,
+          dt.device_type_name,
+          e.emp_name as device_keeper
+          from device d
+          left join device_type dt on dt.device_type_id=d.device_type_id
+          left join employee e on e.emp_id=d.device_keeper_id
+          where dt.device_type_name like concat('%',#{searchValue},'%')
+    </select>
+
 </mapper>

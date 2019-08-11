@@ -9,6 +9,15 @@
     <result column="note" jdbcType="VARCHAR" property="note" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+  <select id="searchProductListByName" resultType="com.cskaoyan.bean.schedule.Product" resultMap="BaseResultMap">
+    select * from product where product_name like #{value}
+  </select>
+  <select id="searchProductListByID" resultType="com.cskaoyan.bean.schedule.Product" resultMap="BaseResultMap">
+    select * from product where product_id like #{value}
+  </select>
+  <select id="searchProductListByType" resultType="com.cskaoyan.bean.schedule.Product" resultMap="BaseResultMap">
+    select * from product where product_type like #{value}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -67,9 +76,11 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List">
     product_id, product_name, product_type, image, note, status
   </sql>
+
   <select id="selectByExample" parameterType="com.cskaoyan.bean.schedule.ProductExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -216,6 +227,7 @@
     </set>
     where product_id = #{productId,jdbcType=VARCHAR}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.schedule.Product">
     update product
     set product_name = #{productName,jdbcType=VARCHAR},

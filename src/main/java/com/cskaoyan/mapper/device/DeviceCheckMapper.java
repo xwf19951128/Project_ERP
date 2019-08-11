@@ -10,4 +10,14 @@ import java.util.List;
  */
 public interface DeviceCheckMapper {
     List<DeviceCheck> queryAllDeviceCheck();
+
+    List<DeviceCheck> searchDeviceCheckByDeviceCheckId(String searchValue);
+
+    List<DeviceCheck> searchDeviceCheckByDeviceName(String searchValue);
+
+    int updateDeviceCheck(DeviceCheck deviceCheck);
+
+    int insertDeviceCheck(DeviceCheck deviceCheck);
+
+    int deleteDeviceCheck(String[] deviceCheck);
 }

@@ -10,4 +10,14 @@ import java.util.List;
  */
 public interface DeviceMaintainMapper {
     List<DeviceMaintain> queryAllDeviceMaintain();
+
+    List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(String searchValue);
+
+    List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(String searchValue);
+
+    int updateDeviceMaintain(DeviceMaintain deviceMaintain);
+
+    int insertDeviceMaintain(DeviceMaintain deviceMaintain);
+
+    int deleteDeviceMaintain(String[] deviceMaintains);
 }

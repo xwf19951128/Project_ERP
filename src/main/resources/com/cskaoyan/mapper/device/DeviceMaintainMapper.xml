@@ -37,6 +37,71 @@
       from device_maintain dm
       left join employee e on dm.device_maintain_emp_id=e.emp_id
 
-  </select>
+    </select>
+
+
+    <!--新增操作-->
+    <insert id="insertDeviceMaintain">
+      insert into device_maintain
+      (device_maintain_id, device_fault_id,
+      device_maintain_emp_id, device_maintain_date,
+      device_maintain_result, device_maintain_cost,
+      note)
+     values (#{deviceMaintainId,jdbcType=VARCHAR}, #{deviceFaultId,jdbcType=VARCHAR},
+      #{deviceMaintainEmpId,jdbcType=VARCHAR}, #{deviceMaintainDate,jdbcType=TIMESTAMP},
+      #{deviceMaintainResult,jdbcType=VARCHAR}, #{deviceMaintainCost,jdbcType=DECIMAL},
+      #{note,jdbcType=VARCHAR})
+    </insert>
+
+    <!--编辑操作-->
+    <update id="updateDeviceMaintain">
+      update device_maintain set
+      device_fault_id =#{deviceFaultId},
+      device_maintain_emp_id = #{deviceMaintainEmpId},
+      device_maintain_date = #{deviceMaintainDate},
+      device_maintain_result =#{deviceMaintainResult},
+      device_maintain_cost =#{deviceMaintainCost},
+      note =#{note}
+      where device_maintain_id = #{deviceMaintainId,jdbcType=VARCHAR}
+    </update>
+
+  <delete id="deleteDeviceMaintain">
+    delete from device_maintain where device_maintain_id in
+    <foreach collection="array" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+
+    <!--模糊查询1-->
+    <select id="searchDeviceMaintainByDeviceFaultId" resultMap="deviceMaintainVoMap">
+      select
+      device_maintain_id,
+      device_fault_id,
+      device_maintain_emp_id,
+      device_maintain_date,
+      device_maintain_result,
+      device_maintain_cost,
+      note,
+      e.emp_name as device_maintain_emp
+      from device_maintain dm
+      left join employee e on dm.device_maintain_emp_id=e.emp_id
+      where dm.device_fault_id like concat('%',#{searchValue},'%')
+    </select>
+    <!--模糊查询2：-->
+    <select id="searchDeviceMaintainByDeviceMaintainId" resultMap="deviceMaintainVoMap">
+          select
+      device_maintain_id,
+      device_fault_id,
+      device_maintain_emp_id,
+      device_maintain_date,
+      device_maintain_result,
+      device_maintain_cost,
+      note,
+      e.emp_name as device_maintain_emp
+      from device_maintain dm
+      left join employee e on dm.device_maintain_emp_id=e.emp_id
+      where dm.device_maintain_id like concat('%',#{searchValue},'%')
+    </select>
 
 </mapper>

@@ -10,4 +10,16 @@ import java.util.List;
  */
 public interface DeviceFaultMapper {
     List<DeviceFault> queryAllDeviceFault();
+
+    int insertDeviceFault(DeviceFault deviceFault);
+
+    DeviceFault queryDeviceFaultById(String deviceFaultId);
+
+    List<DeviceFault> searchDeviceFaultByDeviceFaultId(String searchValue);
+
+    List<DeviceFault> searchDeviceFaultByDeviceFaultName(String searchValue);
+
+    int updateDeviceFault(DeviceFault deviceFault);
+
+    int deleteDeviceFault(String[] deviceFault);
 }

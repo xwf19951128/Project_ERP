@@ -17,6 +17,7 @@ public class RandomId {
         }
         return sb.toString();
     }
+
     public final static String getShortRandomId(){
         StringBuffer sb=new StringBuffer();
         Date date=new Date();

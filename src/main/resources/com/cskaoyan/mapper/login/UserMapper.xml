@@ -12,4 +12,100 @@
     <select id="queryUserByUsernameAndPassword" resultType="com.cskaoyan.bean.login.SysUser">
         select id,username,password,locked from sys_user where username = #{user.username} and password=#{user.password}
     </select>
+
+    <select id="getUserList" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+    </select>
+    
+    <resultMap id="getUserListLeft" type="com.cskaoyan.bean.user.User">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="roleId" column="roleId"/>
+        <result property="roleName" column="roleName"/>
+        <result property="available" column="available"/>
+    </resultMap>
+
+    <select id="getRoleData" resultType="com.cskaoyan.bean.user.Role">
+        select role_id as roleId , role_name as roleName,available
+        from sys_role
+    </select>
+
+
+    <select id="queryUserById" resultType="com.cskaoyan.bean.user.User">
+         select id,username,password,locked from sys_user where id = #{id}
+    </select>
+
+    <insert id="insertUser">
+        insert into sys_user (id,username,password,locked)
+        values (#{user.id},#{user.username},#{user.password},#{user.locked})
+    </insert>
+    <insert id="insertUserRole">
+         insert into sys_user_role (id,sys_role_id,sys_user_id)
+        values (#{uuid},#{user.roleId},#{user.id})
+    </insert>
+
+    <delete id="deleteBatchRole">
+        delete from sys_user_role where sys_user_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+    </foreach>
+    </delete>
+
+    <delete id="deleteBatchUser">
+        delete from sys_user where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateRole">
+        update sys_user_role
+        set sys_role_id = #{user.roleId}
+        where sys_user_id = #{user.id}
+    </update>
+
+    <update id="updateUser">
+        update sys_user
+        set username = #{user.username},
+        password = #{user.password},
+        locked = #{user.locked}
+        where id = #{user.id}
+    </update>
+
+    <select id="searchUserByUserId" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+        where su.id like #{term}
+    </select>
+
+    <select id="searchUserByUserName" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+        where username like #{term}
+    </select>
+
+    <select id="searchUserByRoleName" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+        where role_Name like #{term}
+    </select>
+
 </mapper>

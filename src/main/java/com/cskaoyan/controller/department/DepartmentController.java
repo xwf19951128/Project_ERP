@@ -2,7 +2,6 @@ package com.cskaoyan.controller.department;
 
 import com.cskaoyan.bean.department.Department;
 import com.cskaoyan.bean.department.DepartmentPage;
-
 import com.cskaoyan.service.department.DepartmentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -151,6 +150,13 @@ public class DepartmentController {
         return data;
     }
 
+    /*下拉框回显*/
+    @RequestMapping("get_data")
+    @ResponseBody
+    public List<Department> getData() {
+        return departmentService.getDepartmentList();
+    }
+
     /*id的模糊查询*/
     @RequestMapping("search_department_by_departmentId")
     @ResponseBody
@@ -172,9 +178,10 @@ public class DepartmentController {
     @ResponseBody
     public DepartmentPage searchDepartmentByDepartmentName(String searchValue, int page, int rows) {
         StringBuilder stringBuilder = new StringBuilder();
-        StringBuilder condition = stringBuilder.append("%").append(searchValue).append("%");  // 拼接查詢條件
+        StringBuilder term = stringBuilder.append("%").append(searchValue).append("%");  // 拼接查詢條件
         PageHelper.startPage(page,rows);
-        List<Department> list = departmentService.searchDepartmentByName(condition.toString());
+        List<Department> list = departmentService.searchDepartmentByName(term.toString());
+
         PageInfo<Department> pageInfo = new PageInfo<>(list);
         long total = pageInfo.getTotal();
         DepartmentPage departmentPage = new DepartmentPage();

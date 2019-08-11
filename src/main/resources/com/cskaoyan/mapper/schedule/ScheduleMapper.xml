@@ -63,6 +63,23 @@
 <!--  <select id="queryPage" resultType="com.cskaoyan.bean.schedule.Order" resultMap="BaseResultMap">-->
 <!--    select * from c_order limit ${page} offset ${row}-->
 <!--  </select>-->
+  <select id="selectByPrimaryKey" resultType="com.cskaoyan.bean.schedule.Order" resultMap="OrderMap">
+    select
+    o.order_id,
+o.custom_id,
+o.product_id,
+o.order_date,
+o.request_date,
+o.note,
+o.quantity,
+o.unit_price,
+o.unit,
+o.image,
+o.file,
+o.status,
+     cu.custom_id,cu.custom_name,p.product_id,p.product_name from c_order o , custom cu , product p
+    where (o.custom_id= cu.custom_id and o.product_id=p.product_id and o.order_id=#{id})
+  </select>
   <select id="queryOrders" resultType="com.cskaoyan.bean.schedule.Order" resultMap="BaseOrder">
     select * from c_order
   </select>
@@ -122,5 +139,56 @@ o.status,
     <update id="deletepathByOid">
         update c_order set file=#{path} where order_id=#{oid}
     </update>
+  <select id="queryOrdersByC" resultType="com.cskaoyan.bean.schedule.Order" resultMap="OrderMap">
+select
+    o.order_id,
+o.custom_id,
+o.product_id,
+o.order_date,
+o.request_date,
+o.note,
+o.quantity,
+o.unit_price,
+o.unit,
+o.image,
+o.file,
+o.status,
+     cu.custom_id,cu.custom_name,p.product_id,p.product_name from c_order o , custom cu , product p
+    where (cu.custom_name like #{value} and o.product_id=p.product_id and o.custom_id=cu.custom_id)
+  </select>
+  <select id="queryOrdersByP" resultType="com.cskaoyan.bean.schedule.Order" resultMap="OrderMap">
+    select
+o.order_id,
+o.custom_id,
+o.product_id,
+o.order_date,
+o.request_date,
+o.note,
+o.quantity,
+o.unit_price,
+o.unit,
+o.image,
+o.file,
+o.status,
+     cu.custom_id,cu.custom_name,p.product_id,p.product_name from c_order o , custom cu , product p
+    where (p.product_name like #{value} and o.custom_id=cu.custom_id and  o.product_id =p.product_id)
+  </select>
+  <select id="queryOrdersByID" resultType="com.cskaoyan.bean.schedule.Order" resultMap="OrderMap">
+ select
+o.order_id,
+o.custom_id,
+o.product_id,
+o.order_date,
+o.request_date,
+o.note,
+o.quantity,
+o.unit_price,
+o.unit,
+o.image,
+o.file,
+o.status,
+     cu.custom_id,cu.custom_name,p.product_id,p.product_name from c_order o , custom cu , product p
+    where o.order_id like #{value}
+  </select>
 </mapper>
 

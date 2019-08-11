@@ -28,4 +28,8 @@ public interface CustomMapper {
     int updateByPrimaryKeySelective(Custom record);
 
     int updateByPrimaryKey(Custom record);
+
+    List<Custom> searchCustomListByID(@Param("id") String s);
+
+    List<Custom> searchCustomListByName(@Param("id") String s);
 }
