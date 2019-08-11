@@ -29,4 +29,10 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
     List<Product> queryList();
+
+    List<Product> searchProductListByType(@Param("value") String s);
+
+    List<Product> searchProductListByName(@Param("value")String s);
+
+    List<Product> searchProductListByID(@Param("value")String s);
 }

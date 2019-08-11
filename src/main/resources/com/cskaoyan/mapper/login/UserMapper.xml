@@ -12,4 +12,41 @@
     <select id="queryUserByUsernameAndPassword" resultType="com.cskaoyan.bean.login.SysUser">
         select id,username,password,locked from sys_user where username = #{user.username} and password=#{user.password}
     </select>
+
+    <select id="getUserList" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+    </select>
+    
+    <resultMap id="getUserListLeft" type="com.cskaoyan.bean.user.User">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="roleId" column="roleId"/>
+        <result property="roleName" column="roleName"/>
+        <result property="available" column="available"/>
+    </resultMap>
+
+    <select id="getRoleData" resultType="com.cskaoyan.bean.user.Role">
+        select role_id as roleId , role_name as roleName,available
+        from sys_role
+    </select>
+
+
+    <select id="queryUserById" resultType="com.cskaoyan.bean.user.User">
+         select id,username,password,locked from sys_user where id = #{id}
+    </select>
+
+    <insert id="insertUser">
+        insert into sys_user (id,username,password,locked)
+        values (#{user.id},#{user.username},#{user.password},#{user.locked})
+    </insert>
+    <insert id="insertUserRole">
+         insert into sys_user_role (id,sys_role_id,sys_user_id)
+        values (#{uuid},#{user.roleId},#{user.id})
+    </insert>
 </mapper>

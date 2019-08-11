@@ -236,52 +236,112 @@ TechnologyService technologyMapper;
 
     @Override
     public SchedulList<Manufacture> searchManufactureByOrderID(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Manufacture> customSchedulList = new SchedulList<>();
+        List<Manufacture> list=manufactureMapper.searchManufactureByOrderID("%"+searchValue+"%");
+        PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Manufacture> searchManufactureByTecName(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Manufacture> customSchedulList = new SchedulList<>();
+        List<Manufacture> list=manufactureMapper.searchManufactureByTecName("%"+searchValue+"%");
+        PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Manufacture> searchManufactureByID(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Manufacture> customSchedulList = new SchedulList<>();
+        List<Manufacture> list=manufactureMapper.searchManufactureByID("%"+searchValue+"%");
+        PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Work> queryWorkProcessByProcessId(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Work> customSchedulList = new SchedulList<>();
+        List<Work> list=workMapper.searchWorkListByProcessId("%"+searchValue+"%");
+        PageInfo<Work> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Work> searchWorkByDev(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Work> customSchedulList = new SchedulList<>();
+        List<Work> list=workMapper.searchWorkListByDev("%"+searchValue+"%");
+        PageInfo<Work> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Work> searchWorkProductListByName(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Work> customSchedulList = new SchedulList<>();
+        List<Work> list=workMapper.searchWorkListByName("%"+searchValue+"%");
+        PageInfo<Work> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Work> searchWorkByID(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Work> customSchedulList = new SchedulList<>();
+        List<Work> list=workMapper.searchWorkListByID("%"+searchValue+"%");
+        PageInfo<Work> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Product> searchProductByType(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Product> customSchedulList = new SchedulList<>();
+        List<Product> list=productMapper.searchProductListByType("%"+searchValue+"%");
+        PageInfo<Product> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Product> searchProductListByName(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Product> customSchedulList = new SchedulList<>();
+        List<Product> list=productMapper.searchProductListByName("%"+searchValue+"%");
+        PageInfo<Product> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override
     public SchedulList<Product> searchProductByID(String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page,rows);
+        SchedulList<Product> customSchedulList = new SchedulList<>();
+        List<Product> list=productMapper.searchProductListByID("%"+searchValue+"%");
+        PageInfo<Product> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 
     @Override

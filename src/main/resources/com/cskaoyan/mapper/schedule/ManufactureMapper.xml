@@ -85,6 +85,22 @@
   <sql id="Base_Column_List">
     manufacture_sn, order_id, technology_id, launch_quantity, begin_date, end_date
   </sql>
+  <sql id="querysql">
+     m.manufacture_sn, m.order_id, m.technology_id, m.launch_quantity, m.begin_date, m.end_date,t.technology_id,t.technology_id,t.technology_name,
+    o.order_id
+  </sql>
+  <select id="searchManufactureByOrderID" resultType="com.cskaoyan.bean.schedule.Manufacture" resultMap="AdvancedMap">
+    select <include refid="querysql"></include>
+    from  manufacture m,c_order o,technology t where(m.order_id like #{value} and m.technology_id=t.technology_id)
+  </select>
+  <select id="searchManufactureByTecName" resultType="com.cskaoyan.bean.schedule.Manufacture" resultMap="AdvancedMap">
+    select <include refid="querysql"></include>
+    from  manufacture m,c_order o,technology t where(m.order_id=o.order_id and m.technology_id=t.technology_id and t.technology_name like #{value})
+  </select>
+  <select id="searchManufactureByID" resultType="com.cskaoyan.bean.schedule.Manufacture" resultMap="AdvancedMap">
+    select <include refid="querysql"></include>
+    from  manufacture m,c_order o,technology t where(m.manufacture_sn like #{value} and m.technology_id=t.technology_id and m.order_id=o.order_id)
+  </select>
   <select id="countNumber" resultType="_long">
     select count(manufacture_sn) from manufacture
   </select>
