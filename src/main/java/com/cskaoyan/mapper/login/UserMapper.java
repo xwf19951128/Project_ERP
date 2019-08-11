@@ -26,4 +26,18 @@ public interface UserMapper {
     int insertUser(@Param("user") User user);
 
     void insertUserRole(@Param("user") User user, @Param("uuid") String uuid);
+
+    int deleteBatchUser(@Param("ids") String[] ids);
+
+    void deleteBatchRole(@Param("ids") String[] ids);
+
+    void updateRole(@Param("user") User user);
+
+    int updateUser(@Param("user") User user);
+
+    List<User> searchUserByUserId(@Param("term") String term);
+
+    List<User> searchUserByUserName(@Param("term")String term);
+
+    List<User> searchUserByRoleName(@Param("term")String term);
 }
