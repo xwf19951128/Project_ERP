@@ -7,6 +7,18 @@
   <packaging>war</packaging>
   
   <dependencies>
+	  <!--Hibernate参数校验-->
+	  <dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-validator</artifactId>
+		  <version>5.1.0.Final</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>javax.validation</groupId>
+		  <artifactId>validation-api</artifactId>
+		  <version>1.1.0.Final</version>
+	  </dependency>
+
 	  <!-- Jackson Json处理工具包 -->
 	  <dependency>
 		  <groupId>com.fasterxml.jackson.core</groupId>
@@ -20,6 +32,12 @@
 		<version>4.12</version>
 		<scope>test</scope>
 	</dependency>
+	  <dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-test</artifactId>
+		  <version>5.1.8.RELEASE</version>
+		  <scope>test</scope>
+	  </dependency>
 	<!-- 日志处理 -->
 	<dependency>
 		<groupId>org.slf4j</groupId>

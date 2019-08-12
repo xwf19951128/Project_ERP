@@ -10,6 +10,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
+        if (requestURI.endsWith("js") || requestURI.endsWith("css")||requestURI.endsWith("png")||requestURI.endsWith("jpg")) {
+            return true;
+        }
         if (requestURI.contains("ajaxLogin")) {
             return true;
         }

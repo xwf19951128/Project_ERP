@@ -28,4 +28,5 @@ public interface MaterialService {
 
     List<Material> listPageSearchMaterialsByType(int page, int rows, String searchValue);
 
+    Material getMaterialById(String materialId);
 }

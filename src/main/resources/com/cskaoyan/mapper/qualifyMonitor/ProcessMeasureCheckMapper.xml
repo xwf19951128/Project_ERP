@@ -5,6 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.qualifyMonitor.ProcessMeasureCheckMapper">
+    <!--查询全部结果-->
     <resultMap id="measureCheckMapper" type="com.cskaoyan.bean.qualifyMonitor.ProcessMeasureCheck">
         <result property="pMeasureCheckId" column="p_measure_check_id"/>
         <result property="processId" column="process_id"/>
@@ -15,7 +16,6 @@
         <result property="note" column="note"/>
         <result property="empName" column="emp_name"/>
     </resultMap>
-
     <select id="queryMeasureCheck" resultMap="measureCheckMapper">
         select
         pmc.p_measure_check_id,
@@ -28,5 +28,66 @@
         emp.emp_name
         from process_measure_check pmc
         left join employee emp on emp.emp_id = pmc.emp_id;
+    </select>
+
+
+    <!--插入-->
+    <insert id="insertProcessMeasureCheck">
+        insert into process_measure_check (
+        p_measure_check_id,
+        process_id,
+        check_item,
+        cdate,
+        measure_data,
+        result,
+        note,
+        emp_id)
+        values (
+        #{processMeasureCheck.pMeasureCheckId},
+        #{processMeasureCheck.processId},
+        #{processMeasureCheck.checkItem},
+        #{processMeasureCheck.cdate},
+        #{processMeasureCheck.measureData},
+        #{processMeasureCheck.result},
+        #{processMeasureCheck.note},
+        #{processMeasureCheck.empId});
+    </insert>
+
+
+    <!--删除-->
+    <delete id="deleteProcessMeasureCheckById">
+        delete from process_measure_check where p_measure_check_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <!--编辑-->
+    <update id="editProcessMeasureCheck">
+        update process_measure_check set
+        process_id = #{processMeasureCheck.processId},
+        check_item = #{processMeasureCheck.checkItem},
+        cdate = #{processMeasureCheck.cdate},
+        measure_data = #{processMeasureCheck.measureData},
+        result = #{processMeasureCheck.result},
+        note = #{processMeasureCheck.note},
+        emp_id = #{processMeasureCheck.empId}
+        where p_measure_check_id = #{processMeasureCheck.pMeasureCheckId}
+    </update>
+
+    <select id="searchPMeasureCheckById" resultMap="measureCheckMapper">
+        select
+        pmc.p_measure_check_id,
+        pmc.process_id,
+        pmc.check_item,
+        pmc.cdate,
+        pmc.measure_data,
+        pmc.result,
+        pmc.note,
+        emp.emp_name
+        from process_measure_check pmc
+        left join employee emp on emp.emp_id = pmc.emp_id
+        where p_measure_check_id like #{id};
     </select>
 </mapper>

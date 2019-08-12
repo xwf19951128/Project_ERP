@@ -40,9 +40,10 @@
 	g.dispose();
 	//输出图片
 	response.setContentType("image/jpeg");
-	out.clear();
-	out = pageContext.pushBody();
+//	out.clear();
+//	out = pageContext.pushBody();
 	OutputStream strm = response.getOutputStream();
 	ImageIO.write(image, "jpeg", strm);
 	strm.close();
+
 %>

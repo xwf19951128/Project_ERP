@@ -18,4 +18,8 @@ public interface DeviceFaultMapper {
     List<DeviceFault> searchDeviceFaultByDeviceFaultId(String searchValue);
 
     List<DeviceFault> searchDeviceFaultByDeviceFaultName(String searchValue);
+
+    int updateDeviceFault(DeviceFault deviceFault);
+
+    int deleteDeviceFault(String[] deviceFault);
 }

@@ -49,4 +49,63 @@
          insert into sys_user_role (id,sys_role_id,sys_user_id)
         values (#{uuid},#{user.roleId},#{user.id})
     </insert>
+
+    <delete id="deleteBatchRole">
+        delete from sys_user_role where sys_user_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+    </foreach>
+    </delete>
+
+    <delete id="deleteBatchUser">
+        delete from sys_user where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateRole">
+        update sys_user_role
+        set sys_role_id = #{user.roleId}
+        where sys_user_id = #{user.id}
+    </update>
+
+    <update id="updateUser">
+        update sys_user
+        set username = #{user.username},
+        password = #{user.password},
+        locked = #{user.locked}
+        where id = #{user.id}
+    </update>
+
+    <select id="searchUserByUserId" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+        where su.id like #{term}
+    </select>
+
+    <select id="searchUserByUserName" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+        where username like #{term}
+    </select>
+
+    <select id="searchUserByRoleName" resultMap="getUserListLeft">
+        select
+        su.id, su.username,su.password,su.locked,
+        sr.role_id as roleId, sr.role_name as roleName,sr.available
+        from sys_user su
+        left join sys_user_role sur on su.id = sur.sys_user_id
+        left join sys_role sr on sur.sys_role_id = sr.role_id
+        where role_Name like #{term}
+    </select>
+
 </mapper>

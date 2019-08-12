@@ -74,6 +74,14 @@
           left join employee e on e.emp_id=d.device_keeper_id
     </select>
 
+    <!--新增数据前的判空操作-->
+   <select id="queryDeviceById" resultMap="deviceVoMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device
+        where device_id =#{deviceId}
+   </select>
+
     <!--新增一个操作-->
     <insert id="insertDevice">
         insert into device
@@ -84,6 +92,29 @@
         #{deviceServiceLife,jdbcType=TIMESTAMP}, #{deviceKeeperId,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
         )
     </insert>
+
+    <!--编辑更新一个操作-->
+    <update id="updateDevice">
+    update device
+    set device_name = #{deviceName,jdbcType=VARCHAR},
+    device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+    device_status_id = #{deviceStatusId,jdbcType=VARCHAR},
+    device_status = #{deviceStatus,jdbcType=VARCHAR},
+    device_purchase_date = #{devicePurchaseDate,jdbcType=TIMESTAMP},
+    device_purchase_price = #{devicePurchasePrice,jdbcType=DECIMAL},
+    device_manufacture_date = #{deviceManufactureDate,jdbcType=TIMESTAMP},
+    device_service_life = #{deviceServiceLife,jdbcType=TIMESTAMP},
+    device_keeper_id = #{deviceKeeperId,jdbcType=VARCHAR},
+    note = #{note,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteDevice">
+        delete from device where device_id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 
     <!--模糊查询1：根据id-->
     <select id="searchDeviceByDeviceId" resultMap="deviceVoMap">
