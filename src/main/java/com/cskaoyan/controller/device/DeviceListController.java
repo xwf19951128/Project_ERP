@@ -70,15 +70,82 @@ public class DeviceListController {
     @RequestMapping("/insert")
     @ResponseBody
     public Map addDevice(Device device){
+        //需要在service层进行判重操作
         HashMap<String, Object> HashMap = new HashMap<>();
         int i=deviceListService.insertDevice(device);
         if(i==1){
             HashMap.put("status",200);
+        }else if(i==2){
+            HashMap.put("msg","弟弟，有重复元素，不能添加~");
         }else{
-            HashMap.put("msg","失败了，弟弟~");
+            HashMap.put("msg","弟弟失败了~");
         }
         return HashMap;
     }
+
+    /**
+     * 进行编辑的操作
+     */
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public Map editShow(){
+        return null;
+    }
+
+    /**
+     * 进行一个编辑操作，然后返回到编辑页面
+     * @param
+     * @return
+     */
+    @RequestMapping("/edit")
+    public String editDevicePage(){
+        return "/WEB-INF/jsp/deviceList_edit.jsp";
+    }
+    /**
+     * 进行真正的编辑操作
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public HashMap updateDevice(Device device){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        int i=deviceListService.updateDevice(device);
+        if(i==1){
+            hashMap.put("status",200);
+        }
+        else{
+            hashMap.put("msg","失败了吗，弟弟");
+        }
+        return hashMap;
+    }
+
+    /**
+     * 进行判断是否删除的请求
+     * @return
+     */
+    @RequestMapping("/delete_judge")
+    @ResponseBody
+    public Map deleteShow(){
+        return null;
+    }
+
+    /**
+     * 删除分支，返回的是一个键值对，这个并不需要跳到其他页面
+     * @return
+     */
+    @RequestMapping("/delete_batch")
+    @ResponseBody
+    public HashMap deleteDeviceType(String ids){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        //注意这样写会错误，因为是string类型，相当于“1,2,3，”d string类型
+        //所以需要根据，分割一下，变为string数组,分割后数组内没有","
+        String[] devices = ids.split(",");
+        int i=deviceListService.deleteDevice(devices);
+        if(i>=1){
+            hashMap.put("status",200);
+        }
+        return hashMap;
+    }
+
 
     /**
      * 模糊查询1：根据id

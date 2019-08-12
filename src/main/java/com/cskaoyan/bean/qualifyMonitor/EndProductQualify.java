@@ -9,6 +9,15 @@ public class EndProductQualify {
     String note;    // 备注
     String orderId; // 订单编号
     String result;  // 检验结果
+    String empId;   // 检验人的id
+
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId;
+    }
 
     public String getCdate() {
         return cdate;

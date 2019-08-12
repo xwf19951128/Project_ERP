@@ -13,4 +13,16 @@ public interface EndProductQualifyMapper {
 
     // 新增成品计量质检
     int insertEndProductQualify(@Param("endProductQualify") EndProductQualify endProductQualify);
+
+    // 删除成品计量质检
+    int deleteEndProductQualifyById(@Param("ids") String[] ids);
+
+    // 编辑
+    int editEndProductQualify(@Param("endProductQualify") EndProductQualify endProductQualify);
+
+    // 根据id进行模糊查询
+    List<EndProductQualify> searchEndProductQualifyById(@Param("id") String id);
+
+    // 根据订单号进行模糊查询
+    List<EndProductQualify> searchEndProductQualifyByOrderId(@Param("orderId") String orderId);
 }

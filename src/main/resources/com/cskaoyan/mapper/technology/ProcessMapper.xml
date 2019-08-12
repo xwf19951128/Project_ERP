@@ -45,4 +45,5 @@
     <select id="queryProcessByPlanId" resultMap="processMap">
         select  process_id,technology_plan_id,sequence,quota from process where technology_plan_id like #{value}
     </select>
+
 </mapper>

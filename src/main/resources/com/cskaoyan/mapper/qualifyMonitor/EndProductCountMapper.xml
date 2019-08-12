@@ -5,6 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.qualifyMonitor.EndProductCountMapper">
+    <!--查询全部信息-->
     <resultMap id="endProductCountMapper" type="com.cskaoyan.bean.qualifyMonitor.EndProductCount">
         <result property="fCountCheckId" column="f_count_check_id"/>
         <result property="orderId" column="order_id"/>
@@ -19,7 +20,6 @@
         <result property="qualify" column="qualify"/>
         <result property="empName" column="emp_name"/>
     </resultMap>
-
     <select id="queryEndProductCount" resultMap="endProductCountMapper">
         select
         fcc.f_count_check_id,
@@ -36,5 +36,102 @@
         emp.emp_name
         from final_count_check fcc
         left join employee emp on emp.emp_id = fcc.emp_id;
+    </select>
+
+
+    <!--插入-->
+    <insert id="insertEndProductCount">
+        insert into final_count_check (
+        f_count_check_id,
+        order_id,
+        check_item,
+        sample,
+        check_number,
+        unqualify,
+        qualify,
+        cdate,
+        measure_data,
+        result,
+        note,
+        emp_id)
+        values (
+        #{endProductCount.fCountCheckId},
+        #{endProductCount.orderId},
+        #{endProductCount.checkItem},
+        #{endProductCount.sample},
+        #{endProductCount.checkNumber},
+        #{endProductCount.unqualify},
+        #{endProductCount.qualify},
+        #{endProductCount.cdate},
+        #{endProductCount.measureData},
+        #{endProductCount.result},
+        #{endProductCount.note},
+        #{endProductCount.empId});
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteEndProductCountById">
+        delete from final_count_check where f_count_check_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--编辑-->
+    <update id="editEndProductCount">
+        update final_count_check set
+        order_id = #{endProductCount.orderId},
+        check_item = #{endProductCount.checkItem},
+        sample = #{endProductCount.sample},
+        check_number = #{endProductCount.checkNumber},
+        unqualify = #{endProductCount.unqualify},
+        qualify = #{endProductCount.qualify},
+        cdate = #{endProductCount.cdate},
+        measure_data = #{endProductCount.measureData},
+        result = #{endProductCount.result},
+        note = #{endProductCount.note},
+        emp_id = #{endProductCount.empId}
+        where f_count_check_id = #{endProductCount.fCountCheckId}
+    </update>
+
+
+    <!--根据id进行模糊查询-->
+    <select id="searchEndProductCountById" resultMap="endProductCountMapper">
+        select
+        fcc.f_count_check_id,
+        fcc.order_id,
+        fcc.check_item,
+        fcc.sample,
+        fcc.check_number,
+        fcc.unqualify,
+        fcc.cdate,
+        fcc.measure_data,
+        fcc.result,
+        fcc.note,
+        fcc.qualify,
+        emp.emp_name
+        from final_count_check fcc
+        left join employee emp on emp.emp_id = fcc.emp_id
+        where fcc.f_count_check_id like #{id};
+    </select>
+
+    <!--根据订单编号进行模糊查询-->
+    <select id="searchEndProductCountByOrderId" resultMap="endProductCountMapper">
+        select
+        fcc.f_count_check_id,
+        fcc.order_id,
+        fcc.check_item,
+        fcc.sample,
+        fcc.check_number,
+        fcc.unqualify,
+        fcc.cdate,
+        fcc.measure_data,
+        fcc.result,
+        fcc.note,
+        fcc.qualify,
+        emp.emp_name
+        from final_count_check fcc
+        left join employee emp on emp.emp_id = fcc.emp_id
+        where fcc.order_id like #{orderId};
     </select>
 </mapper>

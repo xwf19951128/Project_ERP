@@ -42,4 +42,6 @@ public interface ScheduleMapper {
     List<Order> queryOrdersByP(@Param("value")String s);
 
     List<Order> queryOrdersByID(@Param("value") String valueOf);
+
+    int deleteByOrderID(String[] id);
 }

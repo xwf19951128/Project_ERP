@@ -5,6 +5,7 @@ import com.cskaoyan.bean.user.Role;
 import com.cskaoyan.bean.user.User;
 import com.cskaoyan.mapper.login.UserMapper;
 import com.cskaoyan.service.login.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,9 +45,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int updateAll(User user) {
+        userMapper.updateRole(user);
+        return userMapper.updateUser(user);
+    }
+
+    @Override
+    public int deleteBatch(String[] ids) {
+        userMapper.deleteBatchRole(ids);
+        return userMapper.deleteBatchUser(ids);
+    }
+
+    @Override
     public int insertUser(User user) {
         UUID uuid = UUID.randomUUID();
         userMapper.insertUserRole(user,uuid.toString());
         return userMapper.insertUser(user);
+    }
+
+    @Override
+    public List<User> searchUserByUserId(String term) {
+        return userMapper.searchUserByUserId(term);
+    }
+
+    @Override
+    public List<User> searchUserByUserName(String term) {
+        return userMapper.searchUserByUserName(term);
+    }
+
+    @Override
+    public List<User> searchUserByRoleName(String term) {
+        return userMapper.searchUserByRoleName(term);
     }
 }

@@ -1,5 +1,6 @@
 package com.cskaoyan.service.device.impl;
 
+import com.cskaoyan.bean.device.DeviceFault;
 import com.cskaoyan.bean.device.DeviceMaintain;
 import com.cskaoyan.mapper.device.DeviceMaintainMapper;
 import com.cskaoyan.service.device.DeviceMaintainService;
@@ -30,5 +31,21 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
     @Override
     public List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(String searchValue) {
         return mapper.searchDeviceMaintainByDeviceMaintainId(searchValue);
+    }
+
+
+    @Override
+    public int updateDeviceMaintain(DeviceMaintain deviceMaintain) {
+        return mapper.updateDeviceMaintain(deviceMaintain);
+    }
+
+    @Override
+    public int insertDeviceMaintain(DeviceMaintain deviceMaintain) {
+        return mapper.insertDeviceMaintain(deviceMaintain);
+    }
+
+    @Override
+    public int deleteDeviceMaintain(String[] deviceMaintains) {
+        return mapper.deleteDeviceMaintain(deviceMaintains);
     }
 }

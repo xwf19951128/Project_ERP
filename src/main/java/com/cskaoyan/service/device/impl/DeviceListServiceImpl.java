@@ -29,6 +29,10 @@ public class DeviceListServiceImpl implements DeviceListService {
 
     @Override
     public int insertDevice(Device device) {
+        Device device1= mapper.queryDeviceById(device.getDeviceId());
+        if(device1!=null){
+            return 2;
+        }
         return mapper.insertDevice(device);
     }
 
@@ -45,5 +49,15 @@ public class DeviceListServiceImpl implements DeviceListService {
     @Override
     public List<Device> searchDeviceByDeviceTypeName(String searchValue) {
         return mapper.searchDeviceByDeviceTypeName(searchValue);
+    }
+
+    @Override
+    public int updateDevice(Device device) {
+        return mapper.updateDevice(device);
+    }
+
+    @Override
+    public int deleteDevice(String[] devices) {
+        return mapper.deleteDevice(devices);
     }
 }

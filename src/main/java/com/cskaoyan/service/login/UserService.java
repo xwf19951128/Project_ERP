@@ -19,4 +19,14 @@ public interface UserService {
     User queryUserById(User user);
 
     int insertUser(User user);
+
+    int deleteBatch(String[] ids);
+
+    int updateAll(User user);
+
+    List<User> searchUserByUserId(String term);
+
+    List<User> searchUserByUserName(String term);
+
+    List<User> searchUserByRoleName(String term);
 }

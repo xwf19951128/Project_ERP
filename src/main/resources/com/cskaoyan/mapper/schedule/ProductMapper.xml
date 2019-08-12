@@ -242,4 +242,10 @@
     <include refid="Base_Column_List" />
     from product
   </select>
+  <delete id="deleteByProductID" parameterType="java.util.List">
+    delete from product where product_id in
+    <foreach collection="array" open="(" close=")" separator="," item="id">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>
