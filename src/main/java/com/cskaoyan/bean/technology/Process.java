@@ -1,6 +1,9 @@
 package com.cskaoyan.bean.technology;
 
+import javax.validation.constraints.Size;
+
 public class Process {
+    @Size(min = 2,max = 4,message = "请输入2-4位的工序编号")
     String processId;
     String technologyPlanId;
     int sequence;

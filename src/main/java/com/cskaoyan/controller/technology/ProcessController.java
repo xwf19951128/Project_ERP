@@ -2,17 +2,21 @@ package com.cskaoyan.controller.technology;
 
 import com.cskaoyan.bean.technology.Process;
 import com.cskaoyan.bean.technology.QueryResult;
+import com.cskaoyan.bean.technology.TechResponseVo;
 import com.cskaoyan.service.technology.ProcessService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,24 +79,32 @@ public class ProcessController {
     //但是返回值必须是jason！！！！！
     @RequestMapping("/insert")
     @ResponseBody
-    public Map insert(Process process) {
-        HashMap<String, Object> result = new HashMap<>();
+    public TechResponseVo<Process> insert(@Valid Process process, BindingResult bindingResult) {
+        TechResponseVo<Process> vo = new TechResponseVo<>();
+        if (bindingResult.hasErrors()){
+            FieldError fieldError = bindingResult.getFieldError();
+            String message = fieldError.getDefaultMessage();
+            vo.setMsg(message);
+            vo.setData(process);
+            vo.setStatus(488);
+            return vo;
+        }
         String processId = process.getProcessId();
         List<Process> processes = processService.queryProcessByProcessId(processId);
         if (process != null) {
-            result.put("status", 500);
-            result.put("msg", "ID重复，请重新输入ID");
+            vo.setStatus(500);
+            vo.setMsg("ID重复，请重新输入ID");
         } else {
             int i = processService.insertProcess(process);
             if (i == 1) {
-                result.put("status", 200);
-                result.put("msg", "ok");
+                vo.setStatus(200);
+                vo.setMsg("ok");
             } else {
-                result.put("status", 288);
-                result.put("msg", "添加失败，请确定参数是否正确");
+                vo.setStatus(288);
+                vo.setMsg("添加失败，请确定参数是否正确");
             }
         }
-        return result;
+        return vo;
     }
 
     @RequestMapping("/delete_judge")
