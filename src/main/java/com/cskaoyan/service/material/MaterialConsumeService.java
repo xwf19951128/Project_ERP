@@ -14,4 +14,12 @@ public interface MaterialConsumeService {
     List<MaterialConsume> listPageSearchMaterialConsumesByWorkId(int page, int rows, String searchValue);
 
     List<MaterialConsume> listPageSearchMaterialConsumesByMaterialId(int page, int rows, String searchValue);
+
+    int insertMaterialConsume(MaterialConsume materialConsume);
+
+    int updateNoteById(MaterialConsume materialConsume);
+
+    int updateAllById(MaterialConsume materialConsume);
+
+    int deleteMaterialConsumesByIds(String[] ids);
 }

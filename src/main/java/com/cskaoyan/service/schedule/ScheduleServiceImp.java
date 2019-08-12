@@ -1,7 +1,6 @@
 package com.cskaoyan.service.schedule;
 
 import com.cskaoyan.bean.schedule.*;
-import com.cskaoyan.bean.technology.Technology;
 import com.cskaoyan.mapper.schedule.*;
 import com.cskaoyan.service.technology.TechnologyService;
 import com.github.pagehelper.PageHelper;
@@ -9,7 +8,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -163,8 +161,8 @@ TechnologyService technologyMapper;
     }
 
     @Override
-    public int deleteOrderByID(String id) {
-        return scheduleMapper.deleteByPrimaryKey(id);
+    public int deleteOrderByID(String[] id) {
+        return scheduleMapper.deleteByOrderID(id);
     }
 
     @Override
@@ -215,23 +213,23 @@ TechnologyService technologyMapper;
     }
 
     @Override
-    public int deleteManufactureByID(String ids) {
-        return manufactureMapper.deleteByPrimaryKey(ids);
+    public int deleteManufactureByID(String[] ids) {
+        return manufactureMapper.deleteByManufacture_sn(ids);
     }
 
     @Override
-    public int deleteWorkByID(String ids) {
-        return workMapper.deleteByPrimaryKey(ids);
+    public int deleteWorkByID(String[] ids) {
+        return workMapper.deleteByWorkID(ids);
     }
 
     @Override
-    public int deleteProductByID(String ids) {
-        return productMapper.deleteByPrimaryKey(ids);
+    public int deleteProductByID(String[] ids) {
+        return productMapper.deleteByProductID(ids);
     }
 
     @Override
-    public int deleteCustomByID(String ids) {
-        return customMapper.deleteByPrimaryKey(ids);
+    public int deleteCustomByID(String[] ids) {
+        return customMapper.deleteByCustomID(ids);
     }
 
     @Override
@@ -365,5 +363,67 @@ TechnologyService technologyMapper;
         customSchedulList.setRows(list );
         return customSchedulList;
 
+    }
+
+    @Override
+    public List<Manufacture> queryManufacture() {
+        return manufactureMapper.queryManufacture();
+    }
+
+    @Override
+    public Manufacture queryManufactureById(String id) {
+        return manufactureMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Work> queryWorkList() {
+        return workMapper.queryWorks();
+    }
+
+    @Override
+    public Work queryWorkById(String id) {
+        return workMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteTaskByIds(String[] ids) {
+        return taskMapper.deleteByIDs(ids);
+    }
+    @Override
+    public SchedulList<Task> searchTaskByManufactureSn(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        SchedulList<Task> customSchedulList = new SchedulList<>();
+        List<Task> list=taskMapper.searchTaskByManufactureSn("%"+searchValue+"%");
+        PageInfo<Task> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
+    }
+
+    @Override
+    public SchedulList<Task> searchTaskByWorkId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        SchedulList<Task> customSchedulList = new SchedulList<>();
+        List<Task> list=taskMapper.searchTaskByWorkId("%"+searchValue+"%");
+        PageInfo<Task> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
+    }
+
+    @Override
+    public SchedulList<Task> searchTaskByTaskId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        SchedulList<Task> customSchedulList = new SchedulList<>();
+        List<Task> list=taskMapper.searchTaskByTaskId("%"+searchValue+"%");
+        PageInfo<Task> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
+    }
+
+    @Override
+    public Task queryTaskById(String id) {
+        return taskMapper.selectByPrimaryKey(id);
     }
 }
