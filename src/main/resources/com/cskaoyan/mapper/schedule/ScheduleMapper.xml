@@ -191,7 +191,7 @@ o.status,
     where o.order_id like #{value}
   </select>
   <delete id="deleteByOrderID" parameterType="java.util.List">
-    delete from order where order_id in
+    delete from c_order where order_id in
     <foreach collection="array" open="(" close=")" separator="," item="id">
       #{id}
     </foreach>

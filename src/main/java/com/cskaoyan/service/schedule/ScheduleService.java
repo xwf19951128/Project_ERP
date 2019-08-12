@@ -109,4 +109,6 @@ public interface ScheduleService {
     SchedulList<Task> searchTaskByWorkId(String searchValue, int page, int rows);
 
     SchedulList<Task> searchTaskByTaskId(String searchValue, int page, int rows);
+
+    Task queryTaskById(String id);
 }
