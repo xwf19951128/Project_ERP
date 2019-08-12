@@ -19,4 +19,28 @@ public class ProcessMeasureCheckServiceImpl implements ProcessMeasureCheckServic
     public List<ProcessMeasureCheck> queryMeasureCheck() {
         return processMeasureCheckMapper.queryMeasureCheck();
     }
+
+    // 插入
+    @Override
+    public int insertProcessMeasureCheck(ProcessMeasureCheck processMeasureCheck) {
+        return processMeasureCheckMapper.insertProcessMeasureCheck(processMeasureCheck);
+    }
+
+    // 删除
+    @Override
+    public int deleteProcessMeasureCheckById(String[] ids) {
+        return processMeasureCheckMapper.deleteProcessMeasureCheckById(ids);
+    }
+
+    // 编辑
+    @Override
+    public int editProcessMeasureCheck(ProcessMeasureCheck processMeasureCheck) {
+        return processMeasureCheckMapper.editProcessMeasureCheck(processMeasureCheck);
+    }
+
+    // 根据id模糊查询
+    @Override
+    public List<ProcessMeasureCheck> searchPMeasureCheckById(String id) {
+        return processMeasureCheckMapper.searchPMeasureCheckById(id);
+    }
 }

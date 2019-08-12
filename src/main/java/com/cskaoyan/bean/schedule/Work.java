@@ -1,5 +1,8 @@
 package com.cskaoyan.bean.schedule;
 
+import com.cskaoyan.bean.device.Device;
+import com.cskaoyan.bean.technology.Process;
+
 public class Work {
     private String workId;
 
@@ -12,6 +15,48 @@ public class Work {
     private String deviceId;
 
     private Integer rating;
+    private Device device;
+    private Process process;
+    private Product product;
+
+    @Override
+    public String toString() {
+        return "Work{" +
+                "workId='" + workId + '\'' +
+                ", processNumber='" + processNumber + '\'' +
+                ", productId='" + productId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", deviceId='" + deviceId + '\'' +
+                ", rating=" + rating +
+                ", device=" + device +
+                ", process=" + process +
+                ", product=" + product +
+                '}';
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    public void setProcess(Process process) {
+        this.process = process;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public String getWorkId() {
         return workId;
@@ -61,15 +106,4 @@ public class Work {
         this.rating = rating;
     }
 
-    @Override
-    public String toString() {
-        return "Work{" +
-                "workId='" + workId + '\'' +
-                ", processNumber='" + processNumber + '\'' +
-                ", productId='" + productId + '\'' +
-                ", processId='" + processId + '\'' +
-                ", deviceId='" + deviceId + '\'' +
-                ", rating=" + rating +
-                '}';
-    }
 }

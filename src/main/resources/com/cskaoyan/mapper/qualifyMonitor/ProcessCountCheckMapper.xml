@@ -5,6 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.qualifyMonitor.ProcessCountCheckMapper">
+    <!--查询全部-->
     <resultMap id="processCountCheckMapper" type="com.cskaoyan.bean.qualifyMonitor.ProcessCountCheck">
         <result property="pCountCheckId" column="p_count_check_id"/>
         <result property="processId" column="process_id"/>
@@ -19,7 +20,6 @@
         <result property="note" column="note"/>
         <result property="empName" column="emp_name"/>
     </resultMap>
-
     <select id="queryProcessCountCheck" resultMap="processCountCheckMapper">
         select
         pcc.p_count_check_id,
@@ -36,5 +36,81 @@
         emp.emp_name
         from process_count_check pcc
         left join employee emp on emp.emp_id = pcc.emp_id;
+    </select>
+
+    <!--插入-->
+    <insert id="insertProcessCountCheck">
+        insert into process_count_check (
+        p_count_check_id,
+        process_id,
+        check_item,
+        sample,
+        check_number,
+        unqualify,
+        qualify,
+        cdate,
+        measure_data,
+        result,
+        note,
+        emp_id)
+        values (
+        #{processCountCheck.pCountCheckId},
+        #{processCountCheck.processId},
+        #{processCountCheck.checkItem},
+        #{processCountCheck.sample},
+        #{processCountCheck.checkNumber},
+        #{processCountCheck.unqualify},
+        #{processCountCheck.qualify},
+        #{processCountCheck.cdate},
+        #{processCountCheck.measureData},
+        #{processCountCheck.result},
+        #{processCountCheck.note},
+        #{processCountCheck.empId});
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteProcessCountCheckById">
+        delete from process_count_check where p_count_check_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--编辑-->
+    <update id="editProcessCountCheck">
+        update process_count_check set
+        process_id = #{processCountCheck.processId},
+        check_item = #{processCountCheck.checkItem},
+        sample = #{processCountCheck.sample},
+        check_number = #{processCountCheck.checkNumber},
+        unqualify = #{processCountCheck.unqualify},
+        qualify = #{processCountCheck.qualify},
+        cdate = #{processCountCheck.cdate},
+        measure_data = #{processCountCheck.measureData},
+        result = #{processCountCheck.result},
+        note = #{processCountCheck.note},
+        emp_id = #{processCountCheck.empId}
+        where p_count_check_id = #{processCountCheck.pCountCheckId}
+    </update>
+
+
+    <!--根据id进行模糊查询-->
+    <select id="searchPCountCheckById" resultMap="processCountCheckMapper">
+        select
+        pcc.p_count_check_id,
+        pcc.process_id,
+        pcc.check_item,
+        pcc.cdate,
+        pcc.sample,
+        pcc.check_number,
+        pcc.unqualify,
+        pcc.qualify,
+        pcc.measure_data,
+        pcc.result,
+        pcc.note,
+        emp.emp_name
+        from process_count_check pcc
+        left join employee emp on emp.emp_id = pcc.emp_id
+        where pcc.p_count_check_id like #{id};
     </select>
 </mapper>

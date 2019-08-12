@@ -12,4 +12,15 @@ public interface UnqualifyMapper {
     // 添加不合格产品
     int insertUnqualify(@Param("unqualifyApply") UnqualifyApply unqualifyApply);
 
+    // 删除
+    int deleteUnqualifyById(@Param("ids") String[] ids);
+
+    // 编辑
+    int editUnqualify(@Param("unqualifyApply") UnqualifyApply unqualifyApply);
+
+    // 根据id模糊查询
+    List<UnqualifyApply> searchUnqualifyById(@Param("id") String id);
+
+    // 根据产品名称模糊查询
+    List<UnqualifyApply> searchUnqualifyByName(@Param("productName") String name);
 }

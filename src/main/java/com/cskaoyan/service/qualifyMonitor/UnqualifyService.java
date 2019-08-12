@@ -10,4 +10,16 @@ public interface UnqualifyService {
 
     // 添加不合格产品
     int insertUnqualify(UnqualifyApply unqualifyApply);
+
+    // 删除
+    int deleteUnqualifyById(String[] ids);
+
+    // 编辑
+    int editUnqualify(UnqualifyApply unqualifyApply);
+
+    // 根据id模糊查询
+    List<UnqualifyApply> searchUnqualifyById(String id);
+
+    // 根据名称模糊查询
+    List<UnqualifyApply> searchUnqualifyByName(String name);
 }

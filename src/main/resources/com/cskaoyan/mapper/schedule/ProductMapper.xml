@@ -9,6 +9,15 @@
     <result column="note" jdbcType="VARCHAR" property="note" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+  <select id="searchProductListByName" resultType="com.cskaoyan.bean.schedule.Product" resultMap="BaseResultMap">
+    select * from product where product_name like #{value}
+  </select>
+  <select id="searchProductListByID" resultType="com.cskaoyan.bean.schedule.Product" resultMap="BaseResultMap">
+    select * from product where product_id like #{value}
+  </select>
+  <select id="searchProductListByType" resultType="com.cskaoyan.bean.schedule.Product" resultMap="BaseResultMap">
+    select * from product where product_type like #{value}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

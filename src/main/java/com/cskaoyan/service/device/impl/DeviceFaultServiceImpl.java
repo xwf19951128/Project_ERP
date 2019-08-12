@@ -44,4 +44,14 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
     public List<DeviceFault> searchDeviceFaultByDeviceFaultName(String searchValue) {
         return mapper.searchDeviceFaultByDeviceFaultName(searchValue);
     }
+
+    @Override
+    public int updateDeviceFault(DeviceFault deviceFault) {
+        return mapper.updateDeviceFault(deviceFault);
+    }
+
+    @Override
+    public int deleteDeviceFault(String[] deviceFault) {
+        return mapper.deleteDeviceFault(deviceFault);
+    }
 }

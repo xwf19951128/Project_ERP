@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cskaoyan.mapper.material.MaterialReceiveMapper">
+    <!--查询所有物料收入-->
+    <select id="listPageMaterialReceives" resultMap="materialReceiveMap">
+        select
+        receive_id as receiveId,
+        material_id as materialId,
+        amount,
+        receive_date as receiveDate,
+        sender,
+        receiver,
+        note
+        FROM material_receive
+        limit #{limit}
+        offset #{offset}
+    </select>
+    <resultMap id="materialReceiveMap" type="com.cskaoyan.bean.material.MaterialReceive">
+        <result column="receiveId" property="receiveId"></result>
+        <result column="amount" property="ammount"></result>
+        <result column="receiveDate" property="receiveDate"></result>
+        <result column="sender" property="sender"></result>
+        <result column="receiver" property="receiver"></result>
+        <result column="note" property="note"></result>
+        <association property="material" javaType="com.cskaoyan.bean.material.Material">
+            <result column="materialId" property="materialId"></result>
+            <result column="note" property="note"></result>
+        </association>
+    </resultMap>
+
+
+    <!--根据ReceiveId模糊查询物料-->
+    <select id="listPageSearchMaterialReceivesByReceiveId" resultMap="materialReceiveMap">
+        select
+        receive_id as receiveId,
+        material_id as materialId,
+        amount,
+        receive_date as receiveDate,
+        sender,
+        receiver,
+        note
+        FROM material_receive
+        where receive_id like #{like}
+        limit #{limit}
+        offset #{offset}
+    </select>
+    <!--根据materialId模糊查询物料-->
+    <select id="listPageSearchMaterialReceivesByMaterialId" resultMap="materialReceiveMap">
+        select
+        receive_id as receiveId,
+        material_id as materialId,
+        amount,
+        receive_date as receiveDate,
+        sender,
+        receiver,
+        note
+        FROM material_receive
+        where material_id like #{like}
+        limit #{limit}
+        offset #{offset}
+    </select>
+
+
+    <!--批量删除-->
+    <delete id="deleteMaterialReceivesByIds">
+        delete from material_receive
+        where receive_id
+        in
+        (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+</mapper>

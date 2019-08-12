@@ -51,4 +51,58 @@
         #{endProductQualify.note},
         #{endProductQualify.empId});
     </insert>
+
+
+    <!--删除-->
+    <delete id="deleteEndProductQualifyById">
+        delete from final_measuret_check where f_measure_check_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--编辑-->
+    <update id="editEndProductQualify">
+        update final_measuret_check set
+        order_id = #{endProductQualify.orderId},
+        check_item = #{endProductQualify.checkItem},
+        cdate = #{endProductQualify.cdate},
+        measure_data = #{endProductQualify.measureData},
+        result = #{endProductQualify.result},
+        note = #{endProductQualify.note},
+        emp_id = #{endProductQualify.empId}
+        where f_measure_check_id = #{endProductQualify.fMeasureCheckId}
+    </update>
+
+    <!--根据id进行模糊查询-->
+    <select id="searchEndProductQualifyById" resultMap="endProductQualifyMapper">
+        select
+        fmc.f_measure_check_id,
+        fmc.order_id,
+        fmc.check_item,
+        fmc.cdate,
+        fmc.measure_data,
+        fmc.result,
+        fmc.note,
+        emp.emp_name
+        from final_measuret_check fmc
+        left join employee emp on emp.emp_id = fmc.emp_id
+        where fmc.f_measure_check_id like #{id};
+    </select>
+
+    <!--根据订单编号进行模糊查询-->
+    <select id="searchEndProductQualifyByOrderId" resultMap="endProductQualifyMapper">
+        select
+        fmc.f_measure_check_id,
+        fmc.order_id,
+        fmc.check_item,
+        fmc.cdate,
+        fmc.measure_data,
+        fmc.result,
+        fmc.note,
+        emp.emp_name
+        from final_measuret_check fmc
+        left join employee emp on emp.emp_id = fmc.emp_id
+        where fmc.order_id like #{orderId};
+    </select>
 </mapper>

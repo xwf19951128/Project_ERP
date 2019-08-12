@@ -1,7 +1,6 @@
 package com.cskaoyan.mapper.department;
 
 import com.cskaoyan.bean.department.Department;
-import com.cskaoyan.bean.department.DepartmentPage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

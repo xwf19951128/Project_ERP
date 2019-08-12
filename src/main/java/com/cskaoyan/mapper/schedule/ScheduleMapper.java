@@ -14,7 +14,7 @@ public interface ScheduleMapper {
 
     int insertSelective(Order record);
 
-    Order selectByPrimaryKey(String orderId);
+    Order selectByPrimaryKey(@Param("id") String orderId);
 
     int updateByPrimaryKeySelective(@Param("record") Order record);
 
@@ -36,4 +36,10 @@ public interface ScheduleMapper {
     List<Product> queryProducts();
 
     int deletepathByOid(@Param("oid") String oid);
+
+    List<Order> queryOrdersByC(@Param("value") String s);
+
+    List<Order> queryOrdersByP(@Param("value")String s);
+
+    List<Order> queryOrdersByID(@Param("value") String valueOf);
 }
