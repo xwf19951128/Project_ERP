@@ -15,6 +15,7 @@ public interface ManufactureMapper {
 
     int deleteByPrimaryKey(String manufactureSn);
 
+    int deleteByManufacture_sn(String[] manufactureSn);
     int insert(Manufacture record);
 
     int insertSelective(Manufacture record);

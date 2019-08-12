@@ -44,7 +44,7 @@ public interface ScheduleService {
 
     int insertOrder(Order order);
 
-    int deleteOrderByID(String id);
+    int deleteOrderByID(String[] id);
 
     SchedulList<Order> searchOrderListByProduct(String searchValue, int page, int rows);
 
@@ -60,13 +60,15 @@ public interface ScheduleService {
 
     int insertCustom(Custom custom);
 
-    int deleteManufactureByID(String ids);
 
-    int deleteWorkByID(String ids);
+    int deleteManufactureByID(String[] ids);
 
-    int deleteProductByID(String ids);
+    int deleteWorkByID(String[] ids);
 
-    int deleteCustomByID(String ids);
+
+    int deleteProductByID(String[] ids);
+
+    int deleteCustomByID(String[] ids);
 
     SchedulList<Manufacture> searchManufactureByOrderID(String searchValue, int page, int rows);
 

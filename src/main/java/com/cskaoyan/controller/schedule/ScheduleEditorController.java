@@ -1,7 +1,6 @@
 package com.cskaoyan.controller.schedule;
 
 import com.cskaoyan.bean.schedule.*;
-import com.cskaoyan.bean.technology.Technology;
 import com.cskaoyan.service.schedule.ScheduleService;
 import com.cskaoyan.utils.RandomId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,40 +143,40 @@ public class ScheduleEditorController {
 //    }
 @RequestMapping("/order/delete_batch")
 @ResponseBody
-public MessageBean DeleteOrderConfirm(String ids){
-    if(service.deleteOrderByID(ids)==1){
+public MessageBean DeleteOrderConfirm(String[] ids){
+    if(service.deleteOrderByID(ids)==ids.length){
         return new MessageBean("200","ok",null);
     }
     return new MessageBean("500","删除失败",null );
 }
     @RequestMapping("/custom/delete_batch")
     @ResponseBody
-    public MessageBean DeleteCustomConfirm(String ids){
-        if(service.deleteCustomByID(ids)==1){
+    public MessageBean DeleteCustomConfirm(String[] ids){
+        if(service.deleteCustomByID(ids)==ids.length){
             return new MessageBean("200","ok",null);
         }
         return new MessageBean("500","删除失败",null );
     }
     @RequestMapping("/product/delete_batch")
     @ResponseBody
-    public MessageBean DeleteProductConfirm(String ids){
-        if(service.deleteProductByID(ids)==1){
+    public MessageBean DeleteProductConfirm(String[] ids){
+        if(service.deleteProductByID(ids)==ids.length){
             return new MessageBean("200","ok",null);
         }
         return new MessageBean("500","删除失败",null );
     }
     @RequestMapping("/work/delete_batch")
     @ResponseBody
-    public MessageBean DeleteWorkConfirm(String ids){
-        if(service.deleteWorkByID(ids)==1){
+    public MessageBean DeleteWorkConfirm(String[] ids){
+        if(service.deleteWorkByID(ids)==ids.length){
             return new MessageBean("200","ok",null);
         }
         return new MessageBean("500","删除失败",null );
     }
     @RequestMapping("/manufacture/delete_batch")
     @ResponseBody
-    public MessageBean DeleteManufactureConfirm(String ids){
-        if(service.deleteManufactureByID(ids)==1){
+    public MessageBean DeleteManufactureConfirm(String[] ids){
+        if(service.deleteManufactureByID(ids)==ids.length){
             return new MessageBean("200","ok",null);
         }
         return new MessageBean("500","删除失败",null );

@@ -8,7 +8,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -162,8 +161,8 @@ TechnologyService technologyMapper;
     }
 
     @Override
-    public int deleteOrderByID(String id) {
-        return scheduleMapper.deleteByPrimaryKey(id);
+    public int deleteOrderByID(String[] id) {
+        return scheduleMapper.deleteByOrderID(id);
     }
 
     @Override
@@ -214,23 +213,23 @@ TechnologyService technologyMapper;
     }
 
     @Override
-    public int deleteManufactureByID(String ids) {
-        return manufactureMapper.deleteByPrimaryKey(ids);
+    public int deleteManufactureByID(String[] ids) {
+        return manufactureMapper.deleteByManufacture_sn(ids);
     }
 
     @Override
-    public int deleteWorkByID(String ids) {
-        return workMapper.deleteByPrimaryKey(ids);
+    public int deleteWorkByID(String[] ids) {
+        return workMapper.deleteByWorkID(ids);
     }
 
     @Override
-    public int deleteProductByID(String ids) {
-        return productMapper.deleteByPrimaryKey(ids);
+    public int deleteProductByID(String[] ids) {
+        return productMapper.deleteByProductID(ids);
     }
 
     @Override
-    public int deleteCustomByID(String ids) {
-        return customMapper.deleteByPrimaryKey(ids);
+    public int deleteCustomByID(String[] ids) {
+        return customMapper.deleteByCustomID(ids);
     }
 
     @Override
@@ -388,13 +387,8 @@ TechnologyService technologyMapper;
 
     @Override
     public int deleteTaskByIds(String[] ids) {
-        List<String> list=new ArrayList<>();
-        for (String id : ids) {
-            list.add(id);
-        }
-        return taskMapper.deleteByIDs(list);
+        return taskMapper.deleteByIDs(ids);
     }
-
     @Override
     public SchedulList<Task> searchTaskByManufactureSn(String searchValue, int page, int rows) {
         PageHelper.startPage(page,rows);

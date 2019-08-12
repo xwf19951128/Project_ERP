@@ -190,5 +190,11 @@ o.status,
      cu.custom_id,cu.custom_name,p.product_id,p.product_name from c_order o , custom cu , product p
     where o.order_id like #{value}
   </select>
+  <delete id="deleteByOrderID" parameterType="java.util.List">
+    delete from order where order_id in
+    <foreach collection="array" open="(" close=")" separator="," item="id">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>
 

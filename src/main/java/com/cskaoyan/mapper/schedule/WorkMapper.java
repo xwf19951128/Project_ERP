@@ -15,7 +15,7 @@ public interface WorkMapper {
     int deleteByExample(WorkExample example);
 
     int deleteByPrimaryKey(String workId);
-
+    int deleteByWorkID(String[] workId);
     int insert(Work record);
 
     int insertSelective(Work record);

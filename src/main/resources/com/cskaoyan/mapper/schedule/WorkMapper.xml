@@ -352,4 +352,10 @@ FROM
 	where (w.work_id like #{value} and w.device_id=d.device_id and
 	p.product_id=w.product_id)
   </select>
+    <delete id="deleteByWorkID" parameterType="java.util.List">
+        delete from work where work_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

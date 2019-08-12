@@ -271,4 +271,11 @@
       end_date = #{endDate,jdbcType=TIMESTAMP}
     where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
   </update>
+
+<delete id="deleteByManufacture_sn" parameterType="java.util.List">
+delete from manufacture where manufacture_sn in
+<foreach collection="array" open="(" close=")" separator="," item="id">
+  #{id}
+</foreach>
+</delete>
 </mapper>

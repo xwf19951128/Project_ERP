@@ -12,7 +12,7 @@ public interface ProductMapper {
     int deleteByExample(ProductExample example);
 
     int deleteByPrimaryKey(String productId);
-
+    int deleteByProductID(String[] productId);
     int insert(Product record);
 
     int insertSelective(Product record);

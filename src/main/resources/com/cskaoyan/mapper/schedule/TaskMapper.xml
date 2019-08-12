@@ -215,8 +215,26 @@
   </select>
   <delete id="deleteByIDs" parameterType="java.util.List">
     DELETE from task where task_id in
-    <foreach collection="list" item="id" open="(" close=")" index="index" separator=",">
+<!--    <foreach collection="list" item="id" open="(" close=")" index="index" separator=",">-->
+<!--      #{id}-->
+<!--    </foreach>-->
+    <foreach collection="array" item="id" open="(" close=")" separator=",">
       #{id}
     </foreach>
   </delete>
+  <select id="searchTaskByManufactureSn" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task where manufacture_sn like #{value}
+  </select>
+  <select id="searchTaskByWorkId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task where work_id like #{value}
+  </select>
+  <select id="searchTaskByTaskId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task where task_id like #{value}
+  </select>
 </mapper>

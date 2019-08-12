@@ -11,6 +11,7 @@ public interface CustomMapper {
     int deleteByExample(CustomExample example);
 
     int deleteByPrimaryKey(String customId);
+    int deleteByCustomID(String[] customId);
 
     int insert(Custom record);
 
