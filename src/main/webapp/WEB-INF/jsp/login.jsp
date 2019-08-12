@@ -138,8 +138,6 @@
 													username : uname.val(),  //把用户名和密码作为ajax参数
 													password : pwd.val(),
 												}),
-
-
 												success : function(data) {  //如果ajax执行成功，就判断返回值对象中的值。参数data就是返回值
 													if (data.msg == 'account_error') {  //通过这个可以判断出返回值中有一个名为 “msg”的 key
 												console.log("account_error");

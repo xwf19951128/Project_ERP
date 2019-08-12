@@ -41,9 +41,13 @@ public class TechnologyController {
    @RequestMapping("/list")
    @ResponseBody
     public QueryResult<Technology> list(){
+
        Page page = PageHelper.startPage(1, 10);
+
        List<Technology> technologies = technologyService.queryAllTechnologies();
        PageInfo<Technology> pageInfo = new PageInfo<>(technologies);
+       long total1 = pageInfo.getTotal();
+
        long total = pageInfo.getTotal();
        QueryResult<Technology> technologyQueryResult = new QueryResult<>();
        technologyQueryResult.setRows(technologies);
@@ -101,6 +105,7 @@ public class TechnologyController {
             }else {
                 result.put("status",288);
                 result.put("msg","添加失败，请确定参数是否正确");
+
             }
         }
         return result;
