@@ -49,12 +49,12 @@ public class ProcessController {
         return processQueryResult;
     }
 
-//    @RequestMapping("/get_data")
-//    @ResponseBody
-//    public List<Process> get_data(){
-//        List<Process> processes = processService.queryAllProcesses();
-//        return processes;
-//    }
+    @RequestMapping("/get_data")
+    @ResponseBody
+    public List<Process> get_data(){
+        List<Process> processes = processService.queryAllProcesses();
+        return processes;
+    }
 
     //新增add需要校验
     @RequestMapping("/add_judge")

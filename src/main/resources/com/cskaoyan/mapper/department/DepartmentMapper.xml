@@ -9,10 +9,8 @@
     </select>
 
     <insert id="insertDepartment">
-
         insert into department (department_id,department_name,note)
         values(#{department.departmentId}, #{department.departmentName}, #{department.note})
-
     </insert>
 
     <select id="queryDepartmentById" resultType="com.cskaoyan.bean.department.Department">
