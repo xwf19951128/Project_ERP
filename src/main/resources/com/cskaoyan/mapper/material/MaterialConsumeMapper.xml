@@ -296,4 +296,16 @@
     where material_id
     like #{like}
   </select>
+
+  <!--批量删除-->
+<!--  <delete id="deleteMaterialConsumesByIds">
+    delete from material_consume
+    where consume_id
+    in
+    (
+    <foreach collection="ids" item="id" separator=",">
+      #{id}
+    </foreach>
+    )
+  </delete>-->
 </mapper>
