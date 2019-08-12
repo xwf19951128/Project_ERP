@@ -10,6 +10,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
+        if(requestURI.endsWith("login.jsp")||requestURI.endsWith("/")){
+            return true;
+        }
         if (requestURI.endsWith("js") || requestURI.endsWith("css")||requestURI.endsWith("png")||requestURI.endsWith("jpg")) {
             return true;
         }
@@ -18,7 +21,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         SysUser activeUser = (SysUser) request.getSession().getAttribute("activeUser");
         if (activeUser == null) {
-            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request,response);
+//            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request,response);
+            response.setHeader("refresh","0;url=/");
         }
         return true;
     }
