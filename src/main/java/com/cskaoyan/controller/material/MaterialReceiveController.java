@@ -7,10 +7,13 @@ import com.cskaoyan.service.material.MaterialService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,8 +55,16 @@ public class MaterialReceiveController {
     }
     @RequestMapping("/insert")
     @ResponseBody
-    public Map<String, Object> insert(MaterialReceive materialReceive, Material material){
+    public Map<String, Object> insert(@Valid MaterialReceive materialReceive, Material material, BindingResult bindingResult) {
         HashMap<String, Object> map = new HashMap<>();
+        if (bindingResult.hasErrors()){
+            FieldError fieldError = bindingResult.getFieldError();
+            if (fieldError != null) {
+                String defaultMessage = fieldError.getDefaultMessage();
+                map.put("msg", defaultMessage);
+                return map;
+            }
+        }
         int insertResult = materialReceiveService.insertMaterialReceive(materialReceive, material);
         if(insertResult == 1) {
             map.put("status", 200);

@@ -2,9 +2,13 @@ package com.cskaoyan.bean.material;
 
 import com.cskaoyan.bean.schedule.Work;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class MaterialConsume {
+
+    @NotNull(message = "物料消耗编号为空")
     private String consumeId;
 
     private String workId;
@@ -15,6 +19,7 @@ public class MaterialConsume {
 
     private Material material;
 
+    @Min(value = 0, message = "物料消耗数量应为非负整数")
     private Integer consumeAmount;
 
     private Date consumeDate;

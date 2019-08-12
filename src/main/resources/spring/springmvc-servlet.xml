@@ -41,4 +41,5 @@
     <mvc:interceptors>
         <bean class="com.cskaoyan.interceptor.LoginInterceptor"/>
     </mvc:interceptors>
+
 </beans>
