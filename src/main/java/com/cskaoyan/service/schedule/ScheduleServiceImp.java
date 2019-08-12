@@ -421,4 +421,9 @@ TechnologyService technologyMapper;
         customSchedulList.setRows(list );
         return customSchedulList;
     }
+
+    @Override
+    public Task queryTaskById(String id) {
+        return taskMapper.selectByPrimaryKey(id);
+    }
 }
