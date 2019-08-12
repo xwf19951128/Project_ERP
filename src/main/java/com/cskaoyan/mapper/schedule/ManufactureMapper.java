@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface ManufactureMapper {
     List<Manufacture> queryList(@Param("page") int page,@Param("rows") int rows);
+    List<Manufacture> queryManufacture();
     long countByExample(ManufactureExample example);
 
     int deleteByExample(ManufactureExample example);

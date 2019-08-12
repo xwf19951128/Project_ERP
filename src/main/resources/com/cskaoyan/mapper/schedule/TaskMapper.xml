@@ -213,4 +213,10 @@
     <include refid="Base_Column_List" />
     from task
   </select>
+  <delete id="deleteByIDs" parameterType="java.util.List">
+    DELETE from task where task_id in
+    <foreach collection="list" item="id" open="(" close=")" index="index" separator=",">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>

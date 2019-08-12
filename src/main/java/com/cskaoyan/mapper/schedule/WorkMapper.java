@@ -1,6 +1,7 @@
 package com.cskaoyan.mapper.schedule;
 
 import com.cskaoyan.bean.schedule.Custom;
+import com.cskaoyan.bean.schedule.Manufacture;
 import com.cskaoyan.bean.schedule.Work;
 import com.cskaoyan.bean.schedule.WorkExample;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface WorkMapper {
     List<Work> queryList(@Param("rows") Integer rows, @Param("page") int i);
+    List<Work> queryWorks();
     long countByExample(WorkExample example);
 
     int deleteByExample(WorkExample example);

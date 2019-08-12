@@ -31,4 +31,11 @@ public interface TaskMapper {
     int updateByPrimaryKey(Task record);
 
 
+    List<Task> searchTaskByTaskId(String s);
+
+    List<Task> searchTaskByWorkId(String s);
+
+    List<Task> searchTaskByManufactureSn(String s);
+
+    int deleteByIDs(List<String> ids);
 }

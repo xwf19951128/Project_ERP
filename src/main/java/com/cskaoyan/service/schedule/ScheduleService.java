@@ -91,4 +91,20 @@ public interface ScheduleService {
     SchedulList<Custom> searchCustomListByName(String searchValue, int page, int rows);
 
     SchedulList<Custom> searchCustomListByID(String searchValue, int page, int rows);
+
+    List<Manufacture> queryManufacture();
+
+    Manufacture queryManufactureById(String id);
+
+    List<Work> queryWorkList();
+
+    Work queryWorkById(String id);
+
+    int deleteTaskByIds(String[] ids);
+
+    SchedulList<Task> searchTaskByManufactureSn(String searchValue, int page, int rows);
+
+    SchedulList<Task> searchTaskByWorkId(String searchValue, int page, int rows);
+
+    SchedulList<Task> searchTaskByTaskId(String searchValue, int page, int rows);
 }

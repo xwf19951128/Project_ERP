@@ -1,7 +1,6 @@
 package com.cskaoyan.service.schedule;
 
 import com.cskaoyan.bean.schedule.*;
-import com.cskaoyan.bean.technology.Technology;
 import com.cskaoyan.mapper.schedule.*;
 import com.cskaoyan.service.technology.TechnologyService;
 import com.github.pagehelper.PageHelper;
@@ -365,5 +364,67 @@ TechnologyService technologyMapper;
         customSchedulList.setRows(list );
         return customSchedulList;
 
+    }
+
+    @Override
+    public List<Manufacture> queryManufacture() {
+        return manufactureMapper.queryManufacture();
+    }
+
+    @Override
+    public Manufacture queryManufactureById(String id) {
+        return manufactureMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Work> queryWorkList() {
+        return workMapper.queryWorks();
+    }
+
+    @Override
+    public Work queryWorkById(String id) {
+        return workMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteTaskByIds(String[] ids) {
+        List<String> list=new ArrayList<>();
+        for (String id : ids) {
+            list.add(id);
+        }
+        return taskMapper.deleteByIDs(list);
+    }
+
+    @Override
+    public SchedulList<Task> searchTaskByManufactureSn(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        SchedulList<Task> customSchedulList = new SchedulList<>();
+        List<Task> list=taskMapper.searchTaskByManufactureSn("%"+searchValue+"%");
+        PageInfo<Task> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
+    }
+
+    @Override
+    public SchedulList<Task> searchTaskByWorkId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        SchedulList<Task> customSchedulList = new SchedulList<>();
+        List<Task> list=taskMapper.searchTaskByWorkId("%"+searchValue+"%");
+        PageInfo<Task> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
+    }
+
+    @Override
+    public SchedulList<Task> searchTaskByTaskId(String searchValue, int page, int rows) {
+        PageHelper.startPage(page,rows);
+        SchedulList<Task> customSchedulList = new SchedulList<>();
+        List<Task> list=taskMapper.searchTaskByTaskId("%"+searchValue+"%");
+        PageInfo<Task> pageInfo = new PageInfo<>(list);
+        customSchedulList.setTotal((int) pageInfo.getTotal());
+        customSchedulList.setRows(list );
+        return customSchedulList;
     }
 }

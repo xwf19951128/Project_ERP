@@ -244,6 +244,23 @@
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
+    <select id="queryWorks" resultType="com.cskaoyan.bean.schedule.Work" resultMap="AdvanceMap">
+	SELECT
+	w.work_id,
+	w.process_number,
+	w.product_id,
+	w.process_id,
+	w.device_id,
+	w.rating,
+	p.product_id,
+	p.product_name,
+	d.device_id,
+	d.device_name
+FROM
+	work w
+	LEFT JOIN (product p,device d)
+	on (w.product_id=p.product_id and w.device_id=d.device_id)
+  </select>
   <select id="queryList" resultType="com.cskaoyan.bean.schedule.Work" resultMap="AdvanceMap">
 	SELECT
 	w.work_id,
