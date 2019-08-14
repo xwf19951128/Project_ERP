@@ -21,8 +21,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         SysUser activeUser = (SysUser) request.getSession().getAttribute("activeUser");
         if (activeUser == null) {
+
 //            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request,response);
             response.setHeader("refresh","0;url=/");
+
         }
         return true;
     }

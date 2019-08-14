@@ -1,13 +1,20 @@
 package com.cskaoyan.bean.material;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Material {
 
+    @NotNull(message = "物料编号为空")
     private String materialId;
+
     private String materialType;
+
     private String status;
+
     private int remaining;
+
     private String note;
-//    private String materialParams;
 
     public String getMaterialId() {
         return materialId;

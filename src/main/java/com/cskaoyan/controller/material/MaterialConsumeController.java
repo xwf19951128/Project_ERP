@@ -1,17 +1,17 @@
 package com.cskaoyan.controller.material;
 
-import com.cskaoyan.bean.material.Material;
 import com.cskaoyan.bean.material.MaterialConsume;
-import com.cskaoyan.bean.material.MaterialReceive;
 import com.cskaoyan.service.material.MaterialConsumeService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -101,8 +101,16 @@ public class MaterialConsumeController {
     }
     @RequestMapping("/insert")
     @ResponseBody
-    public Map<String, Object> insert(MaterialConsume materialConsume){ // 实体内也保存了MaterialId字段
+    public Map<String, Object> insert(@Valid MaterialConsume materialConsume, BindingResult bindingResult) { // 实体内也保存了MaterialId字段
         HashMap<String, Object> map = new HashMap<>();
+        if (bindingResult.hasErrors()){
+            FieldError fieldError = bindingResult.getFieldError();
+            if (fieldError != null) {
+                String defaultMessage = fieldError.getDefaultMessage();
+                map.put("msg", defaultMessage);
+                return map;
+            }
+        }
         int insertResult = materialConsumeService.insertMaterialConsume(materialConsume);
         if(insertResult == 1) {
             map.put("status", 200);
