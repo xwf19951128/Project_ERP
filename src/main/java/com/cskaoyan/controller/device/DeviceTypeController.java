@@ -29,8 +29,10 @@ public class DeviceTypeController {
     public JsonFindResult<DeviceType> getList(){
         JsonFindResult<DeviceType> deviceTypeJsonFindResult = new JsonFindResult<>();
         List<DeviceType> deviceTypes = deviceTypeService.queryAllDeviceType();
+//        PageInfo<DeviceType> deviceTypePageInfo = new PageInfo<>(deviceTypes);
         deviceTypeJsonFindResult.setRows(deviceTypes);
         deviceTypeJsonFindResult.setTotal(deviceTypes.size());
+       // deviceTypeJsonFindResult.setTotal((int) deviceTypePageInfo.getTotal());
         return deviceTypeJsonFindResult;
     }
 

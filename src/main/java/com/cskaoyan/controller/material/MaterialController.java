@@ -5,12 +5,14 @@ import com.cskaoyan.service.material.MaterialService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,15 +121,23 @@ public class MaterialController {
     }
     @RequestMapping("/material/insert")
     @ResponseBody
-    public Map<String, Object> insert(Material material){
-        int insertResult = materialService.insertMaterial(material);
+    public Map<String, Object> insert(@Valid Material material, BindingResult bindingResult) {
         HashMap<String, Object> map = new HashMap<>();
+        if (bindingResult.hasErrors()){
+            FieldError fieldError = bindingResult.getFieldError();
+            if (fieldError != null) {
+                String defaultMessage = fieldError.getDefaultMessage();
+                map.put("msg", defaultMessage);
+                return map;
+            }
+        }
+        int insertResult = materialService.insertMaterial(material);
         if(insertResult == 1) {
             map.put("status", 200);
             map.put("msg", "OK");
             map.put("data", null);
         }else {
-            map.put("msg", "服务器开小差了，修改描述失败");
+            map.put("msg", "服务器开小差了，新增物料失败");
         }
         return map;
     }

@@ -1,15 +1,25 @@
 package com.cskaoyan.bean.material;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class MaterialReceive {
 
+    @NotNull(message = "物料收入编号为空")
     private String receiveId;
+
     private Material material;
+
+    @Min(value = 0, message = "物料收入数量为非负正整数")
     private int ammount;
+
     private Date receiveDate;
+
     private String sender;
+
     private String receiver;
+
     private String note;
 
     public String getReceiveId() {
