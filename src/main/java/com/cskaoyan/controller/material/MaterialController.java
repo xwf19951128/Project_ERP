@@ -162,7 +162,9 @@ public class MaterialController {
             map.put("msg", "OK");
             map.put("data", null);
         }else {
+            map.put("status", 404);
             map.put("msg", "服务器开小差了，删除物料失败");
+            map.put("data", null);
         }
         return map;
     }
